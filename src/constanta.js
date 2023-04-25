@@ -1,7 +1,9 @@
 export const AUTOMATON_IGNORED_PROJECT_LIST = [
     '@aikosia/automaton',
-    '@aikosia/automaton-core',
+    '@aikosia/automaton-dev', //reserved
     '@aikosia/automaton-cli',
+    '@aikosia/automaton-core',
     '@aikosia/automaton-daemon',
-    '@aikosia/automaton-dev'
+    '@aikosia/automaton-examples',
+    '@aikosia/automaton-boilerplate',
 ]
