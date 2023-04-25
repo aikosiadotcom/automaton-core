@@ -6,6 +6,7 @@ import EnvRequiredError from "./error/env_required_error.js";
 import * as dotenv from "dotenv";
 import envChecker from "node-envchecker";
 import { createClient } from '@supabase/supabase-js';
+import * as System from './system.js';
 
 /**
  * @external winston.Logger
@@ -46,7 +47,7 @@ class Ability{
         ];
 
         try{
-            dotenv.config();
+            dotenv.config({ path: System.getPath("env") });
             envChecker(requiredEnv);
         }catch(err){
             throw new EnvRequiredError(requiredEnv);
