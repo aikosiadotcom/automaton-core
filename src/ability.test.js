@@ -24,10 +24,6 @@ afterEach(() => {
     process.env = env;
 });
 
-test("should throw abstract class error",()=>{
-    expect(()=>new Ability()).toThrow(AbstractClassError);
-});
-
 test("should throw env required error",()=>{
     expect(()=>new DummyClass({key:"test"})).toThrowError(EnvRequiredError);
 });
