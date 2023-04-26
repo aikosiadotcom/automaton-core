@@ -50,7 +50,7 @@ class Ability{
             dotenv.config({ path: System.getPath("env") });
             envChecker(requiredEnv);
         }catch(err){
-            throw new EnvRequiredError(requiredEnv);
+            throw new EnvRequiredError({path:System.getPath("config"),requiredEnv});
         }
         
         let supabaseConfig = config.supabase ?? {};

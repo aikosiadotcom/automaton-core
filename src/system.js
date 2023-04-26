@@ -12,7 +12,7 @@ for(let [key,value] of Object.entries(folder)){
     await fsExtra.ensureDir(value);
 }
 
-async function getPath(folderName = ""){
+function getPath(folderName = ""){
     if(folderName == "env"){
         return path.join(folder["config"],'.env');
     }
