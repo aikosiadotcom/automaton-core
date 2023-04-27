@@ -27,7 +27,7 @@ class WinstonSupabaseTransport extends Transport {
      * 
      * @param {WinstonSupabaseTransportOptions} options
      */
-    constructor(options) {
+    constructor(options = {}) {
         super(options);
 
         if (!options.tableName || !options.supabaseClient) {
@@ -50,13 +50,14 @@ class WinstonSupabaseTransport extends Transport {
 
     async log(args, callback) {
         const { logsTable } = this;
-        const { project_key, module_key, level, message, ...metax } = args;
-        const meta = metax[Symbol.for('splat')];
+        const { project_key, module_key, child_module_key, level, message, ...metax } = args;
+        const meta = metax.stack ?? metax[Symbol.for('splat')];
+
         setImmediate(() => {
             this.emit('logged', args);
         });
         await logsTable.insert([
-            { project_key, module_key, level, message, meta }
+            { project_key, module_key, child_module_key, message, meta, level}
         ]);
         callback();
     }

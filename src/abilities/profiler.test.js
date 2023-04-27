@@ -1,20 +1,61 @@
 import {describe,test,expect ,jest} from '@jest/globals';
 import Profiler from "./profiler.js";
-import Logger from './logger/logger.js';
 
-test("should log to console",async()=>{
-    const mockLog = jest.fn();
-        global.console = {log:mockLog}
-    const logger = new Logger();
-    const profiler = new Profiler((meta)=>logger.log("info",meta));
+const getInstance = (args)=>new Profiler(args);
 
-    profiler.start("test");
-    await new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            return resolve();
-        },1000)
+describe("instantiation",()=>{
+    describe("no parameter given",()=>{
+        test('with namespace',async()=>{
+            const profiler = getInstance();
+
+            profiler.start("test");
+            await new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    return resolve();
+                },1000)
+            });
+            const measureResult = profiler.stop("test");
+            expect(measureResult.name).toEqual("test");
+        });
+        
+        test('no namespace',async()=>{
+            const profiler = getInstance();
+
+            profiler.start();
+            await new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    return resolve();
+                },1000)
+            });
+            const measureResult = profiler.stop();
+            expect(measureResult.name).toEqual("default");
+        });
+        
+        test('namespace not match',async()=>{
+            const profiler = getInstance();
+
+            profiler.start('a');
+            await new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    return resolve();
+                },1000)
+            });
+
+            expect(()=>profiler.stop('b')).toThrowError();
+        });
     });
-    profiler.stop("test");
-    
-    expect(JSON.parse(mockLog.mock.lastCall[0])).toHaveProperty("name","test"); 
+
+    test("with parameter loginstance",async()=>{
+        const mockFn = jest.fn();
+        const profiler =  getInstance(mockFn);
+
+        profiler.start("test");
+        await new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                return resolve();
+            },1000)
+        });
+        const measureResult = profiler.stop("test");
+        expect(mockFn).toBeCalled();
+    });
 });

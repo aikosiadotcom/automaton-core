@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import jsv from "json-validator";
 import ManifestError from './error/manifest_error.js';
-import { AUTOMATON_IGNORED_PROJECT_LIST } from './constanta.js';
+import * as CONSTANT from './constanta.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -23,7 +23,7 @@ const automatonSchema = {
     template:{
         required:true,
         trim:true,
-        enum: ["rest", "crawler", "etl"]
+        enum: CONSTANT.AUTOMATON_TEMPLATE_TYPE
     },
     cronjob: {
       required: true,
@@ -51,7 +51,7 @@ const automatonSchema = {
 
 class Runtime extends Ability{
     constructor(){
-        super({key:"Runtime"});
+        super({key:"Core",childKey:"Runtime"});
     }
 
     async #transform(pluginPath){
@@ -116,7 +116,7 @@ class Runtime extends Ability{
 
     //TODO: jadikan ignoreProjectList bisa di set dari server lain
     static async getInstalledAutomata(){
-        const ignoreProjectList = AUTOMATON_IGNORED_PROJECT_LIST; //please using fullname. example: '@aikosia/automaton-boilerplate'
+        const ignoreProjectList = CONSTANT.AUTOMATON_IGNORED_PROJECT_LIST; //please using fullname. example: '@aikosia/automaton-boilerplate'
 
         const ret = execSync(`npm ls -g --depth=0 --json=true`);
         const list = JSON.parse(ret.toString())["dependencies"];
@@ -159,7 +159,8 @@ class Runtime extends Ability{
             targets:{
                 "node": "18.12.1",
                 "esmodules": true
-            }
+            },
+            sourceType:"module"
         });
 
         if(!writeToFile){
@@ -188,7 +189,6 @@ class Runtime extends Ability{
      */
     async run(userAutomatonProject = null){
         const automata = await this.getAutomata(userAutomatonProject);
-        this.logger.log("info","Loaded Automaton",automata);
         for(let i=0;i<automata.length;i++){
             await this.emitter.emit("validator",automata);
             
@@ -229,6 +229,7 @@ class Runtime extends Ability{
         
         }
 
+        this.logger.verbose(`loaded automaton: ${automata.length}`,automata);
         return automata;
     }
 }

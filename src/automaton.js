@@ -14,7 +14,10 @@ class Automaton extends Ability{
     _endpoint;
 
     constructor(config){
-        super(config);
+        super(Object.assign(config,{
+            key:"Core",
+            childKey:config.key
+        }));
         const {daemon: daemonConfig = {}} = config ?? {};
 
         let {host,port} = daemonConfig ?? {};
@@ -34,29 +37,34 @@ class Automaton extends Ability{
         });
 
         this.emitter.once('ready',async()=>{
-            this.profiler.start("execution");
-            await this.emitter.emit("_start");
 
-            /**template = crawler */
-            if(this._manifest.template == 'crawler'){
-                /**runParameter */
-                if(this._manifest.runParameter == "page"){
-                    const page = await this._context.newPage();
-                    await this.run(page);
-                    await page.close();
-                }else if(this._manifest.runParameter == "context"){
-                    await this.run(this._context);
+            try{
+                await this.emitter.emit("_start");
+                this.profiler.start("run");
+                
+                /**template processor */
+                if(this._manifest.template == 'crawler'){
+                    /**runParameter */
+                    if(this._manifest.runParameter == "page"){
+                        const page = await this._context.newPage();
+                        await this.run(page);
+                        await page.close();
+                    }else if(this._manifest.runParameter == "context"){
+                        await this.run(this._context);
+                    }else{
+                        await this.run(null);
+                    }
+                }else if(this._manifest.template == 'etl'){
+
+                }else if(this._manifest.template == 'rest'){
                 }else{
-                    await this.run(null);
+                    this.logger.log("error","run",new ManifestError({message:`template processor "${this._manifest.template}" not found`}))
                 }
-            }else if(this._manifest.template == 'etl'){
-
-            }else if(this._manifest.template == 'rest'){
-            }else{
-                this.logger.log("error","running",new ManifestError({message:`template processor "${this._manifest.template}" not found`}))
+            }catch(err){
+                this.logger.log("error","run",err);
+            }finally{
+                await this.emitter.emit('_end',this.profiler.stop("run"));
             }
-
-            await this.emitter.emit('_end',this.profiler.stop("execution"));
         });
     }
 

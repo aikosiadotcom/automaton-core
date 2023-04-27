@@ -1,12 +1,12 @@
 import EventEmitter from "./abilities/event_emitter.js";
 import Profiler from './abilities/profiler.js';
 import Logger from './abilities/logger/logger.js';
-import AbstractClassError from "./error/abstract_class_error.js";
+import ConstructorParamsRequiredError from "./error/constructor_params_required_error.js";
 import EnvRequiredError from "./error/env_required_error.js";
 import * as dotenv from "dotenv";
 import envChecker from "node-envchecker";
 import { createClient } from '@supabase/supabase-js';
-import * as System from './system.js';
+import * as sys from './system.js';
 
 /**
  * @external winston.Logger
@@ -35,9 +35,9 @@ class Ability{
     db;
 
     constructor(config = {}){
-        // if(this.constructor == Ability){
-        //     throw new AbstractClassError();
-        // }
+        if(!config.key || !config.childKey){
+            throw new ConstructorParamsRequiredError(['key','childKey']);
+        }
 
         const requiredEnv = [
             'AUTOMATON_DAEMON_HOST',
@@ -47,10 +47,10 @@ class Ability{
         ];
 
         try{
-            dotenv.config({ path: System.getPath("env") });
+            dotenv.config({ path: sys.getPath("env") });
             envChecker(requiredEnv);
         }catch(err){
-            throw new EnvRequiredError({path:System.getPath("config"),requiredEnv});
+            throw new EnvRequiredError({path:sys.getPath("config"),requiredEnv});
         }
         
         let supabaseConfig = config.supabase ?? {};
@@ -77,10 +77,11 @@ class Ability{
         let winstonConfig = config.winston ?? {};
         if(Object.keys(winstonConfig).length == 0){
             winstonConfig = {
-                level:"info",
+                level:"debug",
                 defaultMeta:{
-                    projectKey:process.env.NODE_ENV != 'production' ? "automaton-dev" : 'automaton',
-                    moduleKey:config.key
+                    projectKey:sys.getCurrentEnv(),
+                    moduleKey:config.key,
+                    childModuleKey:config.childKey
                 }
             }
         }
@@ -100,9 +101,11 @@ class Ability{
             loggerConfig:loggerConfig
         });
           
-        this.profiler = new Profiler((meta)=>{
-            this.logger.log("info","profiling",meta);
-        });
+        this.profiler = new Profiler(this._profilerLog);
+    }
+
+    _profilerLog(meta){
+        this.logger.verbose("performance report",meta);
     }
 }
 

@@ -15,7 +15,7 @@ jobs:
     - name: Setup Node Js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: '18.12.1'
 
     - name: Publish if version has been updated
       uses: pascalgn/npm-publish-action@1.3.9

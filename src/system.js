@@ -2,14 +2,20 @@ import envPaths from "env-paths";
 import path from "path";
 import fsExtra from 'fs-extra';
 
-const folder = envPaths(process.env.NODE_ENV != 'production' ? `automaton-dev` :  'automaton', {
-    suffix:"",
-});
+let folder;
+const projectName = 'Automaton';
+const projectEnv = getCurrentEnv();
 
-folder.profile = path.join(folder.data,"profile");
+async function main(){
+    folder = envPaths(path.join(projectName,projectEnv), {
+        suffix:"",
+    });
 
-for(let [key,value] of Object.entries(folder)){
-    await fsExtra.ensureDir(value);
+    folder.profile = path.join(folder.data,"Profile");
+
+    for(let [key,value] of Object.entries(folder)){
+        await fsExtra.ensureDir(value);
+    }
 }
 
 function getPath(folderName = ""){
@@ -24,4 +30,16 @@ function getPath(folderName = ""){
     return folder;
 }
 
-export { getPath }
+function getCurrentEnv(){
+    if(process.env.NODE_ENV == 'testing'){
+        return 'Testing';
+    }else if(process.env.NODE_ENV == 'development'){
+        return 'Development';
+    }
+
+    return 'Production';
+}
+
+await main();
+
+export { getPath, getCurrentEnv }
