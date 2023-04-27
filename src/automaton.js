@@ -3,6 +3,7 @@ import {chromium} from 'playwright-core';
 import Ability from "./ability.js";
 import MustOverrideError from "./error/must_override_error.js";
 import ManifestError from "./error/manifest_error.js";
+import AbstractClassError from "./error/abstract_class_error.js";
 
 /**
  * @extends Ability
@@ -18,6 +19,11 @@ class Automaton extends Ability{
             key:"Core",
             childKey:config.key
         }));
+        
+        // if(this.constructor === Automaton){
+        //     throw new AbstractClassError();
+        // }
+
         const {daemon: daemonConfig = {}} = config ?? {};
 
         let {host,port} = daemonConfig ?? {};

@@ -101,7 +101,7 @@ class Ability{
             loggerConfig:loggerConfig
         });
           
-        this.profiler = new Profiler(this._profilerLog);
+        this.profiler = new Profiler(this._profilerLog.bind(this));
     }
 
     _profilerLog(meta){

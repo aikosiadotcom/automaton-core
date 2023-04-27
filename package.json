@@ -74,9 +74,16 @@
         "openReport": false
       }]
     ],
-    "testPathIgnorePatterns":["<rootDir>/src/error","<rootDir>/src/constanta.js"],
+    "testPathIgnorePatterns":[
+      "<rootDir>/src/error",
+      "<rootDir>/src/constanta.js",
+      "<rootDir>/src/index.js"
+    ],
     "coveragePathIgnorePatterns": [
-      "<rootDir>/src/error","<rootDir>/src/constanta.js"
-    ]
+      "<rootDir>/src/error",
+      "<rootDir>/src/constanta.js",
+      "<rootDir>/src/index.js"
+    ],
+    "coverageProvider":"v8"
   }
 }

@@ -159,8 +159,7 @@ class Runtime extends Ability{
             targets:{
                 "node": "18.12.1",
                 "esmodules": true
-            },
-            sourceType:"module"
+            }
         });
 
         if(!writeToFile){

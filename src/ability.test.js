@@ -1,12 +1,13 @@
 import {describe,test,expect ,jest} from '@jest/globals';
+import {dotenv,envChecker,supabase} from "./__mocks__/abilitity_deps.js";
 
 jest.unstable_mockModule("./abilities/profiler.js",()=>({
     default:jest.fn()
 }));
 
-const dotenv = async()=>(await import("./__mocks__/dotenv.js")).default;
-const envChecker = async()=>(await import("./__mocks__/node-envchecker.js")).default;
-const supabase = async()=>(await import("./__mocks__/supabase.js")).supabase_;
+// const dotenv = async()=>(await import("./__mocks__/dotenv.js")).default;
+// const envChecker = async()=>(await import("./__mocks__/node-envchecker.js")).default;
+// const supabase = async()=>(await import("./__mocks__/supabase.js")).supabase_;
 const profiler = async()=>(await import("./abilities/profiler.js")).default;
 const getInstance = async(args)=>new (await import('./ability.js')).default(args);
 
