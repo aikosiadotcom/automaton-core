@@ -1,7 +1,7 @@
 import {jest} from '@jest/globals';
 jest.unstable_mockModule("./ability.js",()=>({
     default:class Ability{
-        emitter = {
+        event = {
             once:jest.fn()
         }
     }

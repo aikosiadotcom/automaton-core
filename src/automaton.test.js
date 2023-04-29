@@ -25,6 +25,6 @@ describe('instantiation', () => {
 
     test('a', async () => {
         const bot = new Bot({key:"Bot"}); 
-        expect(bot.emitter.once).toHaveBeenCalled();
+        expect(bot.event.once).toHaveBeenCalled();
     });
 });

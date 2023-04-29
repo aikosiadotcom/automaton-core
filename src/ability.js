@@ -27,7 +27,7 @@ class Ability{
     /**
      * @type {EventEmitter}
      */
-    emitter;
+    event;
 
     /**
      * @type {supabase} 
@@ -93,7 +93,7 @@ class Ability{
             }
         }
 
-        this.emitter = new EventEmitter();
+        this.event = new EventEmitter();
 
         this.logger = new Logger({
             supabase:this.db,
@@ -101,11 +101,11 @@ class Ability{
             loggerConfig:loggerConfig
         });
           
-        this.profiler = new Profiler(this._profilerLog.bind(this));
+        this.profiler = new Profiler(this.#reportHandler.bind(this));
     }
 
-    _profilerLog(meta){
-        this.logger.verbose("performance report",meta);
+    #reportHandler(meta){
+        this.logger.log("verbose","execution time report",meta);
     }
 }
 

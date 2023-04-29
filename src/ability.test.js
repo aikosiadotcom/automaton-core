@@ -66,7 +66,6 @@ describe('instantiation', () => {
                 console:true
             }
         });
-        instance._profilerLog();
         expect(instance.constructor.name).toBe("Ability");
         expect(mock).toHaveBeenCalled();
     });

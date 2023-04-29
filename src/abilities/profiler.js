@@ -1,38 +1,51 @@
 import prettyHrtime from 'pretty-hrtime';
 
-/** 
- * @typedef {Object} ProfilerResult
- * @property {string} name
- * @property {number} time
- * @property {string} words
- * @property {string} preciseWords
- * @property {string} verboseWords
-*/
-
 /**
- * @callback CallbackLoggerInstance
- * @param {ProfilerResult} data
- */
+ * @description
+ * contains method to measure of the time required to execute a task
 
-/**
- * measure execution time
+ * @example <caption>default usage</caption>
+ * 
+ * const profiler = new Profiler();
+ * 
+ * @example <caption>optional usage</caption>
+ * 
+ * function reportHandler(report){
+ *    console.log("report",report);
+ * }
+ * 
+ * const profiler = new Profiler(reportHandler);
  */
 class Profiler{
   namedPerformances = {};
   defaultName = "default";
+  
+  /**
+   * @callback ReportHandler
+   * @param {ExecutionTimeReport} report
+   */
 
   /**
-   * 
-   * @param {CallbackLoggerInstance} logInstance 
+   * @param {ReportHandler} [reportHandler] - a handler to process the report
    */
-  constructor(logInstance){
-    this.logInstance = logInstance;
+  constructor(reportHandler){
+    this.logInstance = reportHandler;
   }
 
   /**
+   * @description
    * start measure
    * 
-   * @param {string} name 
+   * @example <caption>default usage</caption>
+   * profiler.start();
+   * 
+   * @example <caption>optional usage</caption>
+   * 
+   * if there are multiple task, then you shall pass parameter name to distinct it.
+   * 
+   * profiler.start("bootstrapTask");
+   * 
+   * @param {string} [name="default"] - start the measurement
    */
   start(name){
     name = name || this.defaultName;
@@ -41,11 +54,31 @@ class Profiler{
     }
   }
   
+  /** 
+   * @typedef {Object} ExecutionTimeReport
+   * @property {string} name
+   * @property {number} time
+   * @property {string} words
+   * @property {string} preciseWords
+   * @property {string} verboseWords
+  */
+  
   /**
+   * @description
    * stop measure
    * 
-   * @param {string} name 
-   * @returns ProfilerResult
+   * @example <caption>default usage</caption>
+   * const report = profiler.stop();
+   * 
+   * @example <caption>optional usage</caption> 
+   * 
+   * parameter name will be using to collect the report of a task
+   * 
+   * const report = profiler.stop("bootstrapTask");
+   * 
+   * @param {string} [name="default"] - stop the measurement and collect the report. 
+   * 
+   * @returns {ExecutionTimeReport}
    */
   stop(name){
     name = name || this.defaultName;

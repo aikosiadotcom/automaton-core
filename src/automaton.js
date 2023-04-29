@@ -35,17 +35,17 @@ class Automaton extends Ability{
         this._endpoint = `${host}:${port}/browser`;
 
         //fungsi ini diperlukan agar bisa set manifest saat instantiate class
-        this.emitter.once('_setManifest',(manifest)=>{
+        this.event.once('_run',(manifest)=>{
             this.setManifest(manifest);
 
             //must call before setManifest cause dependency
             this.#initialize();
         });
 
-        this.emitter.once('ready',async()=>{
+        this.event.once('ready',async()=>{
 
             try{
-                await this.emitter.emit("_start");
+                await this.event.emit("_start");
                 this.profiler.start("run");
                 
                 /**template processor */
@@ -60,8 +60,6 @@ class Automaton extends Ability{
                     }else{
                         await this.run(null);
                     }
-                }else if(this._manifest.template == 'etl'){
-
                 }else if(this._manifest.template == 'rest'){
                 }else{
                     this.logger.log("error","run",new ManifestError({message:`template processor "${this._manifest.template}" not found`}))
@@ -69,7 +67,7 @@ class Automaton extends Ability{
             }catch(err){
                 this.logger.log("error","run",err);
             }finally{
-                await this.emitter.emit('_end',this.profiler.stop("run"));
+                await this.event.emit('_end',this.profiler.stop("run"));
             }
         });
     }
@@ -97,7 +95,7 @@ class Automaton extends Ability{
             return page;
         });
 
-        this.emitter.emit('ready');
+        this.event.emit('ready');
     }
 
     /**

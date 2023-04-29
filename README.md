@@ -1,5 +1,5 @@
 
-<h1 align="center">AUTOMATON CORE<br/><div><h6><i>A Library For Developer To Build Automaton Bot</i></h6></div></h1>
+<h1 align="center">AUTOMATON CORE<br/><div><h6><i>A Library For Developer To Build Bot</i></h6></div></h1>
 
 <div align="center">
     
