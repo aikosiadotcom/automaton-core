@@ -7,7 +7,7 @@ const __dirname = resolveDirname(import.meta.url);
 const mockPath = path.join(__dirname,"..","..","..");
 await mockAbility(mockPath,{showLog:false});
 const Analyzer = (await import("./analyzer.js")).default;
-
+// console.log(path.normalize(`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01`));
 beforeAll(()=>{
     jest.useFakeTimers();
 });
@@ -20,14 +20,14 @@ describe("given Analyzer class",()=>{
                 candidates: [
                     {
                       name: '@aikosia/automaton-plugin-rest-example-01',
-                      root: `${mockPath}\\__mocks__\\plugins\\@aikosia\\automaton-plugin-rest-example-01`
+                      root: `${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01`
                     }
                   ]  
             }); 
             expect(ret[0]).toEqual({
                 name:"@aikosia/automaton-plugin-rest-example-01",
-                root:`${mockPath}\\__mocks__\\plugins\\@aikosia\\automaton-plugin-rest-example-01`,
-                file:`${mockPath}\\__mocks__\\plugins\\@aikosia\\automaton-plugin-rest-example-01\\src\\index.js`,
+                root:`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01`,
+                file:`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`,
                 manifest:{
                     "version": "1.0.0",
                     "template": "rest",
@@ -45,7 +45,7 @@ describe("given Analyzer class",()=>{
                 candidates: [
                     {
                       name: '@aikosia/automaton-plugin-rest-example-02',
-                      root: `${mockPath}\\__mocks__\\plugins\\@aikosia\\automaton-plugin-rest-example-02`
+                      root: `${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-02`
                     }
                   ]  
             }); 
@@ -60,11 +60,11 @@ describe("given Analyzer class",()=>{
                 candidates: [
                     {
                       name: '@aikosia/automaton-plugin-rest-example-02',
-                      root: `${mockPath}\\__mocks__\\plugins\\@aikosia\\automaton-plugin-rest-example-02`
+                      root: `${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-02`
                     },
                     {
                         name: '@aikosia/automaton-plugin-rest-example-03',
-                        root: `${mockPath}\\__mocks__\\plugins\\@aikosia\\automaton-plugin-rest-example-03`
+                        root: `${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-03`
                     }
                   ]  
             }); 
