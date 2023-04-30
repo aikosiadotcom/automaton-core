@@ -20,8 +20,8 @@ describe("given Compiler class",()=>{
                 automata: [
                     {
                       name: '@aikosia/automaton-plugin-rest-example-01',
-                      root: `${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01`,
-                      file: `${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`,
+                      root: path.normalize(`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01`),
+                      file: path.normalize(`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`),
                       manifest: {
                         version: '1.0.0',
                         template: 'rest',
@@ -34,8 +34,8 @@ describe("given Compiler class",()=>{
             });
             expect(ret[0]).toEqual({
                 name:"@aikosia/automaton-plugin-rest-example-01",
-                root:`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01`,
-                file:`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`,
+                root:path.normalize(`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01`),
+                file:path.normalize(`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`),
                 manifest:{
                     "version": "1.0.0",
                     "template": "rest",
@@ -43,7 +43,8 @@ describe("given Compiler class",()=>{
                     "runParameter": "page",
                     "cronjob": false
                   },
-                main: `${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/.automaton\/index.mjs`})
+                main: path.normalize(`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/.automaton\/index.mjs`)
+              })
         });
     }); 
 })
