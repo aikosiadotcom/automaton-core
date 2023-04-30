@@ -9,25 +9,26 @@ import parallel from "@trenskow/parallel";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-class Generator extends Ability{
-    #babelOptions = {
-        cwd:__dirname,
-        caller: {
-            name: "automaton",
-            supportsStaticESM: true,
-        },
-        code:true,
-        ast:false,
-        babelrc:false,
-        presets:[["@babel/preset-env", { "modules": false }]],
-        plugins:[
-            ["@babel/plugin-proposal-decorators", { "version": "2023-01" }]
-        ],
-        targets:{
-            "node": "18.12.1",
-            "esmodules": true
-        }
+export const BABEL_OPTIONS = {
+    cwd:__dirname,
+    caller: {
+        name: "automaton",
+        supportsStaticESM: true,
+    },
+    code:true,
+    ast:false,
+    babelrc:false,
+    presets:[["@babel/preset-env", { "modules": false }]],
+    plugins:[
+        ["@babel/plugin-proposal-decorators", { "version": "2023-01" }]
+    ],
+    targets:{
+        "node": "18.12.1",
+        "esmodules": true
     }
+}
+
+class Generator extends Ability{
 
     constructor(){
         super({key:"Core",childKey:"Generator"});
@@ -43,7 +44,8 @@ class Generator extends Ability{
             }
         }))).filter(val=>val!=false);
 
-        this.logger.log("verbose","result",{
+        this.logger.log("verbose",`passed: ${result.length}`,{
+            processor:'Generator',
             candidates:result,
             inactive:candidates.filter((currentPlugin)=>(
                 result.filter((childPlugin)=>childPlugin.name == currentPlugin.name).length == 0
@@ -53,7 +55,7 @@ class Generator extends Ability{
     }
 
     async #compile({name,root,file,manifest}){
-        const {code} = await babel.transformFileAsync(file, this.#babelOptions);
+        const {code} = await babel.transformFileAsync(file, BABEL_OPTIONS);
 
         /**convert filename to mjs, to fix bug error "This file is being treated as an ES module because it has a '.js' file extension"*/
         let filenameToMjs = (path.basename(file)).split(".");

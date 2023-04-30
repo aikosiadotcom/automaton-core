@@ -12,8 +12,8 @@ class Compiler extends Ability{
         this.#generator = new Generator();
     }
     
-    async run({candidates}){
-        const analyzerResult = await this.#analyzer.run({candidates});
+    async run({automata}){
+        const analyzerResult = await this.#analyzer.run({candidates:automata});
         const generatorResult = await this.#generator.run({candidates:analyzerResult});
 
         return generatorResult;

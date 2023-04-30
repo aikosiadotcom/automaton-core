@@ -5,7 +5,7 @@ import {PLUGIN_INCLUDE_REGEX} from "../../constant.js";
 import NpmPackageManager from "./npm_package_manager.js";
 import TestPackageManager from "../../__mocks__/test_package_manager.js";
 
-const __dirname = path.join(new URL('', import.meta.url).pathname.substring(1));
+const __dirname = new URL('', import.meta.url).pathname.substring(1);
 await mockAbility(path.join(__dirname,"..","..",".."),{showLog:false});
 const PluginLoader = (await import("./index.js")).default;
 
@@ -59,6 +59,7 @@ describe("given PluginLoader class",()=>{
                 const loader = new PluginLoader({includeRegex:PLUGIN_INCLUDE_REGEX,excludeRegex:["@aikosiadotcom"],packageManager:new TestPackageManager()});
                 const result = await loader.ls();
                 expect(result["candidates"].length).toBeGreaterThan(0);
+                // console.log("copy this",result);
                 expect(result["excluded"].length).toEqual(0);
             });
         });

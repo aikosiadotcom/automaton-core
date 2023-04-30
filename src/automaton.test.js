@@ -2,7 +2,8 @@ import {describe,test,expect ,jest} from '@jest/globals';
 import mockAbility from "./__mocks__/ability.js";
 import path from "path";
 
-await mockAbility(path.join(new URL('', import.meta.url).pathname.substring(1),".."),{showLog:false});
+const __dirname = new URL('', import.meta.url).pathname.substring(1);
+await mockAbility(path.join(__dirname,".."),{showLog:false});
 await import('./__mocks__/axios.js'); 
 await import('./__mocks__/playwright-core.js'); 
 const Automaton = (await import("./automaton.js")).default;

@@ -1,5 +1,5 @@
 {
-  "name": "@aikosia/automaton-plugin-rest-example-01",
+  "name": "@aikosia/automaton-plugin-rest-example-04",
   "version": "1.0.0",
   "main": "./src/index.js",
   "type": "module",

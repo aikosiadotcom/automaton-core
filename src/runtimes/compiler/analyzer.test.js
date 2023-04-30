@@ -2,7 +2,7 @@ import {describe,test,expect ,jest} from '@jest/globals';
 import mockAbility from "../../__mocks__/ability.js"; 
 import path from "path";
 
-const __dirname = path.join(new URL('', import.meta.url).pathname.substring(1));
+const __dirname = new URL('', import.meta.url).pathname.substring(1);
 const mockPath = path.join(__dirname,"..","..","..");
 await mockAbility(mockPath,{showLog:false});
 const Analyzer = (await import("./analyzer.js")).default;

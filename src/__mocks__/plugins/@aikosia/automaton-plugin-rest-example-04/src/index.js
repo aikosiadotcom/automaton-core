@@ -12,5 +12,3 @@ class AutomatonPluginRestExample01 extends Automaton{
         return `Hello, ${name}`;
     }
 }
-
-export default AutomatonPluginRestExample01;

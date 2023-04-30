@@ -1,4 +1,4 @@
-import Automaton, { Decorators } from "@aikosia/automaton-core";
+import Automaton, { decorators } from "@aikosia/automaton-core";
 
 class AutomatonPluginRestExample01 extends Automaton{
     constructor(){

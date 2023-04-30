@@ -9,14 +9,16 @@ class TestPackageManager extends InterfacePackageManager{
     }
 
     root(){
-        return path.join(__dirname,"plugins");
+        return path.join(__dirname,"..","plugins");
     }
 
     ls(){
         return  ({
             "name": "test",
             "dependencies": {
-              "@aikosia/automaton-plugin-crawler-example-01": {},
+              "@aikosia/automaton-plugin-rest-example-01": {},
+              "@aikosia/automaton-plugin-rest-example-02": {},
+              "@aikosia/automaton-plugin-rest-example-03": {},
             }
           }
           )["dependencies"];

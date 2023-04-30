@@ -2,7 +2,6 @@ import wait from 'delay';
 import pRetry from 'p-retry';
 import Ability from './ability.js';
 import random from 'random';
-
 const logger = (new Ability({key:"Core",childKey:"Decorator"})).logger;
 
 function dowhile(value,{kind,name}){
@@ -11,23 +10,26 @@ function dowhile(value,{kind,name}){
             let stop = false;
             let currentPage = 0;
             do{
-                stop = await value.call(this,args[0],args[1],currentPage);
+                stop = await value.call(this,currentPage,...args);
                 currentPage++;
             }while(!stop);
         }
     }
 }
 
+/* c8 ignore start */
 async function _delay(opts = {}){
     const _min = opts.min ?? 30;
     const _max = opts.max ?? 60;
     const _meta = opts.meta ?? {};
+
     const _name = opts.name ?? "";
 
     const t = random.int(_min*1000,_max*1000);
     console.log(_name,_meta,`delay ${Math.ceil(t/1000)} seconds between ${_min} - ${_max}`);
     await delay(t);
 }
+/* c8 ignore end */
 
 function delay(value,opts){
     if(opts != undefined && opts.kind == "method"){
@@ -51,7 +53,7 @@ function delay(value,opts){
 function retry(value,opts){
     if(opts != undefined && opts.kind == "method"){
         return async function (...args) {
-            await pRetry(()=>value.call(this,...args),{
+            return await pRetry(async()=>await value.call(this,...args),{
                 retries:2,
                 onFailedAttempt: async error => {
                     logger.log("warn","retry",`Attempt ${error.attemptNumber} failed on method "${opts.name}" with ${error.stack}. There are ${error.retriesLeft} retries left.`);
@@ -66,7 +68,7 @@ function retry(value,opts){
     return (_value,{kind,name})=>{
         if(kind == 'method'){
             return async function (...args) {
-                await pRetry(()=>_value.call(this,...args),{
+                return await pRetry(async()=>await _value.call(this,...args),{
                     retries: retries ?? 2,
                     onFailedAttempt: async error => {
                         logger.log("warn","retry",`Attempt ${error.attemptNumber} failed on method "${name}" with ${error.stack}. There are ${error.retriesLeft} retries left.`); 

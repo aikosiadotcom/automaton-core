@@ -1,11 +1,10 @@
-import * as system from "./system.js";
-import Automaton from "./automaton.js";
-import * as decorators from './decorators.js';
-import * as constant from "./constant.js/index.js";
-import Ability from "./ability.js";
-import * as runtime from "./runtimes";
-import {V2 as Runtime} from './runtimes/runtime.v2.js';
+import * as system from "#src/system";
+import Automaton from "#src/automaton";
+import * as decorators from '#src/decorators';
+import * as constant from "#src/constant";
+import Ability from "#src/ability";
+import Runtime from '#src/runtimes/runtime.v1';
 
-export { decorators, runtime, Runtime,  constant, Ability, system};
+export { decorators, Runtime , constant, Ability, system};
 
 export default Automaton;

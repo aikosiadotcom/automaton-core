@@ -26,7 +26,8 @@ class Analyzer extends Ability{
             result.filter((childPlugin)=>childPlugin.name == currentPlugin.name).length == 0
         ));
 
-        this.logger.log("verbose","result",{
+        this.logger.log("verbose",`passed: ${result.length}`,{
+            processor:'Analyzer',
             candidates:result,
             inactive:inactive});
 

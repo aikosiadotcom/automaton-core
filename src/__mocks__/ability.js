@@ -12,8 +12,8 @@ async function main(currentDir, {showLog = false}){
                 stop:()=>"mock"
             }
             logger = {
-                log:(...args)=>showLog ? console.log(...args) : null,
-                verbose:(...args)=>showLog ? console.log(...args) : null
+                log:(...args)=>showLog ? console.warn(...args) : null,
+                verbose:(...args)=>showLog ? console.warn(...args) : null
             }
         }
     }));
