@@ -20,7 +20,8 @@ function _applyDecs(targetClass, memberDecs, classDecs, instanceBrand) { return 
 function _checkInRHS(value) { if (Object(value) !== value) throw TypeError("right-hand side of 'in' should be an object, got " + (null !== value ? typeof value : "null")); return value; }
 import path from "path";
 import mockAbility from "./ability.js";
-var __dirname = new URL('', import.meta.url).pathname.substring(1);
+import { resolveDirname } from "../system.js";
+var __dirname = resolveDirname(import.meta.url);
 await mockAbility(path.join(__dirname, ".."), {
   showLog: false
 });

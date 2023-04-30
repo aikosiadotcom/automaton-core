@@ -40,8 +40,14 @@ function getCurrentEnv(){
 
     return 'Production';
 }
+
+function resolveDirname(importMetaUrl){
+    const __dirname = new URL('', importMetaUrl).pathname;
+    return ['win32','win64'].includes(process.platform) ? __dirname.substring(1) : __dirname;
+}
 /* c8 ignore end */
+
 
 await main();
 
-export { getPath, getCurrentEnv }
+export { getPath, getCurrentEnv,resolveDirname }

@@ -4,8 +4,9 @@ import path from "path";
 import { BABEL_OPTIONS } from '#src/runtimes/compiler/generator';
 import * as babel from "@babel/core";
 import fsExtra from 'fs-extra';
+import { resolveDirname } from './system';
 
-const __dirname = new URL('', import.meta.url).pathname.substring(1);
+const __dirname = resolveDirname(import.meta.url);
 const mockPath = path.join(__dirname,"..");
 await mockAbility(mockPath,{showLog:false});
 

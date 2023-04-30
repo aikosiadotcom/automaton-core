@@ -1,8 +1,9 @@
 import {describe,test,expect ,jest} from '@jest/globals';
 import mockAbility from "./__mocks__/ability.js";
 import path from "path";
+import { resolveDirname } from './system.js';
 
-const __dirname = new URL('', import.meta.url).pathname.substring(1);
+const __dirname = resolveDirname(import.meta.url);
 await mockAbility(path.join(__dirname,".."),{showLog:false});
 await import('./__mocks__/axios.js'); 
 await import('./__mocks__/playwright-core.js'); 

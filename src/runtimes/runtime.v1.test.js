@@ -2,8 +2,9 @@ import {describe,test,expect ,jest} from '@jest/globals';
 import mockAbility from "../__mocks__/ability.js"; 
 import mockLoader from "../__mocks__/plugin_loader.js"; 
 import path from "path";
+import { resolveDirname } from '../system.js';
 
-const __dirname = new URL('', import.meta.url).pathname.substring(1);
+const __dirname = resolveDirname(import.meta.url);
 const mockPath = path.join(__dirname,"..","..");
 await mockAbility(mockPath,{showLog:false});
 await mockLoader(mockPath);

@@ -1,7 +1,7 @@
 import path from "path";
 import mockAbility from "./ability.js";
-
-const __dirname = new URL('', import.meta.url).pathname.substring(1);
+import { resolveDirname } from "../system.js";
+const __dirname =  resolveDirname(import.meta.url);
 await mockAbility(path.join(__dirname,".."),{showLog:false});
 
 const {decorators} = await import("../index.js");

@@ -1,7 +1,7 @@
 import path from 'path';
 import InterfacePackageManager from '../runtimes/plugin_loader/interface_package_manager.js';
-
-const __dirname = path.join(new URL('', import.meta.url).pathname.substring(1));
+import { resolveDirname } from '../system.js';
+const __dirname = resolveDirname(import.meta.url);
 
 class TestPackageManager extends InterfacePackageManager{
     constructor(){
