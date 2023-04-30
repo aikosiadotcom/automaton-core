@@ -11,7 +11,7 @@ export const PLUGIN_INCLUDE_REGEX = deepFreeze([
     `@aikosia/${PLUGIN_NAMING_PREFIX['crawler']}`
 ]);
 
-export const PLUGIN_IGNORE_REGEX = Object.freeze([
+export const PLUGIN_EXCLUDE_REGEX = Object.freeze([
 ]);
 
 export const SCHEMA_TEMPLATE_TYPE = deepFreeze([
@@ -41,7 +41,7 @@ export const SCHEMA = deepFreeze({
       required: true,
       trim: true,
       asyncValidate: function(value, path, cb) {
-        if(value === "false"){
+        if(value === "false" || value == false){
             cb(null,null);
         }else{
             if(!cron.validate(value)){

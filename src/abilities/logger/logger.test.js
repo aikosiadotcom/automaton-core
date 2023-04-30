@@ -15,24 +15,36 @@ afterEach(()=>{
     jest.clearAllMocks();
 });
 
-describe("usage",()=>{
-    test("default settings - only log to console",async()=>{
-        const logger = getInstance();
+describe("given Logger class",()=>{
 
-        logger.log("info","hello world");
-        expect(JSON.parse(mockFn.mock.lastCall[0])).toEqual({
-            "level": "info",
-            "message": "hello world",
-            "module_key": "",
-            "project_key": "",
-            "child_module_key":""
-        }); 
+    describe("when there's no options pass to constructor",()=>{
+
+        test("then should only log to console",async()=>{
+
+            const logger = getInstance();
+    
+            logger.log("info","hello world");
+            expect(JSON.parse(mockFn.mock.lastCall[0])).toEqual({
+                "level": "info",
+                "message": "hello world",
+                "module_key": "",
+                "project_key": "",
+                "child_module_key":""
+            }); 
+
+        });
+    
     });
 
-    test("disable log to console and using mock supabase instead",async()=>{
-        const logger = getInstance({logger:{console:false,tableName:'winston_logs'},supabase:supabase});
+    describe("when supabase client is pass to the constructor",()=>{
 
-        await logger.log("info","awesome");
-        expect(supabase.get()[0].message).toEqual("awesome");
+        test("then what you log will also pass to supabase client automatically",async()=>{
+            const logger = getInstance({supabase:supabase});
+    
+            await logger.log("info","awesome");
+
+            expect(supabase.get()[0].message).toEqual("awesome");
+        });
+
     });
 });

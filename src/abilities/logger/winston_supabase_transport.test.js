@@ -9,22 +9,31 @@ afterEach(()=>{
     jest.clearAllMocks();
 });
 
-describe("instantiation",()=>{
+describe("given WinstonSupabaseTransport",()=>{
 
-    test("when no parameters pass to constructor",()=>{
-        expect(getInstance).toThrow(Error);
+    describe("when there's no options pass to constructor",()=>{
+
+        test("then throw error",()=>{
+            expect(getInstance).toThrow(Error);
+        });
+
     });
 
-    test("log",async()=>{
-        jest.useFakeTimers();
-        let counter = 0;
-        const logger = getInstance({tableName:'winston_logs',supabaseClient:supabase});
-        logger.on("logged",(args)=>counter++);
-        await logger.log({message:"good quality code"},mockFn);
+    describe("when the required options (tableName,supabaseClient) provided", ()=>{
 
-        jest.runAllTimers();
-        expect(supabase.get()[0].message).toEqual("good quality code");
-        expect(counter).toBe(1);
-    });
+        test("then you get the instance and test it's 'log' method",async()=>{
+            jest.useFakeTimers();
+            let counter = 0;
+            const logger = getInstance({tableName:'winston_logs',supabaseClient:supabase});
+            logger.on("logged",(args)=>counter++);
+            await logger.log({message:"good quality code"},mockFn);
+    
+            jest.runAllTimers();
+            expect(supabase.get()[0].message).toEqual("good quality code");
+            expect(counter).toBe(1);
+        });
+
+    })
+
 });
 

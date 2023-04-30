@@ -8,7 +8,7 @@ import { execSync }  from 'child_process';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import jsv from "json-validator";
-import ManifestError from '../error/manifest_error.js';
+import ManifestError from '../errors/manifest_error.js';
 import * as constant from './constant.js/index.js';
 
 const __filename = fileURLToPath(import.meta.url);

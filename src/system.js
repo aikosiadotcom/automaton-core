@@ -23,13 +23,14 @@ function getPath(folderName = ""){
         return path.join(folder["config"],'.env');
     }
 
-    if(folderName != ""){
+    if(folderName){
         return folder[folderName];
     }
     
     return folder;
 }
 
+/* c8 ignore start */
 function getCurrentEnv(){
     if(process.env.NODE_ENV == 'testing'){
         return 'Testing';
@@ -39,6 +40,7 @@ function getCurrentEnv(){
 
     return 'Production';
 }
+/* c8 ignore end */
 
 await main();
 

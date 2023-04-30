@@ -28,6 +28,9 @@
   ],
   "author": "firman",
   "license": "MIT",
+  "imports": {
+    "#src/*": "./src/*.js"
+  },
   "dependencies": {
     "@babel/core": "^7.21.4",
     "@babel/plugin-proposal-decorators": "^7.21.0",
@@ -59,41 +62,5 @@
     "jsdoc-mermaid": "^1.0.0",
     "node-jest-badges": "^1.3.12",
     "taffydb": "^2.7.3"
-  },
-  "jest": {
-    "transform": {},
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "./src/**"
-    ],
-    "coverageReporters": [
-      "clover",
-      "json",
-      "lcov",
-      "text",
-      "json-summary"
-    ],
-    "reporters": [
-      "default",
-      [
-        "jest-html-reporters",
-        {
-          "publicPath": "./coverage",
-          "filename": "report.html",
-          "openReport": false
-        }
-      ]
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/src/error",
-      "<rootDir>/src/constanta.js",
-      "<rootDir>/src/index.js"
-    ],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/src/error",
-      "<rootDir>/src/constanta.js",
-      "<rootDir>/src/index.js"
-    ],
-    "coverageProvider": "v8"
   }
 }

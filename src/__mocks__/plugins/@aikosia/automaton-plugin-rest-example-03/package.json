@@ -1,0 +1,44 @@
+{
+  "name": "@aikosia/automaton-plugin-rest-example-01",
+  "version": "1.0.0",
+  "description": "Boilerplate for automaton create command ",
+  "main": "./src/index.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aikosiadotcom/automaton-plugin-rest-example-01"
+  },
+  "keywords": [
+    "bot",
+    "aikosia",
+    "automaton",
+    "puppeteer",
+    "playwright",
+    "chromium",
+    "automation"
+  ],
+  "scripts": {
+    "start": "cross-env NODE_ENV=development node ./node_modules/@aikosia/automaton-cli/src exec",
+    "release": "node ./script/release.js",
+    "fix-release": "np --no-2fa"
+  },
+  "author": "firman",
+  "license": "MIT",
+  "files": [
+    "src"
+  ],
+  "automaton": {
+    "version": "1.0.0",
+    "template": "restx",
+    "profile": "default",
+    "runParameter": "page",
+    "cronjob": false
+  },
+  "devDependencies": {
+    "@aikosia/automaton-cli": "^1.0.0",
+    "@aikosia/automaton-core": "^1.0.0",
+    "cross-env": "^7.0.3",
+    "np": "^7.7.0",
+    "read-pkg": "^8.0.0"
+  }
+}

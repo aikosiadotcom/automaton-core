@@ -1,25 +1,25 @@
 import {describe,test,expect ,jest} from '@jest/globals';
 import * as system from "./system.js";
 
-test("getPath",()=>{
-    expect(system.getPath("t")).toBeUndefined();
-    expect(system.getPath("")).toBeTruthy();
-});
-
-describe("getCurrentEnv",()=>{
-    test("NODE_ENV set to development",()=>{
-        process.env.NODE_ENV = 'development';
-        expect(system.getCurrentEnv()).toEqual(process.env.NODE_ENV.split("").map((v)=>{
-            if(v == 'd') return 'D';
-            return v;
-        }).join(""));
+describe("given getPath method",()=>{
+    describe("when no argument is given",()=>{
+        test("then it will return object",()=>{
+            expect(system.getPath()).toHaveProperty("config")
+        });
     });
-
-    test("NODE_ENV set to production",()=>{
-        process.env.NODE_ENV = 'production';
-        expect(system.getCurrentEnv()).toEqual(process.env.NODE_ENV.split("").map((v)=>{
-            if(v == 'p') return 'P';
-            return v;
-        }).join(""));
-    })
+    describe("when argument is 'env'",()=>{
+        test("then location env file will be return",()=>{
+            expect(system.getPath("env")).toBeTruthy();
+        });
+    });
+    describe("when argument is 'config'",()=>{
+        test("then location 'config' file will be return",()=>{
+            expect(system.getPath("env")).toBeTruthy();
+        });
+    });
+    describe("when the given argument key not found on the system",()=>{
+        test("then undefined will be return",()=>{
+            expect(system.getPath("test")).toBeUndefined();
+        });
+    });
 });

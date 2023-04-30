@@ -3,22 +3,11 @@ import Profiler from "./profiler.js";
 
 const getInstance = (args)=>new Profiler(args);
 
-describe("instantiation",()=>{
-    describe("no parameter given",()=>{
-        test('with namespace',async()=>{
-            const profiler = getInstance();
-
-            profiler.start("test");
-            await new Promise((resolve,reject)=>{
-                setTimeout(()=>{
-                    return resolve();
-                },1000)
-            });
-            const measureResult = profiler.stop("test");
-            expect(measureResult.name).toEqual("test");
-        });
+describe("given a Profiler class",()=>{
+    
+    describe("when method start and stop is called without argument",()=>{
         
-        test('no namespace',async()=>{
+        test("then executionTimeReport will have 'default' as property name",async()=>{
             const profiler = getInstance();
 
             profiler.start();
@@ -30,8 +19,27 @@ describe("instantiation",()=>{
             const measureResult = profiler.stop();
             expect(measureResult.name).toEqual("default");
         });
+    });
+
+    describe("when method start and stop is called with the same argument name",()=>{
+
+        test('then executionTimeReport is return',async()=>{
+            const profiler = getInstance();
+
+            profiler.start("test");
+            await new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    return resolve();
+                },1000)
+            });
+            const executionTimeReport = profiler.stop("test");
+            expect(executionTimeReport.name).toEqual("test");
+        });
         
-        test('namespace not match',async()=>{
+    });
+    
+    describe("when the namespace of 'start' and 'stop' method not same",()=>{
+        test('then throw error',async()=>{
             const profiler = getInstance();
 
             profiler.start('a');
@@ -45,17 +53,22 @@ describe("instantiation",()=>{
         });
     });
 
-    test("with parameter loginstance",async()=>{
-        const mockFn = jest.fn();
-        const profiler =  getInstance(mockFn);
+    describe("when options (reportHandler) pass to constructor",()=>{
 
-        profiler.start("test");
-        await new Promise((resolve,reject)=>{
-            setTimeout(()=>{
-                return resolve();
-            },1000)
+        test("then reportHandler will be called when method 'stop' is called",async()=>{
+            const mockFn = jest.fn();
+            const profiler =  getInstance(mockFn);
+    
+            profiler.start("test");
+            await new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    return resolve();
+                },1000)
+            });
+            const measureResult = profiler.stop("test");
+            expect(mockFn).toBeCalled();
         });
-        const measureResult = profiler.stop("test");
-        expect(mockFn).toBeCalled();
-    });
+
+    })
+
 });

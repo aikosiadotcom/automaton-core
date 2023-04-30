@@ -29,7 +29,7 @@ class Runtime extends Ability{
                     throw new Error("please using \'export default\' in your class");
                 }
     
-                const _run = ()=>{
+                const _run = async ()=>{
                     automaton["class"] = className.default;
                     automaton["instance"] = className.default();
                     automaton["instance"].emitter.once('_start',()=>{});
@@ -41,23 +41,23 @@ class Runtime extends Ability{
                         }
                     });
                     //TODO: this error not catch yet, maybe using promise?
-                    automaton["instance"].emitter.emit("_run",manifest);
+                    await automaton["instance"].emitter.emit("_run",manifest);
                 }
     
                 //keep alive
                 if(userAutomatonProject || manifest.cronjob === false || manifest.cronjob == "false"){
-                     _run();
+                     await _run();
                 }else{
                     //TODO: this error not catch yet, maybe using promise?
-                    cron.schedule(manifest.cronjob, () =>  {
-                        _run();
+                    cron.schedule(manifest.cronjob, async () =>  {
+                        await _run();
                     }, {
                         id:name,
                         timezone: "Asia/Jakarta"
                     });
                 }
             }catch(err){
-                this.logger.log("error",`deactivation \'${name}\'`,err);
+                this.logger.log("error",`RuntimeException of \'${name}\'`,err);
             }
             
         }))).filter(val=>val!=false);
