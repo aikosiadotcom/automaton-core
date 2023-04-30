@@ -12,29 +12,29 @@ async function main(currentDir, opts){
                     installed: [
                       {
                         name: '@aikosia/automaton-plugin-rest-example-01',
-                        root: path.normalize(`${__dirname}\\plugins\\@aikosia\\automaton-plugin-rest-example-01`)
+                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-01`)
                       },
                       {
                         name: '@aikosia/automaton-plugin-rest-example-02',
-                        root: path.normalize(`${__dirname}\\plugins\\@aikosia\\automaton-plugin-rest-example-02`)
+                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-02`)
                       },
                       {
                         name: '@aikosia/automaton-plugin-rest-example-03',
-                        root: path.normalize(`${__dirname}\\plugins\\@aikosia\\automaton-plugin-rest-example-03`)
+                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-03`)
                       }
                     ],
                     candidates: [
                       {
                         name: '@aikosia/automaton-plugin-rest-example-01',
-                        root: path.normalize(`${__dirname}\\plugins\\@aikosia\\automaton-plugin-rest-example-01`)
+                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-01`)
                       },
                       {
                         name: '@aikosia/automaton-plugin-rest-example-02',
-                        root: path.normalize(`${__dirname}\\plugins\\@aikosia\\automaton-plugin-rest-example-02`)
+                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-02`)
                       },
                       {
                         name: '@aikosia/automaton-plugin-rest-example-03',
-                        root: path.normalize(`${__dirname}\\plugins\\@aikosia\\automaton-plugin-rest-example-03`)
+                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-03`)
                       }
                     ],
                     excluded: []
