@@ -38,7 +38,7 @@ async function main(currentDir, opts){
                       }
                     ],
                     excluded: []
-                  }["candidates"]
+                  }
             }
         }
     }));

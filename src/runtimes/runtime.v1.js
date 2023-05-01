@@ -4,6 +4,7 @@ import Compiler from '#src/runtimes/compiler/index';
 import PluginLoader from '#src/runtimes/plugin_loader/index';
 import parallel from "@trenskow/parallel";
 import deepFreeze from "deep-freeze-es6";
+import {PLUGIN_INCLUDE_REGEX} from "#src/constant";
 
 class Runtime extends Ability{
     #compiler;
@@ -12,12 +13,12 @@ class Runtime extends Ability{
     constructor(){
         super({key:"Core",childKey:"Runtime"});
         this.#compiler = new Compiler();
-        this.#loader = new PluginLoader();
+        this.#loader = new PluginLoader({includeRegex:PLUGIN_INCLUDE_REGEX});
     }
 
     async run(){ 
         this.profiler.start('Runtime.run');
-        const automata = await this.#loader.ls();  
+        const {candidates:automata} = await this.#loader.ls();  
         const candidates = await this.#compiler.run({automata});
         const result = (await parallel(candidates.map(async(plugin)=>{
             return await this.#build({plugin});

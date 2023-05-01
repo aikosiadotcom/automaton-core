@@ -1,7 +1,7 @@
 import { deepFreeze } from "deep-freeze-es6";
-import Ability from "../../ability.js";
+import Ability from "#src/ability";
 import path from "path";
-import InterfacePackageManager from './interface_package_manager.js';
+import NpmPackageManager from '#src/runtimes/plugin_loader/npm_package_manager'
 
 /**
  * Load plugins of automaton
@@ -27,7 +27,7 @@ class PluginLoader extends Ability{
    *    ignoreRegex: []
    * });
    */
-  constructor({ includeRegex = [], excludeRegex = [], packageManager = new InterfacePackageManager() }) {
+  constructor({ includeRegex = [], excludeRegex = [], packageManager = new NpmPackageManager() }) {
     super({key:'Core',childKey:'PluginLoader'});
 
     if(includeRegex.length == 0){
