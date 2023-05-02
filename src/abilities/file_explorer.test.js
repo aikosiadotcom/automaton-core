@@ -12,7 +12,7 @@ describe("given App class",()=>{
         test("then should through error",()=>{
             expect(()=>new FileExplorer({name:'Automaton', dryRun:true, additionalPath:[{
                 addToKey:'cache',
-                name:"this/foldername"
+                name:{"a":"b"}
             }]})).toThrow();
 
             expect(()=>new FileExplorer({name:'Automaton', dryRun:true, additionalPath:[{
