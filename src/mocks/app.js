@@ -4,7 +4,7 @@ import {resolve} from 'import-meta-resolve';
 
 async function main({showLog = false}){
     const location = resolve('#src/app',import.meta.url);
-    jest.unstable_mockModule(location.replace("file:///",""),()=>({
+    jest.unstable_mockModule(location.replace(process.platform == "win32" ? "file:///" : "file://",""),()=>({
         default:class App{
             event = new EventEmitter()
             profiler = {

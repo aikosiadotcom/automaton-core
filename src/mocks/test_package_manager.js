@@ -2,7 +2,7 @@ import path from 'path';
 import InterfacePackageManager from '#plugin_loader/interface_package_manager';
 import {resolve} from 'import-meta-resolve';
 
-const __dirname = resolve("#mock",import.meta.url).replace("file:///");
+const __dirname = resolve("#mock",import.meta.url).replace(process.platform == "win32" ? "file:///" : "file://");
 
 class TestPackageManager extends InterfacePackageManager{
     constructor(){

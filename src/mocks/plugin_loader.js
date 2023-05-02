@@ -2,10 +2,10 @@ import {jest} from '@jest/globals';
 import path from "path";
 import {resolve} from 'import-meta-resolve';
 
-const __dirname = resolve("#mock",import.meta.url).replace("file:///","");
+const __dirname = resolve("#mock",import.meta.url).replace(process.platform == "win32" ? "file:///" : "file://","");
 async function main(opts){
     const location = resolve('#runtime/plugin_loader/index',import.meta.url);
-    jest.unstable_mockModule(location.replace("file:///",""),()=>({
+    jest.unstable_mockModule(location.replace(process.platform == "win32" ? "file:///" : "file://",""),()=>({
         default:class PluginLoader{
             async ls(){
                 return {

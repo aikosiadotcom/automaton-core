@@ -6,10 +6,10 @@ import fsExtra from 'fs-extra';
 import {resolve} from 'import-meta-resolve';
 
 await mockApp({showLog:false});
-const {code} = await babel.transformFileAsync(resolve("#mock/decorators",import.meta.url).replace("file:///",""), BABEL_OPTIONS);
+const {code} = await babel.transformFileAsync(resolve("#mock/decorators",import.meta.url).replace(process.platform == "win32" ? "file:///" : "file://",""), BABEL_OPTIONS);
 
-await fsExtra.ensureFile(resolve("#mock/decorators-compiled",import.meta.url).replace("file:///",""));
-await fsExtra.writeFile(resolve("#mock/decorators-compiled",import.meta.url).replace("file:///",""),code);
+await fsExtra.ensureFile(resolve("#mock/decorators-compiled",import.meta.url).replace(process.platform == "win32" ? "file:///" : "file://",""));
+await fsExtra.writeFile(resolve("#mock/decorators-compiled",import.meta.url).replace(process.platform == "win32" ? "file:///" : "file://",""),code);
 
 const {default:Test} = await import(resolve("#mock/decorators-compiled",import.meta.url));
 
