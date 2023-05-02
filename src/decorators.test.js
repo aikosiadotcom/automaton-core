@@ -1,20 +1,17 @@
 import {describe,test,expect ,jest} from '@jest/globals';
-import mockAbility from "#src/__mocks__/ability"; 
-import path from "path";
-import { BABEL_OPTIONS } from '#src/runtimes/compiler/generator';
+import mockApp from "#mock/app"; 
+import { BABEL_OPTIONS } from '#runtime/compiler/generator';
 import * as babel from "@babel/core";
 import fsExtra from 'fs-extra';
-import { resolveDirname } from './system.js';
+import {resolve} from 'import-meta-resolve';
 
-const __dirname = resolveDirname(import.meta.url);
-const mockPath = path.join(__dirname,"..");
-await mockAbility(mockPath,{showLog:false});
+await mockApp({showLog:false});
+const {code} = await babel.transformFileAsync(resolve("#mock/decorators",import.meta.url).replace("file:///",""), BABEL_OPTIONS);
 
-const baseMockPath = path.join(__dirname,"..","__mocks__");
-const {code} = await babel.transformFileAsync(path.join(baseMockPath,"decorators.js"), BABEL_OPTIONS);
-await fsExtra.ensureFile(path.join(baseMockPath,"decorators-compiled.js"));
-await fsExtra.writeFile(path.join(baseMockPath,"decorators-compiled.js"),code);
-const {default:Test} = await import(path.join(baseMockPath,"decorators-compiled.js"));
+await fsExtra.ensureFile(resolve("#mock/decorators-compiled",import.meta.url).replace("file:///",""));
+await fsExtra.writeFile(resolve("#mock/decorators-compiled",import.meta.url).replace("file:///",""),code);
+
+const {default:Test} = await import(resolve("#mock/decorators-compiled",import.meta.url));
 
 beforeAll(()=>{
     jest.useFakeTimers(); 

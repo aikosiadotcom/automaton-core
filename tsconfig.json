@@ -1,0 +1,13 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "noEmit": true,
+        "allowJs": true,
+        "checkJs": false,
+        "target": "ES2021",
+        "resolveJsonModule": true,
+        "moduleResolution": "nodenext",
+        "allowSyntheticDefaultImports": true
+    },
+    "include": ["./src"]
+}

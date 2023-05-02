@@ -18,16 +18,12 @@ function pushInitializers(ret, initializers) { initializers && ret.push(function
 function applyClassDecs(targetClass, classDecs) { if (classDecs.length > 0) { for (var initializers = [], newClass = targetClass, name = targetClass.name, i = classDecs.length - 1; i >= 0; i--) { var decoratorFinishedRef = { v: !1 }; try { var nextNewClass = classDecs[i](newClass, { kind: "class", name: name, addInitializer: createAddInitializerMethod(initializers, decoratorFinishedRef) }); } finally { decoratorFinishedRef.v = !0; } void 0 !== nextNewClass && (assertValidReturnValue(10, nextNewClass), newClass = nextNewClass); } return [newClass, function () { for (var i = 0; i < initializers.length; i++) initializers[i].call(newClass); }]; } }
 function _applyDecs(targetClass, memberDecs, classDecs, instanceBrand) { return { e: applyMemberDecs(targetClass, memberDecs, instanceBrand), get c() { return applyClassDecs(targetClass, classDecs); } }; }
 function _checkInRHS(value) { if (Object(value) !== value) throw TypeError("right-hand side of 'in' should be an object, got " + (null !== value ? typeof value : "null")); return value; }
-import path from "path";
-import mockAbility from "./ability.js";
-import { resolveDirname } from "../system.js";
-var __dirname = resolveDirname(import.meta.url);
-await mockAbility(path.join(__dirname, ".."), {
+import mockApp from "#mock/app";
+import { resolve } from "import-meta-resolve";
+await mockApp({
   showLog: false
 });
-var {
-  decorators
-} = await import("../index.js");
+var decorators = await import("../decorators.js");
 _dec = decorators.dowhile;
 _dec2 = decorators.delay;
 _dec3 = decorators.delay({

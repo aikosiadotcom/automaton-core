@@ -1,4 +1,4 @@
-import AbstractClassError from "#src/errors/abstract_class_error";
+import AbstractClassError from "#error/abstract_class_error";
 
 class InterfacePackageManager{
      constructor(){

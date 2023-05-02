@@ -1,12 +1,11 @@
 import {describe,test,expect ,jest} from '@jest/globals';
-import mockAbility from "../../__mocks__/ability.js"; 
+import mockApp from "#mock/app"; 
 import path from "path";
-import { resolveDirname } from '../../system.js';
+import {resolve} from 'import-meta-resolve';
 
-const __dirname = resolveDirname(import.meta.url);
-const mockPath = path.join(__dirname,"..","..","..");
-await mockAbility(mockPath,{showLog:false});
-const Compiler = (await import("./index.js")).default;
+const mockPath = path.join(resolve("#mock",import.meta.url).replace("file:///",""),"..");
+await mockApp({showLog:false});
+const Compiler = (await import(resolve("#compiler/index",import.meta.url))).default;
 
 beforeAll(()=>{
     jest.useFakeTimers();
@@ -20,8 +19,8 @@ describe("given Compiler class",()=>{
                 automata: [
                     {
                       name: '@aikosia/automaton-plugin-rest-example-01',
-                      root: path.normalize(`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01`),
-                      file: path.normalize(`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`),
+                      root: path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01`),
+                      file: path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`),
                       manifest: {
                         version: '1.0.0',
                         template: 'rest',
@@ -34,8 +33,8 @@ describe("given Compiler class",()=>{
             });
             expect(ret[0]).toEqual({
                 name:"@aikosia/automaton-plugin-rest-example-01",
-                root:path.normalize(`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01`),
-                file:path.normalize(`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`),
+                root:path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01`),
+                file:path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`),
                 manifest:{
                     "version": "1.0.0",
                     "template": "rest",
@@ -43,7 +42,7 @@ describe("given Compiler class",()=>{
                     "runParameter": "page",
                     "cronjob": false
                   },
-                main: path.normalize(`${mockPath}\/__mocks__\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/.automaton\/index.mjs`)
+                main: path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/.automaton\/index.mjs`)
               })
         });
     }); 

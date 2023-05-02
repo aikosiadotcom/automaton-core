@@ -1,6 +1,6 @@
 import {describe,test,expect ,jest} from '@jest/globals';
-import WinstonSupabaseTransport from "./winston_supabase_transport.js";
-import supabase from '../../__mocks__/supabase.js';
+import WinstonSupabaseTransport from "#ability/logger/winston_supabase_transport";
+import supabase from '#mock/supabase';
 
 let mockFn = jest.fn();;
 const getInstance = (args)=>new WinstonSupabaseTransport(args);

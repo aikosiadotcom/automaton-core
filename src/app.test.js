@@ -1,14 +1,15 @@
 import {describe,test,expect ,jest} from '@jest/globals';
-import {dotenv,envChecker,supabase} from "./__mocks__/abilitity_deps.js";
+import {dotenv,envChecker,supabase} from "./mocks/app_deps.js";
+import {resolve} from 'import-meta-resolve';
 
-const getInstance = async(args)=>new (await import('./ability.js')).default(args);
+const getInstance = async(args)=>new (await import(resolve('#src/app',import.meta.url))).default(args);
 
 beforeEach(()=>{
     jest.resetModules();
     jest.resetAllMocks();
 });
   
-describe("given Ability class", () => {
+describe("given App class", () => {
 
     describe("when there's no options pass to constructor", ()=>{
 
@@ -45,7 +46,7 @@ describe("given Ability class", () => {
             await envChecker();
             await supabase();
             const instance = await getInstance({key:'key',childKey:'childKey'});
-            expect(instance.constructor.name).toBe("Ability");
+            expect(instance.constructor.name).toBe("App");
         });
         
     });

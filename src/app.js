@@ -1,21 +1,21 @@
-import EventEmitter from "./abilities/event_emitter.js";
-import Profiler from "./abilities/profiler.js";
-import Logger from "./abilities/logger/logger.js";
-import ConstructorParamsRequiredError from "./errors/constructor_params_required_error.js";
-import EnvRequiredError from "./errors/env_required_error.js";
+import EventEmitter from "#ability/event_emitter";
+import Profiler from "#ability/profiler";
+import Logger from "#ability/logger/index";
+import FileExplorer from "#ability/file_explorer";
+import ConstructorParamsRequiredError from "#error/constructor_params_required_error";
+import EnvRequiredError from "#error/env_required_error";
 import * as dotenv from "dotenv";
 import envChecker from "node-envchecker";
 import { createClient } from "@supabase/supabase-js";
-import * as sys from "./system.js";
 
 /**
  * @external winston.Logger
  * @see https://github.com/winstonjs/winston
  * */
 
-class Ability {
+class App{
   /**
-   * @type {winston.Logger} @link winston.Logger
+   * @type {Logger}
    */
   logger;
 
@@ -30,14 +30,22 @@ class Ability {
   event;
 
   /**
-   * @type {supabase}
+   * @external supabase
    */
   db;
 
+  /** 
+   * @type {FileExplorer}
+  */
+  explorer;
+
   constructor(config = {}) {
+
     if (!config.key || !config.childKey) {
       throw new ConstructorParamsRequiredError(["key", "childKey"]);
     }
+
+    this.explorer = new FileExplorer({name:"Automaton",additionalPath:[{name:"Profile",addToKey:"data"}]});
 
     const requiredEnv = [
       "AUTOMATON_DAEMON_HOST",
@@ -47,10 +55,10 @@ class Ability {
     ];
 
     try {
-      dotenv.config({ path: sys.getPath("env") });
+      dotenv.config({ path: this.explorer.path["env"] });
       envChecker(requiredEnv);
     } catch (err) {
-      throw new EnvRequiredError({ path: sys.getPath("config"), requiredEnv });
+      throw new EnvRequiredError({ path: this.explorer.path["config"], requiredEnv });
     }
 
     let supabaseConfig = config.supabase ?? {};
@@ -79,7 +87,7 @@ class Ability {
       winstonConfig = {
         level: "debug",
         defaultMeta: {
-          projectKey: sys.getCurrentEnv(),
+          projectKey: this.explorer.getCurrentEnv(),
           moduleKey: config.key,
           childModuleKey: config.childKey,
         },
@@ -89,7 +97,7 @@ class Ability {
     let loggerConfig = config.logger ?? {};
     if (Object.keys(loggerConfig).length == 0) {
       loggerConfig = {
-        console: process.env.NODE_ENV != "production",
+        console: this.explorer.env.isPro(),
       };
     }
 
@@ -105,4 +113,4 @@ class Ability {
   }
 }
 
-export default Ability;;
+export default App;;

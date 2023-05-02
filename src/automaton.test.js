@@ -1,19 +1,16 @@
 import {describe,test,expect ,jest} from '@jest/globals';
-import mockAbility from "./__mocks__/ability.js";
-import path from "path";
-import { resolveDirname } from './system.js';
+import mockApp from "#mock/app";
+import {resolve} from 'import-meta-resolve';
 
-const __dirname = resolveDirname(import.meta.url);
-await mockAbility(path.join(__dirname,".."),{showLog:false});
-await import('./__mocks__/axios.js'); 
-await import('./__mocks__/playwright-core.js'); 
-const Automaton = (await import("./automaton.js")).default;
+await mockApp({showLog:false});
+await import(resolve('#mock/axios',import.meta.url)); 
+await import(resolve('#mock/playwright-core',import.meta.url)); 
+const Automaton = (await import(resolve("#src/automaton",import.meta.url))).default;
 class Bot extends Automaton{
     constructor(config){
         super(config);
     }
 }
-const getInstance = (args)=>new Bot(args);
 
 beforeEach(()=>{
     jest.resetModules();

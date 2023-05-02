@@ -1,8 +1,9 @@
 import wait from 'delay';
 import pRetry from 'p-retry';
-import Ability from './ability.js';
+import App from '#src/app';
 import random from 'random';
-const logger = (new Ability({key:"Core",childKey:"Decorator"})).logger;
+
+const logger = (new App({key:"Core",childKey:"Decorator"})).logger;
 
 function dowhile(value,{kind,name}){
     if(kind == 'method'){

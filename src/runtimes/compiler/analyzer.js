@@ -1,12 +1,12 @@
 import path from 'path';
-import Ability from "#src/ability";
+import App from "#src/app";
 import {readPackage} from 'read-pkg';
 import jsv from "json-validator";
-import ManifestError from '#src/errors/manifest_error';
+import ManifestError from '#error/manifest_error';
 import * as constant from '#src/constant';
 import parallel from "@trenskow/parallel";
 
-class Analyzer extends Ability{
+class Analyzer extends App{
 
     constructor(){
         super({key:"Core",childKey:"Analyzer"});

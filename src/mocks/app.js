@@ -1,11 +1,11 @@
 import {jest} from '@jest/globals';
-import EventEmitter from '../abilities/event_emitter.js';
-import path from "path";
+import EventEmitter from '#ability/event_emitter';
+import {resolve} from 'import-meta-resolve';
 
-async function main(currentDir, {showLog = false}){
-    const location = path.join(currentDir,"ability.js");
-    jest.unstable_mockModule(location,()=>({
-        default:class Ability{
+async function main({showLog = false}){
+    const location = resolve('#src/app',import.meta.url);
+    jest.unstable_mockModule(location.replace("file:///",""),()=>({
+        default:class App{
             event = new EventEmitter()
             profiler = {
                 start:()=>"mock",
@@ -21,4 +21,4 @@ async function main(currentDir, {showLog = false}){
 }
 
 
-export default async(currentDir,opts)=>main(currentDir,opts);
+export default async(opts)=>main(opts);

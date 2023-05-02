@@ -1,14 +1,11 @@
 import {describe,test,expect ,jest} from '@jest/globals';
-import mockAbility from "../__mocks__/ability.js"; 
-import mockLoader from "../__mocks__/plugin_loader.js"; 
-import path from "path";
-import { resolveDirname } from '../system.js';
+import mockApp from "#mock/app"; 
+import mockLoader from "#mock/plugin_loader"; 
+import {resolve} from 'import-meta-resolve';
 
-const __dirname = resolveDirname(import.meta.url);
-const mockPath = path.join(__dirname,"..","..");
-await mockAbility(mockPath,{showLog:false});
-await mockLoader(mockPath);
-const Runtime = (await import("./runtime.v1.js")).default;
+await mockApp({showLog:false});
+await mockLoader();
+const Runtime = (await import(resolve("#runtime/runtime.v1",import.meta.url))).default;
 
 beforeAll(()=>{
     jest.useFakeTimers(); 

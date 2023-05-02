@@ -23,19 +23,19 @@
     ]
   ],
   "testPathIgnorePatterns": [
+    "<rootDir>/src/mocks",
     "<rootDir>/src/errors",
     "<rootDir>/src/constant.js",
     "<rootDir>/src/index.js",
     "<rootDir>/src/runtimes/index.js",
-    "<rootDir>/src/runtimes/runtime.v1.js",
     "<rootDir>/src/runtimes/plugin_loader/interface_package_manager.js"
   ],
   "coveragePathIgnorePatterns": [
-    "<rootDir>/src/error",
+    "<rootDir>/src/mocks",
+    "<rootDir>/src/errors",
     "<rootDir>/src/constant.js",
     "<rootDir>/src/index.js",
     "<rootDir>/src/runtimes/index.js",
-    "<rootDir>/src/runtimes/runtime.v1.js",
     "<rootDir>/src/runtimes/plugin_loader/interface_package_manager.js"
   ],
   "coverageProvider": "v8"

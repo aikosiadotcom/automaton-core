@@ -1,5 +1,5 @@
 import {describe,test,expect ,jest} from '@jest/globals';
-import EventEmitter from "./event_emitter.js";
+import EventEmitter from "#ability/event_emitter";
 
 let instance,mockFn;
 const getInstance = ()=>new EventEmitter();

@@ -2,7 +2,7 @@
     "source":{
         "include":["./src"],
         "includePattern":".js$",
-        "excludePattern":"(node_modules/|docs|__mocks__|.test.)"
+        "excludePattern":"(node_modules/|docs|mocks|.test.)"
     },
     "plugins":[
         "plugins/markdown",

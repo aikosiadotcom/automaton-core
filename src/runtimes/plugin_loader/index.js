@@ -1,12 +1,12 @@
 import { deepFreeze } from "deep-freeze-es6";
-import Ability from "#src/ability";
+import App from "#src/app";
 import path from "path";
-import NpmPackageManager from '#src/runtimes/plugin_loader/npm_package_manager'
+import NpmPackageManager from '#plugin_loader/npm_package_manager'
 
 /**
  * Load plugins of automaton
  */
-class PluginLoader extends Ability{
+class PluginLoader extends App{
   #includeRegex;
   #excludeRegex;
   root;

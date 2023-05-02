@@ -1,8 +1,8 @@
-import Ability from "#src/ability";
-import Analyzer from "#src/runtimes/compiler/analyzer";
-import Generator from "#src/runtimes/compiler/generator";
+import App from "#src/app";
+import Analyzer from "#compiler/analyzer";
+import Generator from "#compiler/generator";
 
-class Compiler extends Ability{
+class Compiler extends App{
     #analyzer;
     #generator;
 

@@ -1,6 +1,6 @@
 import {describe,test,expect ,jest} from '@jest/globals';
-import Logger from "./logger.js";
-import supabase from '../../__mocks__/supabase.js';
+import Logger from "#ability/logger/index";
+import supabase from '#mock/supabase';
 
 let instance,mockFn;
 const getInstance = (args)=>new Logger(args);

@@ -1,12 +1,12 @@
 import cron from 'node-cron';
-import Ability from "#src/ability";
-import Compiler from '#src/runtimes/compiler/index';
-import PluginLoader from '#src/runtimes/plugin_loader/index';
+import App from "#src/app";
+import Compiler from '#compiler/index';
+import PluginLoader from '#plugin_loader/index';
 import parallel from "@trenskow/parallel";
 import deepFreeze from "deep-freeze-es6";
 import {PLUGIN_INCLUDE_REGEX} from "#src/constant";
 
-class Runtime extends Ability{
+class Runtime extends App{
     #compiler;
     #loader;
 

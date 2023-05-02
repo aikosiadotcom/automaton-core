@@ -1,7 +1,8 @@
 import path from 'path';
-import InterfacePackageManager from '../runtimes/plugin_loader/interface_package_manager.js';
-import { resolveDirname } from '../system.js';
-const __dirname = resolveDirname(import.meta.url);
+import InterfacePackageManager from '#plugin_loader/interface_package_manager';
+import {resolve} from 'import-meta-resolve';
+
+const __dirname = resolve("#mock",import.meta.url).replace("file:///");
 
 class TestPackageManager extends InterfacePackageManager{
     constructor(){
@@ -9,7 +10,7 @@ class TestPackageManager extends InterfacePackageManager{
     }
 
     root(){
-        return path.join(__dirname,"..","plugins");
+        return path.join(__dirname,"plugins");
     }
 
     ls(){

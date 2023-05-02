@@ -1,7 +1,7 @@
 import * as babel from "@babel/core";
 import fsExtra from 'fs-extra';
 import path from 'path';
-import Ability from "#src/ability";
+import App from "#src/app";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import parallel from "@trenskow/parallel";
@@ -28,7 +28,7 @@ export const BABEL_OPTIONS = {
     }
 }
 
-class Generator extends Ability{
+class Generator extends App{
 
     constructor(){
         super({key:"Core",childKey:"Generator"});

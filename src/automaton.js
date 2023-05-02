@@ -1,14 +1,14 @@
 import axios from "axios";
 import {chromium} from 'playwright-core';
-import Ability from "./ability.js";
-import MustOverrideError from "./errors/must_override_error.js";
-import ManifestError from "./errors/manifest_error.js";
-import AbstractClassError from "./errors/abstract_class_error.js";
+import App from "#src/app";
+import MustOverrideError from "#error/must_override_error";
+import ManifestError from "#error/manifest_error";
+import AbstractClassError from "#error/abstract_class_error";
 
 /**
- * @extends Ability
+ * @extends App
  */
-class Automaton extends Ability{
+class Automaton extends App{
     #browser;
     _context;
     _manifest;

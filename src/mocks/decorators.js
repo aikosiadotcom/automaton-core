@@ -1,10 +1,10 @@
-import path from "path";
-import mockAbility from "./ability.js";
-import { resolveDirname } from "../system.js";
-const __dirname =  resolveDirname(import.meta.url);
-await mockAbility(path.join(__dirname,".."),{showLog:false});
+import mockApp from "#mock/app";
+import { resolve } from "import-meta-resolve";
 
-const {decorators} = await import("../index.js");
+await mockApp({showLog:false});
+
+const decorators = await import("../decorators.js");
+
 class DecoratorTest{
     counter = 0;
     innerRetry = 0;

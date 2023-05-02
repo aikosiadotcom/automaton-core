@@ -1,11 +1,11 @@
 import {jest} from '@jest/globals';
 import path from "path";
-import { resolveDirname } from '../system.js';
+import {resolve} from 'import-meta-resolve';
 
-const __dirname = path.join(resolveDirname(import.meta.url),"..");
-async function main(currentDir, opts){
-    const location = path.join(currentDir,"runtimes","plugin_loader","index.js");
-    jest.unstable_mockModule(location,()=>({
+const __dirname = resolve("#mock",import.meta.url).replace("file:///","");
+async function main(opts){
+    const location = resolve('#runtime/plugin_loader/index',import.meta.url);
+    jest.unstable_mockModule(location.replace("file:///",""),()=>({
         default:class PluginLoader{
             async ls(){
                 return {
@@ -46,4 +46,4 @@ async function main(currentDir, opts){
 }
 
 
-export default async(currentDir,opts)=>main(currentDir,opts);
+export default async(opts)=>main(opts);

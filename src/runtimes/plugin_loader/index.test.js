@@ -1,14 +1,12 @@
 import {describe,test,expect ,jest} from '@jest/globals';
-import mockAbility from "../../__mocks__/ability.js"; 
-import path from "path";
-import {PLUGIN_INCLUDE_REGEX} from "../../constant.js";
-import NpmPackageManager from "./npm_package_manager.js";
-import TestPackageManager from "../../__mocks__/test_package_manager.js";
-import { resolveDirname } from '../../system.js';
+import mockApp from "#mock/app"; 
+import {PLUGIN_INCLUDE_REGEX} from "#src/constant";
+import NpmPackageManager from "#plugin_loader/npm_package_manager";
+import TestPackageManager from "#mock/test_package_manager";
+import {resolve} from 'import-meta-resolve';
 
-const __dirname = resolveDirname(import.meta.url);
-await mockAbility(path.join(__dirname,"..","..",".."),{showLog:false});
-const PluginLoader = (await import("./index.js")).default;
+await mockApp({showLog:false});
+const PluginLoader = (await import(resolve("#plugin_loader/index",import.meta.url))).default;
 
 describe("given PluginLoader class",()=>{
     describe("when no options pass to constructor",()=>{

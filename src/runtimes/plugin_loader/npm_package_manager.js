@@ -1,4 +1,4 @@
-import InterfacePackageManager from "./interface_package_manager.js";
+import InterfacePackageManager from "#plugin_loader/interface_package_manager";
 import { execSync } from "child_process";
 
 class NpmPackageManager extends InterfacePackageManager{
