@@ -1,5 +1,5 @@
 import {jest} from '@jest/globals';
-import EventEmitter from '#ability/event_emitter';
+import EventEmitter from '#feature/event_emitter';
 import {resolve} from 'import-meta-resolve';
 
 async function main({showLog = false}){

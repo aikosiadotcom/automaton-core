@@ -46,23 +46,24 @@ class Analyzer extends App{
         await new Promise((resolve,reject)=>{
             jsv.validate(config,constant.SCHEMA,(err,msg)=>{
                 if(msg && Object.keys(msg).length){
-                    reject(new ManifestError(msg));
+                    return reject(new ManifestError(msg));
                 }
 
                 /* c8 ignore start */
                 if(err){
-                    reject(new ManifestError(err));
+                    return reject(new ManifestError(err));
                 }
                 /* c8 ignore end */
 
                 return resolve();
             });
         });
-        if(process.env.NODE_ENV != 'production'){
-            //set default value for development
-            config["profile"] = 'default';
-            config["cronjob"] = false;
-        }
+
+        // if(!this.app.env.isProduction()){
+        //     //set default value for development
+        //     config["profile"] = 'default';
+        //     config["cronjob"] = false;
+        // }
 
         return {
             name:name,

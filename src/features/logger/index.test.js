@@ -1,5 +1,5 @@
 import {describe,test,expect ,jest} from '@jest/globals';
-import Logger from "#ability/logger/index";
+import Logger from "#feature/logger/index";
 import supabase from '#mock/supabase';
 
 let instance,mockFn;

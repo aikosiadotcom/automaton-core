@@ -37,7 +37,7 @@
   "license": "MIT",
   "imports": {
     "#src/*": "./src/*.js",
-    "#ability/*": "./src/abilities/*.js",
+    "#feature/*": "./src/features/*.js",
     "#logger/*":"./src/logger/*.js",
     "#runtime/*": "./src/runtimes/*.js",
     "#plugin_loader/*":"./src/runtimes/plugin_loader/*.js",

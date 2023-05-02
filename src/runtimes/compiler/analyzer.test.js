@@ -32,7 +32,7 @@ describe("given Analyzer class",()=>{
                     "template": "rest",
                     "profile": "default",
                     "runParameter": "page",
-                    "cronjob": false
+                    "cronjob": "false"
                   }})
         });
     });

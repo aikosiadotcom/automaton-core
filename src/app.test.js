@@ -16,6 +16,7 @@ describe("given App class", () => {
         test('then throw ConstructorParamsRequiredError', async () => {
             try{
                 await getInstance();
+                expect(1).toBe(2);
             }catch(err){ 
                 expect(err.constructor.name).toEqual("ConstructorParamsRequiredError");
             }
@@ -27,12 +28,14 @@ describe("given App class", () => {
         
         beforeEach(()=>{
             //needed because EnvRequiredError will console.error
-            jest.spyOn(console, 'error').mockImplementation(() => {}); 
+            // jest.spyOn(console, 'error').mockImplementation(() => {}); 
         })
 
         test('then throw EnvRequiredError',  async() => {
             try{
+                (await import(resolve("#mock/node-envchecker",import.meta.url))).default({throwError:true})
                 await getInstance({key:'key',childKey:'childKey'});
+                expect(1).toBe(2);
             }catch(err){
                 expect(err.constructor.name).toEqual("EnvRequiredError");
             }
@@ -43,7 +46,7 @@ describe("given App class", () => {
 
         test('then should get the instance', async () => {
             await dotenv();
-            await envChecker();
+            await envChecker({throwError:false});
             await supabase();
             const instance = await getInstance({key:'key',childKey:'childKey'});
             expect(instance.constructor.name).toBe("App");

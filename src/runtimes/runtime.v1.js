@@ -4,16 +4,16 @@ import Compiler from '#compiler/index';
 import PluginLoader from '#plugin_loader/index';
 import parallel from "@trenskow/parallel";
 import deepFreeze from "deep-freeze-es6";
-import {PLUGIN_INCLUDE_REGEX} from "#src/constant";
+import {PLUGIN_INCLUDE_REGEX, PLUGIN_EXCLUDE_REGEX} from "#src/constant";
 
 class Runtime extends App{
     #compiler;
     #loader;
 
-    constructor(){
+    constructor({includeRegex = PLUGIN_INCLUDE_REGEX, excludeRegex = PLUGIN_EXCLUDE_REGEX}){
         super({key:"Core",childKey:"Runtime"});
         this.#compiler = new Compiler();
-        this.#loader = new PluginLoader({includeRegex:PLUGIN_INCLUDE_REGEX});
+        this.#loader = new PluginLoader({includeRegex, excludeRegex});
     }
 
     async run(){ 
@@ -59,6 +59,7 @@ class Runtime extends App{
             if(manifest.cronjob === false || manifest.cronjob == "false"){
                     await _run();
             }else{
+                /* c8 ignore start*/
                 //TODO: this error not catch yet, maybe using promise?
                 cron.schedule(manifest.cronjob, async () =>  {
                     await _run();
@@ -66,6 +67,7 @@ class Runtime extends App{
                     id:name,
                     timezone: "Asia/Jakarta"
                 }); 
+                /* c8 ignore end*/
             }
 
             return automaton;

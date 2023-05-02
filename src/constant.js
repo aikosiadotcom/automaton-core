@@ -46,6 +46,8 @@ export const SCHEMA = deepFreeze({
         }else{
             if(!cron.validate(value)){
                 cb({message:`wrong syntax of ${path} field. Please read: https://www.npmjs.com/package/node-cron`});
+            }else{
+                cb(null,null);
             }
         }
       }

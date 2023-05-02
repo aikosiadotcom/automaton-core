@@ -8,37 +8,69 @@ async function main(opts){
     jest.unstable_mockModule(location.replace(process.platform == "win32" ? "file:///" : "file://",""),()=>({
         default:class PluginLoader{
             async ls(){
-                return {
+              switch (opts.case){
+                case 1:
+                  //cronjob false
+                  return {
+                      installed: [
+                        {
+                          name: '@aikosia/automaton-plugin-rest-example-01',
+                          root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-01`)
+                        },
+                        {
+                          name: '@aikosia/automaton-plugin-rest-example-02',
+                          root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-02`)
+                        },
+                        {
+                          name: '@aikosia/automaton-plugin-rest-example-03',
+                          root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-03`)
+                        }
+                      ],
+                      candidates: [
+                        {
+                          name: '@aikosia/automaton-plugin-rest-example-01',
+                          root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-01`)
+                        },
+                        {
+                          name: '@aikosia/automaton-plugin-rest-example-02',
+                          root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-02`)
+                        },
+                        {
+                          name: '@aikosia/automaton-plugin-rest-example-03',
+                          root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-03`)
+                        }
+                      ],
+                      excluded: []
+                    }
+
+                case 2:
+                  //no default export
+                  return {
                     installed: [
-                      {
-                        name: '@aikosia/automaton-plugin-rest-example-01',
-                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-01`)
-                      },
-                      {
-                        name: '@aikosia/automaton-plugin-rest-example-02',
-                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-02`)
-                      },
-                      {
-                        name: '@aikosia/automaton-plugin-rest-example-03',
-                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-03`)
-                      }
                     ],
                     candidates: [
                       {
-                        name: '@aikosia/automaton-plugin-rest-example-01',
-                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-01`)
-                      },
-                      {
-                        name: '@aikosia/automaton-plugin-rest-example-02',
-                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-02`)
-                      },
-                      {
-                        name: '@aikosia/automaton-plugin-rest-example-03',
-                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-03`)
+                        name: '@aikosia/automaton-plugin-rest-example-04',
+                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-04`)
                       }
                     ],
                     excluded: []
                   }
+
+                case 3:
+                  //for cronjob test
+                  return {
+                    installed: [
+                    ],
+                    candidates: [
+                      {
+                        name: '@aikosia/automaton-plugin-rest-example-05',
+                        root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-05`)
+                      }
+                    ],
+                    excluded: []
+                  }
+              }
             }
         }
     }));

@@ -1,5 +1,5 @@
 import {describe,test,expect ,jest} from '@jest/globals';
-import Profiler from "#ability/profiler";
+import Profiler from "#feature/profiler";
 
 const getInstance = (args)=>new Profiler(args);
 

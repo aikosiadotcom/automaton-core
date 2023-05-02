@@ -1,5 +1,5 @@
 import winston from "winston";
-import WinstonSupabaseTransport from "#ability/logger/winston_supabase_transport";
+import WinstonSupabaseTransport from "#feature/logger/winston_supabase_transport";
 
 class Logger{
     constructor(config){

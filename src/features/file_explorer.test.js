@@ -1,5 +1,5 @@
 import {describe,test,expect ,jest} from '@jest/globals';
-import FileExplorer from "#ability/file_explorer";
+import FileExplorer from "#feature/file_explorer";
 
 describe("given App class",()=>{
     describe("when NODE_ENV is set",()=>{

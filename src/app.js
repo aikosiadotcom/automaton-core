@@ -1,7 +1,7 @@
-import EventEmitter from "#ability/event_emitter";
-import Profiler from "#ability/profiler";
-import Logger from "#ability/logger/index";
-import FileExplorer from "#ability/file_explorer";
+import EventEmitter from "#feature/event_emitter";
+import Profiler from "#feature/profiler";
+import Logger from "#feature/logger/index";
+import FileExplorer from "#feature/file_explorer";
 import ConstructorParamsRequiredError from "#error/constructor_params_required_error";
 import EnvRequiredError from "#error/env_required_error";
 import * as dotenv from "dotenv";

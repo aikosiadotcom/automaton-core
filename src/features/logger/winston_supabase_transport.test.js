@@ -1,5 +1,5 @@
 import {describe,test,expect ,jest} from '@jest/globals';
-import WinstonSupabaseTransport from "#ability/logger/winston_supabase_transport";
+import WinstonSupabaseTransport from "#feature/logger/winston_supabase_transport";
 import supabase from '#mock/supabase';
 
 let mockFn = jest.fn();;
