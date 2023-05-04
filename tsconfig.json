@@ -7,7 +7,8 @@
         "target": "ES2021",
         "resolveJsonModule": true,
         "moduleResolution": "nodenext",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop":true
     },
     "include": ["./src"]
 }

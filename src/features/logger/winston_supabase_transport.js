@@ -1,33 +1,55 @@
+// @ts-nocheck
 import Transport from 'winston-transport';
 
 /**
  * @external Transport
+ * @see https://github.com/winstonjs/winston-transport
+ */
+
+/**
+ * @external SupabaseClient
+ * @see https://supabase.com/docs/reference/javascript/initializing
+ */
+
+/**
+ * @typedef {("error" | "warn" | "info" | "http" | "verbose" | "debug" | "silly")} WinstonSupabaseTransport~LogLevel
+ */
+
+/**
+ * Acts as a transport for winston to sending logs to Supabase server.
+ * This class will be used by [Logger]{@link Logger} internally.
+ * @category Features
+ * @subcategory Internal
+ * @example 
+ * 
+ * import winston from "winston";
+ * import { createClient } from "@supabase/supabase-js"; 
+ * import WinstonSupabaseTransport from "./winston_supabase_transport.js";
+ * 
+ * const client = createClient(supabaseUrl,supabaseKey);
+ * const logger = winston.createLogger({
+ *      defaultMeta: {},
+ *      transports: [
+ *          new WinstonSupabaseTransport({tableName:'logs',supabaseClient:client})
+ *      ]
+ * });
+ * 
+ * logger.log("info","Hello Jen", {meta:"accept additional object type"});
  * @see https://github.com/winstonjs/winston#adding-custom-transports
- * */
-
-/**
- * @typedef {Object} SupabaseOptions
- * @property {string} url - The API gateway for your Supabase project.
- * @property {string} secret - The anon key for your Supabase API.
- * @see https://supabase.com/docs/guides/database/connecting-to-postgres#api-url-and-keys
- */
-
-/** 
- * @typedef {Object} WinstonSupabaseTransportOptions
- * @property {SupabaseOptions} supabase
- * @property {string} tableName - name of the table will be used to store logs on your supabase project.
- */
-
-/**
- * @extends external:Transport
+ * 
+ * @extends external:Transport  
  */
 class WinstonSupabaseTransport extends Transport {
     
     /**
-     * 
-     * @param {WinstonSupabaseTransportOptions} options
+     * @param {object} options
+     * @param {string} options.tableName - Name of the table to hold logs
+     * @param {external:SupabaseClient} options.supabaseClient
+     * @param {string} [options.name="Winston-Supabase-Logger"]
+     * @param {WinstonSupabaseTransport~LogLevel} [options.level="debug"] - {@link https://github.com/winstonjs/winston#logging-levels}
+     * @param {boolean} [options.silent=false]
      */
-    constructor(options = {}) {
+    constructor(options) {
         super(options);
 
         if (!options.tableName || !options.supabaseClient) {

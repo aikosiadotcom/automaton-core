@@ -1,9 +1,24 @@
 import prettyHrtime from 'pretty-hrtime';
 
-/**
- * @description
- * contains method to measure of the time required to execute a task
+/** 
+ * @typedef {Object} Profiler~ExecutionTimeReport
+ * @property {string} name
+ * @property {number} time
+ * @property {string} words
+ * @property {string} preciseWords
+ * @property {string} verboseWords
+*/
 
+/**
+ * @callback Profiler~ReportHandler
+ * @param {Profiler~ExecutionTimeReport} report
+ */
+
+
+/**
+ * Contains methods to measure of the time required to execute a task
+ * @category Features
+ * @subcategory Feature
  * @example <caption>default usage</caption>
  * 
  * const profiler = new Profiler();
@@ -19,14 +34,8 @@ import prettyHrtime from 'pretty-hrtime';
 class Profiler{
   namedPerformances = {};
   defaultName = "default";
-  
   /**
-   * @callback ReportHandler
-   * @param {ExecutionTimeReport} report
-   */
-
-  /**
-   * @param {ReportHandler} [reportHandler] - a handler to process the report
+   * @param {Profiler~ReportHandler} [reportHandler] - a handler to process the report
    */
   constructor(reportHandler){
     this.logInstance = reportHandler;
@@ -54,15 +63,6 @@ class Profiler{
     }
   }
   
-  /** 
-   * @typedef {Object} ExecutionTimeReport
-   * @property {string} name
-   * @property {number} time
-   * @property {string} words
-   * @property {string} preciseWords
-   * @property {string} verboseWords
-  */
-  
   /**
    * @description
    * stop measure
@@ -78,7 +78,7 @@ class Profiler{
    * 
    * @param {string} [name="default"] - stop the measurement and collect the report. 
    * 
-   * @returns {ExecutionTimeReport}
+   * @returns {Profiler~ExecutionTimeReport}
    */
   stop(name){
     name = name || this.defaultName;

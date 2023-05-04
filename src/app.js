@@ -9,10 +9,27 @@ import envChecker from "node-envchecker";
 import { createClient } from "@supabase/supabase-js";
 
 /**
- * @external winston.Logger
- * @see https://github.com/winstonjs/winston
- * */
-
+ * An abstract class that serves as a base for creating applications. It provides
+several features such as logging, profiling, event handling, and file exploration. It also
+initializes a Supabase client for database operations and checks for required environment variables.
+The constructor takes a configuration object that can be used to customize the behavior of the
+class.
+ * @category Features
+ * @subcategory API
+ * @example 
+ * 
+ * import App from "./app.js";
+ * 
+ * class MyApp extends App{
+ *    super({key:"MyApp",childKey:"MyAppModule"});
+ * 
+ *    constructor(){
+ *      //you will have access to all of instance features class success logger,db,profiler,event,etc...
+ *    }
+ * }
+ * 
+ * @abstract
+ */
 class App{
   /**
    * @type {Logger}
@@ -30,7 +47,8 @@ class App{
   event;
 
   /**
-   * @external supabase
+   * @type {external:SupabaseClient}
+   * @todo let consumer choose database service by themselves instead of only support for supabase
    */
   db;
 
@@ -39,14 +57,20 @@ class App{
   */
   explorer;
 
-  constructor(config = {}) {
+/**
+ * @param {object} options - An object containing optional configuration options for the constructor.
+ * @param {string} options.key - This key value will serves as moduleKey for module_key in supabase winston_logs tables
+ * @param {string} options.childKey - This child key value will serves as childModuleKey for child_module_key in supabase winston_logs tables
+ * @todo Provide additional argument for modify behaviour of features class
+ */
+  constructor(options) {
 
-    if (!config.key || !config.childKey) {
+    if (!options.key || !options.childKey) {
       throw new ConstructorParamsRequiredError(["key", "childKey"]);
     }
 
     this.explorer = new FileExplorer({name:"Automaton",additionalPath:[{name:"Profile",addToKey:"data"}]});
-
+    
     const requiredEnv = [
       "AUTOMATON_DAEMON_HOST",
       "AUTOMATON_DAEMON_PORT",
@@ -61,7 +85,7 @@ class App{
       throw new EnvRequiredError({ path: this.explorer.path["config"], requiredEnv });
     }
 
-    let supabaseConfig = config.supabase ?? {};
+    let supabaseConfig = {};
     if (Object.keys(supabaseConfig).length == 0) {
       supabaseConfig = {
         url: process.env.AUTOMATON_SUPABASE_URL,
@@ -82,19 +106,19 @@ class App{
       });
     }
 
-    let winstonConfig = config.winston ?? {};
+    let winstonConfig = {};
     if (Object.keys(winstonConfig).length == 0) {
       winstonConfig = {
         level: "debug",
         defaultMeta: {
           projectKey: this.explorer.getCurrentEnv(),
-          moduleKey: config.key,
-          childModuleKey: config.childKey,
+          moduleKey: options.key,
+          childModuleKey: options.childKey,
         },
       };
     }
 
-    let loggerConfig = config.logger ?? {};
+    let loggerConfig = {};
     if (Object.keys(loggerConfig).length == 0) {
       loggerConfig = {
         console: this.explorer.env.isPro(),
@@ -106,7 +130,7 @@ class App{
     this.logger = new Logger({
       supabase: this.db,
       winston: winstonConfig,
-      loggerConfig: loggerConfig,
+      logger: loggerConfig,
     });
 
     this.profiler = new Profiler(executionTimeReport=>this.logger.log("verbose", "execution time report", executionTimeReport));

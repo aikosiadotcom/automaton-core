@@ -39,10 +39,10 @@
   "imports": {
     "#src/*": "./src/*.js",
     "#feature/*": "./src/features/*.js",
-    "#logger/*":"./src/logger/*.js",
+    "#logger/*": "./src/logger/*.js",
     "#runtime/*": "./src/runtimes/*.js",
-    "#plugin_loader/*":"./src/runtimes/plugin_loader/*.js",
-    "#compiler/*":"./src/runtimes/compiler/*.js",
+    "#plugin_loader/*": "./src/runtimes/plugin_loader/*.js",
+    "#compiler/*": "./src/runtimes/compiler/*.js",
     "#error/*": "./src/errors/*.js",
     "#mock": "./src/mocks",
     "#mock/*": "./src/mocks/*.js"
@@ -79,6 +79,7 @@
     "jest-html-reporters": "^3.1.4",
     "jsdoc": "^4.0.2",
     "jsdoc-mermaid": "^1.0.0",
+    "jsdoc-plugin-intersection": "^1.0.4",
     "node-jest-badges": "^1.3.12",
     "taffydb": "^2.7.3",
     "typescript": "^5.0.4"

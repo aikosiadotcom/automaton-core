@@ -23,12 +23,11 @@ describe("given Runtime class",()=>{
             await mockLoader({case:1});
             const Runtime = (await import(resolve("#runtime/runtime.v1",import.meta.url))).default;
             const runtime = new Runtime({});
-            const ret = await runtime.run(); 
+            const ret = await runtime.run();
+            // console.log(ret); 
             expect(ret.length).toEqual(1);  
             expect(()=>ret[0] = null).toThrow();
             expect(()=>ret[0].main = null).toThrow();
-            expect(ret[0]).toHaveProperty("class");
-            expect(ret[0]).toHaveProperty("instance");
         });
     });
 

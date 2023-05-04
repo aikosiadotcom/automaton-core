@@ -13,4 +13,6 @@ class AutomatonPluginRestExample01 extends Automaton{
     }
 }
 
+export const TestImmutability = "I Am Immutable";
+
 export default AutomatonPluginRestExample01;

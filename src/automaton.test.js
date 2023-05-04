@@ -29,12 +29,12 @@ describe('given Automaton class', () => {
         });
     });
 
-    describe("when the required options key is pass and emit '_run' event",()=>{
-        test('then the _end event handler should be called', async () => {
+    describe("when the required options key is pass and emit '#run' event",()=>{
+        test('then the end event handler should be called', async () => {
             const mockFn = jest.fn();
             const bot = new Bot({key:"Bot"}); 
-            bot.event.once("_end",mockFn);
-            await bot.event.emit('_run',{
+            bot.event.once("end",mockFn);
+            await bot.event.emit('#run',{
                 "version": "1.0.0", 
                 "template": "rest",
                 "profile": "default",

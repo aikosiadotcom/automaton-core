@@ -3,6 +3,13 @@ import EventEmitter from '#feature/event_emitter';
 import {resolve} from 'import-meta-resolve';
 
 async function main({showLog = false}){
+    process.argv.forEach((val, index, array)=>{
+        if(["-log","log"].includes(val)){
+            showLog = true;
+            return;
+        }
+    });
+
     const location = resolve('#src/app',import.meta.url);
     jest.unstable_mockModule(location.replace(process.platform == "win32" ? "file:///" : "file://",""),()=>({
         default:class App{

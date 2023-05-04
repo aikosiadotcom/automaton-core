@@ -13,7 +13,7 @@ beforeAll(()=>{
 
 describe("given Analyzer class",()=>{
     describe("when 'run' method is called",()=>{
-        test("then will return a immutable object",async()=>{
+        test("then the returned object should be immutable",async()=>{
             const analyzer = new Analyzer();
             const ret = await analyzer.run({
                 candidates: [
@@ -32,8 +32,14 @@ describe("given Analyzer class",()=>{
                     "template": "rest",
                     "profile": "default",
                     "runParameter": "page",
-                    "cronjob": "false"
-                  }})
+                    "cronjob": false
+                  }});
+            expect(()=>ret[0] = null).toThrow();
+            expect(()=>ret[0].name = null).toThrow();
+            expect(()=>ret[0].root = null).toThrow();
+            expect(()=>ret[0].file = null).toThrow();
+            expect(()=>ret[0].manifest = null).toThrow();
+            expect(()=>ret[0].manifest.version = null).toThrow();
         });
     });
     

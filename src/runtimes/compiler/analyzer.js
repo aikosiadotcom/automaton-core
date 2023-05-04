@@ -3,19 +3,73 @@ import App from "#src/app";
 import {readPackage} from 'read-pkg';
 import jsv from "json-validator";
 import ManifestError from '#error/manifest_error';
-import * as constant from '#src/constant';
 import parallel from "@trenskow/parallel";
+import deepFreeze from "deep-freeze-es6";
+import * as manifest from "#runtime/manifest";
 
+/**
+ * @typedef {object} Analyzer~AnalyzedImmutableProperties
+ * @property {string} file 
+ * @property {module:Manifest~Schema} manifest
+ */
+
+/**
+ * @typedef {PluginLoader~LoadedImmutablePlugin & Analyzer~AnalyzedImmutableProperties} Analyzer~AnalyzedImmutablePlugin
+ */
+
+
+/**
+ * This class will do analysis on file manifest plugin and add some new properties
+ * @category Runtimes
+ * @subcategory Compiler
+ * 
+ * @example 
+ * 
+ * import Analyzer from "./analyzer.js";
+ * 
+ * const candidates = [{
+ *      name: '@aikosia/automaton-plugin-rest-example-01',
+ *      root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-01`)
+ * }]
+ * const analyzer = new Analyzer();
+ * const result = await analyzer.run({candidates});
+ * console.log(result);
+ * 
+ * Console Terminal Output:
+ * {
+ *  name:"@aikosia/automaton-plugin-rest-example-01",
+ *  root:path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01`),
+ *  file:path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`),
+ *  manifest:{
+ *      "version": "1.0.0",
+ *      "template": "rest",
+ *      "profile": "default",
+ *      "runParameter": "page",
+ *      "cronjob": "false"
+ *  }
+ * }
+ * 
+ * @extends App
+ */
 class Analyzer extends App{
 
     constructor(){
         super({key:"Core",childKey:"Analyzer"});
     }
 
+    /**
+     * Run the analysis
+     * @param {object} options 
+     * @param {Array<PluginLoader~LoadedImmutablePlugin>} options.candidates 
+     * 
+     * @returns {Promise<Array<Analyzer~AnalyzedImmutablePlugin>>}
+     * 
+     * @async
+     */
     async run({candidates}){
         const result = (await parallel(candidates.map(async (plugin)=>{
             try{
-                return await this.analysis(plugin);
+                return await this.#analysis(plugin);
             }catch(err){
                 this.logger.log("warn",`deactivation \'${plugin.name}\'`,err);
                 return false;
@@ -31,20 +85,24 @@ class Analyzer extends App{
             candidates:result,
             inactive:inactive});
 
-        return result;
+        return deepFreeze(result);
     }
 
-    async analysis({name,root}){
+    /**
+     * @param {PluginLoader~LoadedImmutablePlugin} options 
+     * @returns {Analyzer~AnalyzedImmutablePlugin}
+     * @async
+     */
+    async #analysis({name,root}){
         const pkg = await readPackage({cwd:root});
-        const config = pkg["automaton"];
+        const innerManifest = pkg["automaton"];
         const file = path.join(root,pkg['main']);
-        if(config == undefined || config == null || Object.keys(config).length == 0){
+        if(innerManifest == undefined || innerManifest == null || Object.keys(innerManifest).length == 0){
             throw new ManifestError({message:`${name} is not a automaton. Please using automaton field in your package.json`});
         }
 
-        //TODO: before call this function, cronjob data type is boolean, after jsv.validate(), cronjob data type somehow turn to string
         await new Promise((resolve,reject)=>{
-            jsv.validate(config,constant.SCHEMA,(err,msg)=>{
+            jsv.validate(JSON.parse(JSON.stringify(innerManifest)),manifest.SCHEMA_JSON_VALIDATOR,(err,msg)=>{
                 if(msg && Object.keys(msg).length){
                     return reject(new ManifestError(msg));
                 }
@@ -59,7 +117,8 @@ class Analyzer extends App{
             });
         });
 
-        // if(!this.app.env.isProduction()){
+        // turn off intentionally since the mock for test dont implement explorer yet
+        // if(this.explorer.env.isDev()){
         //     //set default value for development
         //     config["profile"] = 'default';
         //     config["cronjob"] = false;
@@ -69,7 +128,7 @@ class Analyzer extends App{
             name:name,
             root:root,
             file:file,
-            manifest:config
+            manifest:innerManifest
         };
     }
 }

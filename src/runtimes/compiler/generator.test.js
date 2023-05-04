@@ -14,7 +14,7 @@ beforeAll(()=>{
 
 describe("given Generator class",()=>{
     describe("when 'run' method is called",()=>{
-        test("then the file will be compile and save to .automaton folder and the object output should have 'main' key",async()=>{
+        test("then the file will be compile and save to .automaton folder and the returned object should immutable",async()=>{
             await fsExtra.remove(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/.automaton`);//TODO: i think this line should be remove. so it dont interfere with other running test
             const generator = new Generator();
             const ret = await generator.run({
@@ -34,6 +34,17 @@ describe("given Generator class",()=>{
                   ]
             });
             expect(ret[0]).toHaveProperty("main");
+            expect(()=>ret[0]=null).toThrow();
+            expect(()=>ret[0].name = null).toThrow();
+            expect(()=>ret[0].root = null).toThrow();
+            expect(()=>ret[0].file = null).toThrow();
+            expect(()=>ret[0].manifest = null).toThrow();
+            expect(()=>ret[0].manifest.version = null).toThrow();
+            expect(()=>ret[0].main = null).toThrow();
+            expect(()=>ret[0].instance = null).toThrow();
+            expect(()=>ret[0].module = null).toThrow();
+            expect(()=>ret[0].module.default = null).toThrow();
+            expect(()=>ret[0].module.TestImmutability = null).toThrow();
             expect(fsExtra.existsSync(ret[0].main)).toBeTruthy();
         });
     }); 

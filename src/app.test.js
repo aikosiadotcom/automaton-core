@@ -15,7 +15,7 @@ describe("given App class", () => {
 
         test('then throw ConstructorParamsRequiredError', async () => {
             try{
-                await getInstance();
+                await getInstance({});
                 expect(1).toBe(2);
             }catch(err){ 
                 expect(err.constructor.name).toEqual("ConstructorParamsRequiredError");

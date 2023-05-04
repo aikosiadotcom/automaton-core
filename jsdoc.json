@@ -1,10 +1,14 @@
 {
+    "tags":{
+        "allowUnknownTags": true
+    },
     "source":{
         "include":["./src"],
         "includePattern":".js$",
         "excludePattern":"(node_modules/|docs|mocks|.test.)"
     },
     "plugins":[
+        "jsdoc-plugin-intersection",
         "plugins/markdown",
         "node_modules/better-docs/category",
         "jsdoc-mermaid"
@@ -24,13 +28,14 @@
         "search": true,
         "default": {
             "staticFiles": {
-              "include": [
-              ]
+              "include": []
             }
         },
         "better-docs": {
             "name": "Automaton",
             "title": "Automaton",
+            "css":"style.css",
+            "hideGenerator":true,
             "navLinks": [
                 {
                     "label": "Github",

@@ -16,7 +16,7 @@ describe("given PluginLoader class",()=>{
     });
 
     describe("when required options includeRegex, packageManager is pass to constructor",()=>{
-        test("then should get the instance and properties of root, packages should be immutables",()=>{
+        test("then should get the returned immutable instance",()=>{
             const loader = new PluginLoader({includeRegex:PLUGIN_INCLUDE_REGEX,packageManager:new NpmPackageManager()});
             expect(loader.root).toContain("node_modules");
             expect(()=>{
@@ -27,19 +27,6 @@ describe("given PluginLoader class",()=>{
             }).toThrowError()
         }); 
     });
- 
-    // describe("given includeRegex pass to constructor using NpmPackageManager",()=>{
-    //     describe("when ls method is called",()=>{
-    //         test("then the return is immutable and property candidates should be greater than 0",async()=>{
-    //             const loader = new PluginLoader({includeRegex:PLUGIN_INCLUDE_REGEX,packageManager:new NpmPackageManager()});
-    //             const result = await loader.ls();
-    //             expect(result["candidates"].length).toBeGreaterThan(0);
-    //             expect(()=>{
-    //                 result.candidates = []
-    //             }).toThrowError()
-    //         });
-    //     });
-    // });
 
     describe("given incudeRegex match and excludeRegex match pass to constructor using TestPackageManager",()=>{
         describe("when ls method is called",()=>{
@@ -54,12 +41,18 @@ describe("given PluginLoader class",()=>{
 
     describe("given incudeRegex match and excludeRegex not match pass to constructor using TestPackageManager",()=>{
         describe("when ls method is called",()=>{
-            test("then property candidates = 1 and excluded == 0",async()=>{
+            test("then property candidates = 1 (immutable) and excluded == 0",async()=>{
                 const loader = new PluginLoader({includeRegex:PLUGIN_INCLUDE_REGEX,excludeRegex:["@aikosiadotcom"],packageManager:new TestPackageManager()});
                 const result = await loader.ls();
                 expect(result["candidates"].length).toBeGreaterThan(0);
                 // console.log("copy this",result);
                 expect(result["excluded"].length).toEqual(0);
+                expect(()=>result["excluded"] = null).toThrow();
+                expect(()=>result["installed"] = null).toThrow();
+                expect(()=>result["candidates"] = null).toThrow();
+                expect(()=>result["candidates"][0] = null).toThrow();
+                expect(()=>result["candidates"][0].name = null).toThrow();
+                expect(()=>result["candidates"][0].root = null).toThrow();
             });
         });
     });
