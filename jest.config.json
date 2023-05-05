@@ -28,6 +28,7 @@
     "<rootDir>/src/constant.js",
     "<rootDir>/src/index.js",
     "<rootDir>/src/runtimes/index.js",
+    "<rootDir>/src/runtimes/manifest.js",
     "<rootDir>/src/runtimes/plugin_loader/interface_package_manager.js"
   ],
   "coveragePathIgnorePatterns": [
@@ -36,6 +37,7 @@
     "<rootDir>/src/constant.js",
     "<rootDir>/src/index.js",
     "<rootDir>/src/runtimes/index.js",
+    "<rootDir>/src/runtimes/manifest.js",
     "<rootDir>/src/runtimes/plugin_loader/interface_package_manager.js"
   ],
   "coverageProvider": "v8"

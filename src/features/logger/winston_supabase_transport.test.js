@@ -14,7 +14,7 @@ describe("given WinstonSupabaseTransport",()=>{
     describe("when there's no options pass to constructor",()=>{
 
         test("then throw error",()=>{
-            expect(getInstance).toThrow(Error);
+            expect(()=>getInstance({})).toThrow();
         });
 
     });

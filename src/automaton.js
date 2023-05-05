@@ -105,7 +105,7 @@ class Automaton extends App{
 
     /**
      * @async
-     * @param {Manifest~Schema} manifest 
+     * @param {module:Manifest~Schema} manifest 
      */
     async #run(manifest){
         try{ 
@@ -167,7 +167,7 @@ class Automaton extends App{
     /**
      * Consumer must implement this method
      * @async
-     * @param {Manifest~SCHEMA_RUN_PARAMETER} arg
+     * @param {module:Manifest~SCHEMA_RUN_PARAMETER} arg
      */
     async run(arg){
         throw new MustOverrideError('please override run method. example: async run(arg)=>{}');
