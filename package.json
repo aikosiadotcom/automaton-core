@@ -1,6 +1,6 @@
 {
   "name": "@aikosia/automaton-core",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Core Libraries Of Automaton Framework",
   "main": "./src/index.js",
   "type": "module",
@@ -32,7 +32,8 @@
   ],
   "files": [
     "src/**/*.js",
-    "!src/**/*.test.js"
+    "!src/**/*.test.js",
+    "!src/mocks/**/*"
   ],
   "author": "firman",
   "license": "MIT",

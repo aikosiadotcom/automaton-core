@@ -28,6 +28,7 @@ describe("given Runtime class",()=>{
             expect(ret.length).toEqual(1);  
             expect(()=>ret[0] = null).toThrow();
             expect(()=>ret[0].main = null).toThrow();
+            expect(Runtime.manifest.SCHEMA_RUN_PARAMETER).toContain("page");
         });
     });
 
