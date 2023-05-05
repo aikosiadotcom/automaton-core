@@ -1,5 +1,9 @@
+<p align="center" style="margin-bottom: 0px !important;">
+  <img width="200" src="statics/logo.svg" alt="Automaton" align="center">
+</p>
+<h1 align="center" style="margin-top: 0px;">Automaton Core</h1>
 
-<h1 align="center">AUTOMATON CORE<br/><div><h6><i>A Library For Developer To Build Bot</i></h6></div></h1>
+<p align="center" >Core Libraries of Automaton Framework</p>
 
 <div align="center">
     

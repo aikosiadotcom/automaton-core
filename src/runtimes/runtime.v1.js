@@ -8,7 +8,7 @@ import {PLUGIN_INCLUDE_REGEX, PLUGIN_EXCLUDE_REGEX} from "#src/constant";
 import NpmPackageManager from '#plugin_loader/npm_package_manager';
 
 /**
- * Using {@link PluginLoader} to load plugins and then using {@link Compiler} to compile it
+ * To load plugins and run it
  * 
  * @example
  * import Runtime from "./runtime.v1.js";
@@ -85,6 +85,8 @@ class Runtime extends App{
 
     /**
      * 
+     * @param {Generator~GeneratedImmutablePlugin} options 
+     * @returns {false | Generator~GeneratedImmutablePlugin}
      */
     async #build({plugin}){
         const {main, name,root,file,manifest, instance, module} = plugin;
