@@ -5,7 +5,14 @@ import PluginLoader from '#plugin_loader/index';
 import parallel from "@trenskow/parallel";
 import {PLUGIN_INCLUDE_REGEX, PLUGIN_EXCLUDE_REGEX} from "#src/constant";
 import NpmPackageManager from '#plugin_loader/npm_package_manager';
-import * as Manifest from "#runtime/manifest";
+import InterfacePackageManager from '#plugin_loader/interface_package_manager';
+import Manifest from "#runtime/manifest";
+
+/**
+ * The Map object is a simple key/value map. Any value (both objects and primitive values) may be used as either a key or a value.
+ * @external Map
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map}
+ */
 
 /**
  * To load plugins and run it
@@ -31,22 +38,27 @@ class Runtime extends App{
     #loader;
     
     /**
-     * @returns {module:Manifest}
+     * Get the Manifest class
+     * @type {Manifest}
      */
-    static get manifest(){
+    static get Manifest(){
         return Manifest;
     }
 
+    /**
+     * Get the running tasks
+     * @type {Map}
+     */
     static get tasks(){
         return cron.getTasks();
     }
 
-/**
-   * @param {object} [options] options
-   * @param {string[]} [options.includeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to include
-   * @param {string[]} [options.excludeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to exclude
-   * @param {InterfacePackageManager} [options.packageManager={@link NpmPackageManager}]
-   */
+    /**
+     * @param {object} [options] options
+     * @param {string[]} [options.includeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to include
+     * @param {string[]} [options.excludeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to exclude
+     * @param {InterfacePackageManager} [options.packageManager={@link NpmPackageManager}]
+    */
     constructor({includeRegex = PLUGIN_INCLUDE_REGEX, excludeRegex = PLUGIN_EXCLUDE_REGEX, packageManager = new NpmPackageManager()}){
         super({key:"Core",childKey:"Runtime"});
         this.#compiler = new Compiler();
@@ -68,8 +80,8 @@ class Runtime extends App{
 
     /**
      * 
-     * @param {Generator~GeneratedImmutablePlugin} options 
-     * @returns {false | Generator~GeneratedImmutablePlugin}
+     * @param {object} options 
+     * @param {Generator~GeneratedImmutablePlugin} plugin
      */
     async #build({plugin}){
         try{
@@ -79,6 +91,11 @@ class Runtime extends App{
         }
     }
 
+    /**
+     * 
+     * @param {object} options 
+     * @param {Generator~GeneratedImmutablePlugin} plugin
+     */
     #cronjob({plugin}){
         const {main, name,root,file,manifest, instance, module} = plugin
         return new Promise((resolve,reject)=>{
@@ -100,6 +117,11 @@ class Runtime extends App{
         });
     }
 
+    /**
+     * 
+     * @param {boolean} value 
+     * @returns {boolean}
+     */
     /* c8 ignore start*/
     _getRunOnInit(value){
         return (value === false || process.env.AUTOMATON_RUNTIME_SCHEDULE_TASK_RUN_IMMEDIATELY === "yes") ? true : false;

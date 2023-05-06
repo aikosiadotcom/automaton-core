@@ -2,7 +2,7 @@ import AbstractClassError from "#error/abstract_class_error";
 
 
 /**
- * Acts as a Interface in case wanna build a custom loader 
+ * Acts as a Interface in case wanna build a custom loader for future use case
  * 
  * @category Runtimes
  * @subcategory Loader

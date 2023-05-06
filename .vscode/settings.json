@@ -1,5 +1,15 @@
 {
     "docwriter.style": "JSDoc",
     "docwriter.progress.trackClasses": true,
-    "docwriter.progress.trackTypes": true
+    "docwriter.progress.trackTypes": true,
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/tsconfig.json":true
+    }
 }

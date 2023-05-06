@@ -9,7 +9,6 @@ class AutomatonPluginRestExample01 extends Automaton{
     }
 
     async run(page){
-        
         console.log(`hi, jen! i am example-01 with cronjob ${this.manifest.cronjob} have been visited`);
     }
 

@@ -63,9 +63,9 @@ declare class Automaton extends App {
     /**
      * Consumer must implement this method
      * @async
-     * @param {module:Manifest~SCHEMA_RUN_PARAMETER} arg
+     * @param {Manifest.runParameter} arg
      */
-    run(arg: any): Promise<void>;
+    run(arg: ("page" | "context" | "null")[]): Promise<void>;
     #private;
 }
 import App from "#src/app";

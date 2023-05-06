@@ -1,17 +1,16 @@
 import path from 'path';
 import App from "#src/app";
 import {readPackage} from 'read-pkg';
-import jsv from "json-validator";
 import ManifestError from '#error/manifest_error';
 import parallel from "@trenskow/parallel";
 import deepFreeze from "deep-freeze-es6";
-import * as manifest from "#runtime/manifest";
+import Manifest from "#runtime/manifest";
 import fsExtra from 'fs-extra';
 
 /**
  * @typedef {object} Analyzer~AnalyzedImmutableProperties
  * @property {string} file 
- * @property {module:Manifest~Schema} manifest
+ * @property {Manifest} manifest
  */
 
 /**
@@ -112,28 +111,7 @@ class Analyzer extends App{
             throw new ManifestError({message:`${name} is not a automaton. Please using automaton field in your package.json`});
         }
 
-        await new Promise((resolve,reject)=>{
-            jsv.validate(JSON.parse(JSON.stringify(innerManifest)),manifest.SCHEMA_JSON_VALIDATOR,(err,msg)=>{
-                if(msg && Object.keys(msg).length){
-                    return reject(new ManifestError(msg));
-                }
-
-                /* c8 ignore start */
-                if(err){
-                    return reject(new ManifestError(err));
-                }
-                /* c8 ignore end */
-
-                return resolve();
-            });
-        });
-
-        // turn off intentionally since the mock for test dont implement explorer yet
-        // if(this.explorer.env.isDev()){
-        //     //set default value for development
-        //     config["profile"] = 'default';
-        //     config["cronjob"] = false;
-        // }
+        await Manifest.validate(innerManifest);
 
         return {
             name:name,

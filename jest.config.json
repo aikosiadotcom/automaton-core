@@ -2,7 +2,8 @@
   "transform": {},
   "collectCoverage": true,
   "collectCoverageFrom": [
-    "./src/**"
+    "./src/**/*.js",
+    "!./src/**/*.d.ts"
   ],
   "coverageReporters": [
     "clover",

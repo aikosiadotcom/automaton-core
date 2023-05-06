@@ -4,12 +4,12 @@ export default Analyzer;
  */
 export type Analyzer = {
     file: string;
-    manifest: any;
+    manifest: Manifest;
 };
 /**
  * @typedef {object} Analyzer~AnalyzedImmutableProperties
  * @property {string} file
- * @property {module:Manifest~Schema} manifest
+ * @property {Manifest} manifest
  */
 /**
  * @typedef {PluginLoader~LoadedImmutablePlugin & Analyzer~AnalyzedImmutableProperties} Analyzer~AnalyzedImmutablePlugin
@@ -61,4 +61,5 @@ declare class Analyzer extends App {
     run({ candidates }: object): Promise<Array<Analyzer>>;
     #private;
 }
+import Manifest from "#runtime/manifest";
 import App from "#src/app";

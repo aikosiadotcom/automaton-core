@@ -4,7 +4,7 @@ import App from "#src/app";
 import MustOverrideError from "#error/must_override_error";
 import ManifestError from "#error/manifest_error";
 import AbstractClassError from "#error/abstract_class_error";
-
+import Manifest from "#runtime/manifest";
 /**
  * Fired when bot start running
  * @event Automaton#start
@@ -106,7 +106,7 @@ class Automaton extends App{
     /**
      * @async
      * @param {object} options 
-     * @param {module:Manifest~Schema} options.manifest 
+     * @param {Manifest} options.manifest 
      * @param {string} [options.endpoint=""] - if endpoint not provided, then it will attempt to get the url from remote server
      */
     async #run({manifest, endpoint}){
@@ -174,7 +174,7 @@ class Automaton extends App{
     /**
      * Consumer must implement this method
      * @async
-     * @param {module:Manifest~SCHEMA_RUN_PARAMETER} arg
+     * @param {Manifest.runParameter} arg
      */
     async run(arg){
         throw new MustOverrideError(`please override run method on ${this.manifest.name}. example: async run(arg)=>{}`);

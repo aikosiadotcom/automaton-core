@@ -1,5 +1,10 @@
 export default Runtime;
 /**
+ * The Map object is a simple key/value map. Any value (both objects and primitive values) may be used as either a key or a value.
+ * @external Map
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map}
+ */
+/**
  * To load plugins and run it
  *
  * @example
@@ -20,16 +25,21 @@ export default Runtime;
 */
 declare class Runtime extends App {
     /**
-     * @returns {module:Manifest}
+     * Get the Manifest class
+     * @type {Manifest}
      */
-    static get manifest(): any;
-    static get tasks(): any;
+    static get Manifest(): Manifest;
     /**
-       * @param {object} [options] options
-       * @param {string[]} [options.includeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to include
-       * @param {string[]} [options.excludeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to exclude
-       * @param {InterfacePackageManager} [options.packageManager={@link NpmPackageManager}]
-       */
+     * Get the running tasks
+     * @type {Map}
+     */
+    static get tasks(): Map<any, any>;
+    /**
+     * @param {object} [options] options
+     * @param {string[]} [options.includeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to include
+     * @param {string[]} [options.excludeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to exclude
+     * @param {InterfacePackageManager} [options.packageManager={@link NpmPackageManager}]
+    */
     constructor({ includeRegex, excludeRegex, packageManager }?: {
         includeRegex?: string[];
         excludeRegex?: string[];
@@ -39,7 +49,14 @@ declare class Runtime extends App {
      * Run the runtime
      */
     run(): Promise<void>;
-    _getRunOnInit(value: any): boolean;
+    /**
+     *
+     * @param {boolean} value
+     * @returns {boolean}
+     */
+    _getRunOnInit(value: boolean): boolean;
     #private;
 }
 import App from "#src/app";
+import Manifest from "#runtime/manifest";
+import InterfacePackageManager from '#plugin_loader/interface_package_manager';

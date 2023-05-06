@@ -83,7 +83,7 @@ describe("given Runtime class",()=>{
             const runtime = new Runtime({});
             await runtime.run(); 
             //to pass uncover line report
-            Runtime.manifest;
+            Runtime.Manifest;
 
             expect(Runtime.tasks.size).toBeGreaterThanOrEqual(0);
             

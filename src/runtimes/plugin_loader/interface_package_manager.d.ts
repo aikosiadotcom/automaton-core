@@ -1,6 +1,6 @@
 export default InterfacePackageManager;
 /**
- * Acts as a Interface in case wanna build a custom loader
+ * Acts as a Interface in case wanna build a custom loader for future use case
  *
  * @category Runtimes
  * @subcategory Loader

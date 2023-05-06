@@ -1,6 +1,6 @@
 {
   "name": "@aikosia/automaton-core",
-  "version": "1.0.9-beta.4",
+  "version": "1.0.9-beta.5",
   "description": "Core Libraries Of Automaton Framework",
   "main": "./src/index.js",
   "type": "module",
@@ -9,8 +9,9 @@
     "url": "https://github.com/aikosiadotcom/automaton-core"
   },
   "scripts": {
+    "types": "del-cli src/**/*.ts -f && tsc",
     "docs": "cross-env NODE_ENV=production ./node_modules/.bin/jsdoc -c jsdoc.json",
-    "release": "del-cli src/**/*.ts -f && tsc && npm run docs && cross-env NODE_ENV=production node ./script/release.js",
+    "release": "npm run types && npm run docs && cross-env NODE_ENV=production node ./script/release.js",
     "test": "cross-env NODE_ENV=development NODE_OPTIONS='--experimental-vm-modules' jest"
   },
   "keywords": [
