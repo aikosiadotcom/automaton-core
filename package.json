@@ -1,6 +1,6 @@
 {
   "name": "@aikosia/automaton-core",
-  "version": "1.0.9-beta.2",
+  "version": "1.0.9-beta.3",
   "description": "Core Libraries Of Automaton Framework",
   "main": "./src/index.js",
   "type": "module",
@@ -10,8 +10,8 @@
   },
   "scripts": {
     "docs": "cross-env NODE_ENV=production ./node_modules/.bin/jsdoc -c jsdoc.json",
-    "release": "cross-env NODE_ENV=production node ./script/release.js",
-    "test": "cross-env NODE_ENV=development NODE_OPTIONS='--experimental-vm-modules' ./node_modules/.bin/jest"
+    "release": "del-cli src/**/*.ts -f && tsc && npm run docs && cross-env NODE_ENV=production node ./script/release.js",
+    "test": "cross-env NODE_ENV=development NODE_OPTIONS='--experimental-vm-modules' jest"
   },
   "keywords": [
     "aikosia",
@@ -77,6 +77,7 @@
   "devDependencies": {
     "better-docs": "github:aikosiadotcom/better-docs#dev",
     "cross-env": "^7.0.3",
+    "del-cli": "^5.0.0",
     "jest": "^29.5.0",
     "jest-html-reporters": "^3.1.4",
     "jsdoc": "^4.0.2",
