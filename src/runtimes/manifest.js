@@ -3,26 +3,6 @@ import cron from 'node-cron';
 import jsv from "json-validator";
 import ManifestError from '#error/manifest_error';
 
-/**
-* @typedef {object} Manifest~Schema 
-* @property {Manifest~SchemaVersion} version
-* @property {Manifest~SchemaTemplate} template
-* @property {string} profile
-* @property {Manifest~SchemaRunParameter} runParameter
-* @property {boolean | string} cronjob
- */
-
-/**
- * @typedef {"1.0.0"} Manifest~SchemaVersion
- */
-
-/**
- * @typedef {"rest" | "crawler"} Manifest~SchemaTemplate
- */
-
-/**
- * @typedef {'context' | 'page' | 'null'} Manifest~SchemaRunParameter
- */
 
 /**
  * File descriptor for bot created by automaton framework
@@ -32,7 +12,7 @@ import ManifestError from '#error/manifest_error';
 class Manifest{
     /**
      * Returns available value for this property
-     * @type {Array<Manifest~SchemaVersion>}
+     * @type {Array<string>}
      */
     static get version(){
         return ["1.0.0"];
@@ -40,7 +20,7 @@ class Manifest{
 
     /**
      * Returns available value for this property
-     * @type {Array<Manifest~SchemaTemplate>}
+     * @type {Array<string>}
      */
     static get template(){
         return deepFreeze([
@@ -51,7 +31,7 @@ class Manifest{
 
     /**
      * Returns available value for this property
-     * @type {Array<Manifest~SchemaRunParameter>}
+     * @type {Array<string>}
      */
     static get runParameter(){
         return deepFreeze([
@@ -63,8 +43,8 @@ class Manifest{
 
     /**
      * @async
-     * @param {Manifest} manifest
-     * @returns {boolean}
+     * @param {Manifest | Manifest~Schema} manifest
+     * @returns {Promise<boolean>}
      * @throws If manifest not valid
      * @see https://www.npmjs.com/package/json-validator#usage--examples
      */
@@ -124,15 +104,24 @@ class Manifest{
     }
 
     /**
-     * @param {Manifest~Schema}
+    * @typedef {object} Manifest~Schema 
+    * @property {"1.0.0"} version
+    * @property {"rest" | "crawler"} template
+    * @property {string} profile
+    * @property {'context' | 'page' | 'null'} runParameter
+    * @property {boolean | string} cronjob
+    */
+
+    /**
+     * @param {(Manifest~Schema)}
      */
     constructor({version,template,profile,runParameter,cronjob}){
         /**
-         * @type {Manifest~SchemaVersion}
+         * @type {"1.0.0"}
          */
         this.version = version;
         /**
-         * @type {Manifest~SchemaTempalte}
+         * @type {"rest" | "crawler"}
          */
         this.template = template;
         /**
@@ -140,7 +129,7 @@ class Manifest{
          */
         this.profile = profile;
         /**
-         * @type {Manifest~SchemaRunParameter}
+         * @type {'context' | 'page' | 'null'}
          */
         this.runParameter = runParameter;
         /**
@@ -150,7 +139,7 @@ class Manifest{
     }
 
     /**
-     * @returns {Manifest~Schema}
+     * @returns {(Manifest~Schema)}
      */
     toObject(){
         return JSON.parse(JSON.stringify({

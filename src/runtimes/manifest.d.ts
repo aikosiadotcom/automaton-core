@@ -1,33 +1,5 @@
 export default Manifest;
 /**
- * ~Schema
- */
-export type Manifest = {
-    /**
-     * ~SchemaVersion} version
-     */
-    "": Manifest;
-    profile: string;
-    cronjob: boolean | string;
-};
-/**
-* @typedef {object} Manifest~Schema
-* @property {Manifest~SchemaVersion} version
-* @property {Manifest~SchemaTemplate} template
-* @property {string} profile
-* @property {Manifest~SchemaRunParameter} runParameter
-* @property {boolean | string} cronjob
- */
-/**
- * @typedef {"1.0.0"} Manifest~SchemaVersion
- */
-/**
- * @typedef {"rest" | "crawler"} Manifest~SchemaTemplate
- */
-/**
- * @typedef {'context' | 'page' | 'null'} Manifest~SchemaRunParameter
- */
-/**
  * File descriptor for bot created by automaton framework
  * @category Runtimes
  * @subcategory Compiler
@@ -35,53 +7,61 @@ export type Manifest = {
 declare class Manifest {
     /**
      * Returns available value for this property
-     * @type {Array<Manifest~SchemaVersion>}
+     * @type {Array<string>}
      */
-    static get version(): Manifest[];
+    static get version(): string[];
     /**
      * Returns available value for this property
-     * @type {Array<Manifest~SchemaTemplate>}
+     * @type {Array<string>}
      */
-    static get template(): Manifest[];
+    static get template(): string[];
     /**
      * Returns available value for this property
-     * @type {Array<Manifest~SchemaRunParameter>}
+     * @type {Array<string>}
      */
-    static get runParameter(): Manifest[];
+    static get runParameter(): string[];
     /**
      * @async
-     * @param {Manifest} manifest
-     * @returns {boolean}
+     * @param {Manifest | Manifest~Schema} manifest
+     * @returns {Promise<boolean>}
      * @throws If manifest not valid
      * @see https://www.npmjs.com/package/json-validator#usage--examples
      */
-    static validate(manifest: Manifest): boolean;
+    static validate(manifest: any): Promise<boolean>;
     /**
-     * @param {Manifest~Schema}
-     */
-    constructor({ version, template, profile, runParameter, cronjob }: Manifest);
+    * @typedef {object} Manifest~Schema
+    * @property {"1.0.0"} version
+    * @property {"rest" | "crawler"} template
+    * @property {string} profile
+    * @property {'context' | 'page' | 'null'} runParameter
+    * @property {boolean | string} cronjob
+    */
     /**
-     * @type {Manifest~SchemaVersion}
+     * @param {(Manifest~Schema)}
      */
-    version: Manifest;
+    constructor({ version, template, profile, runParameter, cronjob }: (Manifest));
     /**
-     * @type {Manifest~SchemaTempalte}
+     * @type {"1.0.0"}
      */
-    template: Manifest;
+    version: "1.0.0";
+    /**
+     * @type {"rest" | "crawler"}
+     */
+    template: "rest" | "crawler";
     /**
      * @type {string}
      */
     profile: string;
     /**
-     * @type {Manifest~SchemaRunParameter}
+     * @type {'context' | 'page' | 'null'}
      */
-    runParameter: Manifest;
+    runParameter: 'context' | 'page' | 'null';
     /**
      * @type {boolean | string}
      */
     cronjob: boolean | string;
     /**
-     * @returns {Manifest~Schema}
+     * @returns {(Manifest~Schema)}
      */
-    toObject(): Manifest;
+    toObject(): (Manifest);
 }
