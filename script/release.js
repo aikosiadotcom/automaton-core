@@ -6,6 +6,9 @@ const json = await readPackage();
 try{
     console.log("sync with remote files");
     execSync(`git pull origin`);
+
+    console.log("stage all changes");
+    execSync(`git pull origin`);
     
     console.log("commit changes");
     execSync(`git add * && git commit -m \"Release ${json.version}\"`);

@@ -8,10 +8,15 @@
     "type": "git",
     "url": "https://github.com/aikosiadotcom/automaton-core"
   },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "scripts": {
     "types": "del-cli src/**/*.ts -f && tsc",
     "docs": "cross-env NODE_ENV=production ./node_modules/.bin/jsdoc -c jsdoc.json",
-    "release": "npm run types && npm run docs && cross-env NODE_ENV=production node ./script/release.js",
+    "release": "npm run types && npm run docs && git pull origin && git add * && git-cz && git push origin",
     "test": "cross-env NODE_ENV=development NODE_OPTIONS='--experimental-vm-modules' jest"
   },
   "keywords": [
@@ -82,7 +87,9 @@
     "@semantic-release/npm": "^10.0.3",
     "@semantic-release/release-notes-generator": "^11.0.1",
     "better-docs": "github:aikosiadotcom/better-docs#dev",
+    "commitizen": "^4.3.0",
     "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
     "del-cli": "^5.0.0",
     "jest": "^29.5.0",
     "jest-html-reporters": "^3.1.4",

@@ -7,7 +7,7 @@
 
 <div align="center">
     
-[![npm-publish](https://github.com/aikosiadotcom/automaton-core/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/aikosiadotcom/automaton-core/actions/workflows/npm-publish.yml)
+[![release](https://github.com/aikosiadotcom/automaton-core/actions/workflows/release.yml/badge.svg)](https://github.com/aikosiadotcom/automaton-core/actions/workflows/release.yml)
 ![Branches](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-branches.svg?raw=true)
 ![Functions](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-functions.svg?raw=true)
 ![Lines](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-lines.svg?raw=true)
