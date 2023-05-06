@@ -81,6 +81,7 @@
     "jsdoc": "^4.0.2",
     "jsdoc-plugin-intersection": "^1.0.4",
     "node-jest-badges": "^1.3.12",
-    "taffydb": "^2.7.3"
+    "taffydb": "^2.7.3",
+    "typescript": "^5.0.4"
   }
 }
