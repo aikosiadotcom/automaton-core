@@ -7,14 +7,18 @@
 
 <div align="center">
     
-[![Release](https://github.com/aikosiadotcom/automaton-core/actions/workflows/release.yml/badge.svg)](https://github.com/aikosiadotcom/automaton-core/actions/workflows/release.yml)
-![Branches](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-branches.svg?raw=true)
+[![Branches](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-branches.svg?raw=true)
 ![Functions](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-functions.svg?raw=true)
 ![Lines](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-lines.svg?raw=true)
 ![Statements](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-statements.svg?raw=true)
 ![Jest coverage](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-jest%20coverage.svg?raw=true)
+![Release](https://github.com/aikosiadotcom/automaton-core/actions/workflows/release.yml/badge.svg)
+![line-code](https://img.shields.io/tokei/lines/github/aikosiadotcom/automaton-core?logo=github)
 ![semantic-release](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)
 ![Type](https://img.shields.io/npm/types/@aikosia/automaton-core?logo=typescript)
+![License](https://img.shields.io/github/license/aikosiadotcom/automaton-core?color=brightgreen)
+![node-version](https://img.shields.io/node/v/@aikosia/automaton-core?color=brightgreen)
+![quality](https://img.shields.io/codefactor/grade/github/aikosiadotcom/automaton-core/main?color=brightgreen)
 
 </div>
 
