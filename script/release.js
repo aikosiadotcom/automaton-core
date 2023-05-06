@@ -15,6 +15,10 @@ try{
     
     console.log("push to server");
     execSync(`git push origin`);
+
+    setTimeout(() => {
+        execSync("git pull origin");
+    }, 10000);
 }catch(err){
     console.log(err.message);
 }
