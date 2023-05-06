@@ -10,8 +10,7 @@
     "plugins":[
         "jsdoc-plugin-intersection",
         "plugins/markdown",
-        "node_modules/better-docs/category",
-        "jsdoc-mermaid"
+        "node_modules/better-docs/category"
     ],
     "opts":{
         "encoding":"utf8",

@@ -1,9 +1,8 @@
 import mockApp from "#mock/app";
-import { resolve } from "import-meta-resolve";
 
 await mockApp({showLog:false});
 
-const decorators = await import("../decorators.js");
+const Decorators = await import("../decorators.js");
 
 class DecoratorTest{
     counter = 0;
@@ -11,7 +10,7 @@ class DecoratorTest{
     constructor(){
     }
 
-    @decorators.dowhile
+    @Decorators.dowhile
     async dowhile1(currentPage,...args){
         if(currentPage == 4){
             return true;
@@ -21,16 +20,16 @@ class DecoratorTest{
         return false;
     }
 
-    @decorators.delay
+    @Decorators.delay
     async delay1(args){
     }
 
-    @decorators.delay({min:1,max:1,meta:"hi, jen !"})
+    @Decorators.delay({min:1,max:1,meta:"hi, jen !"})
     async delay2(args){
         this.innerMethod();
     }
 
-    @decorators.retry
+    @Decorators.retry
     async retry1(){
         this.innerRetry++;
 
@@ -40,7 +39,7 @@ class DecoratorTest{
         throw new Error("hello world");
     }
 
-    @decorators.retry({min:1,max:1,meta:"hi, firman !"})
+    @Decorators.retry({min:1,max:1,meta:"hi, firman !"})
     async retry2(){
         throw new Error("hello world");
     }

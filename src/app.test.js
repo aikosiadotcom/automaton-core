@@ -1,6 +1,7 @@
 import {describe,test,expect ,jest} from '@jest/globals';
 import {dotenv,envChecker,supabase} from "./mocks/app_deps.js";
 import {resolve} from 'import-meta-resolve';
+import path from "path";
 
 const getInstance = async(args)=>new (await import(resolve('#src/app',import.meta.url))).default(args);
 
@@ -8,6 +9,7 @@ beforeEach(()=>{
     jest.resetModules();
     jest.resetAllMocks();
 });
+
   
 describe("given App class", () => {
 
@@ -24,7 +26,23 @@ describe("given App class", () => {
 
     });
 
-    describe("when the required options (key,childkey) provided. but, required .env file not found",()=>{
+    describe("when the required options (key,childkey) provided and required .env file found on local path (project root directory)", ()=>{
+        test('then should get the instance', async () => {
+            process.chdir(path.join("src","mocks","plugins","@aikosia","automaton-plugin-rest-example-05"));
+            await supabase();
+            const instance = await getInstance({key:'key',childKey:'childKey'});
+            expect(instance.constructor.name).toBe("App");
+
+            /**careful this block maybe FAIL cause process.env is global object and jest test run parallel*/
+            expect(process.env.AUTOMATON_DAEMON_HOST).toEqual("test");
+            expect(process.env.AUTOMATON_DAEMON_PORT).toEqual("test");
+            expect(process.env.AUTOMATON_SUPABASE_URL).toEqual("test");
+            expect(process.env.AUTOMATON_SUPABASE_KEY).toEqual("test");
+        });
+        
+    });
+
+    describe("when the required options (key,childkey) provided. but, required .env file found on system path with the wrong variable",()=>{
         
         beforeEach(()=>{
             //needed because EnvRequiredError will console.error
@@ -42,7 +60,7 @@ describe("given App class", () => {
         });
     });
 
-    describe("when the required options (key,childkey) provided and required .env file found too", ()=>{
+    describe("when the required options (key,childkey) provided and required .env file found on system path with the right variable", ()=>{
 
         test('then should get the instance', async () => {
             await dotenv();
@@ -53,4 +71,22 @@ describe("given App class", () => {
         });
         
     });
+
+    
+    // describe("when _getEnvFile is called", ()=>{
+
+    //     test('then should function as it should be', async () => {
+    //         await dotenv();
+    //         await envChecker({throwError:false});
+    //         await supabase();
+    //         const instance = await getInstance({key:'key',childKey:'childKey'});
+    //         instance._getEnvFile();
+    //         expect(1).toBe(1);
+
+    //         process.chdir(path.join("src","mocks","plugins","@aikosia","automaton-plugin-rest-example-05"));
+    //         instance._getEnvFile();
+    //         expect(1).toBe(1);
+    //     });
+        
+    // });
 });

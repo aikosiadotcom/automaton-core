@@ -1,7 +1,7 @@
 await import('../../../../axios.js');
 await import('../../../../playwright-core.js');
 
-const {default:Automaton,decorators} = await import('#core');
+const {default:Automaton,Decorators} = await import('#core');
 
 class AutomatonPluginRestExample04 extends Automaton{
     constructor(){

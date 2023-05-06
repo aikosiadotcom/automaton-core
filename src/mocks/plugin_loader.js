@@ -58,7 +58,7 @@ async function main(opts){
                   }
 
                 case 3:
-                  //for cronjob test
+                  //for cronjob * * * * * test
                   return {
                     installed: [
                     ],
@@ -70,6 +70,20 @@ async function main(opts){
                     ],
                     excluded: []
                   }
+
+                  case 4:
+                    //for cronjob * * * * * test through error inside cron.schedule
+                    return {
+                      installed: [
+                      ],
+                      candidates: [
+                        {
+                          name: '@aikosia/automaton-plugin-rest-example-06',
+                          root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-06`)
+                        }
+                      ],
+                      excluded: []
+                    }
               }
             }
         }

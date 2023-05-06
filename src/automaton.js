@@ -98,35 +98,41 @@ class Automaton extends App{
         /**
          * Since we dont wanna force consumer of this class to always provided options manifest when they inherited this class. So, it must implemented this way
          */
-        this.event.once('#run',async(manifest)=>{
-            await this.#run(manifest);
+        this.event.on('#run',async({manifest, endpoint = ""})=>{
+            await this.#run({manifest, endpoint});
         });
     }
 
     /**
      * @async
-     * @param {module:Manifest~Schema} manifest 
+     * @param {object} options 
+     * @param {module:Manifest~Schema} options.manifest 
+     * @param {string} [options.endpoint=""] - if endpoint not provided, then it will attempt to get the url from remote server
      */
-    async #run(manifest){
+    async #run({manifest, endpoint}){
         try{ 
-            this.manifest = manifest;
-            const {data} = await axios.get(`${this.endpoint}/${this.manifest["profile"]}`);
-            this.#browser = await chromium.connectOverCDP(data);
-            this.#context = this.#browser.contexts()[0];
-    
-            //TODO: Consider to change it to plugin maybe like puppeteer-extra-plugin. 
-            /* c8 ignore start */
-            this.#context.on("page",(page)=>{
-                page.automaton = {};
-                page.automaton.waitForResponse = async({goto,waitUrl,responseType="json"})=>{
-                    const responsePromise  = page.waitForResponse((resp)=>resp.url().includes(waitUrl));
-                    await page.goto(goto);
-                    const response = await responsePromise;
-                    return await response[responseType]();
-                }
-    
-                return page;
-            });
+            if(this.manifest == undefined || JSON.stringify(this.manifest) !== manifest || this.endpoint != endpoint){
+                //since this event listener using 'on' not 'once'
+                this.manifest = manifest;
+                this.#browser = await chromium.connectOverCDP(endpoint ? endpoint : (await axios.get(`${this.endpoint}/${this.manifest["profile"]}`)).data);
+                this.#context = this.#browser.contexts()[0];
+        
+                //TODO: Consider to change it to plugin maybe like puppeteer-extra-plugin. 
+                /* c8 ignore start */
+                this.#context.on("page",(page)=>{
+                    page.automaton = {};
+                    page.automaton.waitForResponse = async({goto,waitUrl,responseType="json"})=>{
+                        const responsePromise  = page.waitForResponse((resp)=>resp.url().includes(waitUrl));
+                        await page.goto(goto);
+                        const response = await responsePromise;
+                        return await response[responseType]();
+                    }
+        
+                    return page;
+                });
+
+                this.endpoint = endpoint;
+            }
             
             /**
              * @fires Automaton#start
@@ -155,7 +161,8 @@ class Automaton extends App{
              * @fires Automaton#error
              */
             await this.event.emit('error',err);
-            this.logger.log("error","RuntimeException",err);
+            // this.logger.log("error","RuntimeException",err);
+            throw err;
         }finally{
             /**
              * @fires Automaton#start
@@ -170,7 +177,7 @@ class Automaton extends App{
      * @param {module:Manifest~SCHEMA_RUN_PARAMETER} arg
      */
     async run(arg){
-        throw new MustOverrideError('please override run method. example: async run(arg)=>{}');
+        throw new MustOverrideError(`please override run method on ${this.manifest.name}. example: async run(arg)=>{}`);
     }
 }
 

@@ -19,20 +19,19 @@ function applyClassDecs(targetClass, classDecs) { if (classDecs.length > 0) { fo
 function _applyDecs(targetClass, memberDecs, classDecs, instanceBrand) { return { e: applyMemberDecs(targetClass, memberDecs, instanceBrand), get c() { return applyClassDecs(targetClass, classDecs); } }; }
 function _checkInRHS(value) { if (Object(value) !== value) throw TypeError("right-hand side of 'in' should be an object, got " + (null !== value ? typeof value : "null")); return value; }
 import mockApp from "#mock/app";
-import { resolve } from "import-meta-resolve";
 await mockApp({
   showLog: false
 });
-var decorators = await import("../decorators.js");
-_dec = decorators.dowhile;
-_dec2 = decorators.delay;
-_dec3 = decorators.delay({
+var Decorators = await import("../decorators.js");
+_dec = Decorators.dowhile;
+_dec2 = Decorators.delay;
+_dec3 = Decorators.delay({
   min: 1,
   max: 1,
   meta: "hi, jen !"
 });
-_dec4 = decorators.retry;
-_dec5 = decorators.retry({
+_dec4 = Decorators.retry;
+_dec5 = Decorators.retry({
   min: 1,
   max: 1,
   meta: "hi, firman !"

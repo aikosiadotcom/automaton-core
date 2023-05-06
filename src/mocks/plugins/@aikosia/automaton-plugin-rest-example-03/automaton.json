@@ -1,0 +1,7 @@
+{
+    "version": "1.0.0",
+    "template": "restx",
+    "profile": "default",
+    "runParameter": "page",
+    "cronjob": false
+}

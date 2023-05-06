@@ -6,6 +6,7 @@ import ManifestError from '#error/manifest_error';
 import parallel from "@trenskow/parallel";
 import deepFreeze from "deep-freeze-es6";
 import * as manifest from "#runtime/manifest";
+import fsExtra from 'fs-extra';
 
 /**
  * @typedef {object} Analyzer~AnalyzedImmutableProperties
@@ -45,7 +46,7 @@ import * as manifest from "#runtime/manifest";
  *      "template": "rest",
  *      "profile": "default",
  *      "runParameter": "page",
- *      "cronjob": "false"
+ *      "cronjob": false
  *  }
  * }
  * 
@@ -89,14 +90,24 @@ class Analyzer extends App{
     }
 
     /**
+     * It will load manifest file (automaton.json) in consumer project root directory. if not found, then it will search automaton field in package.json.
+     * 
      * @param {PluginLoader~LoadedImmutablePlugin} options 
      * @returns {Analyzer~AnalyzedImmutablePlugin}
      * @async
      */
     async #analysis({name,root}){
-        const pkg = await readPackage({cwd:root});
-        const innerManifest = pkg["automaton"];
+        let pkg = await readPackage({cwd:root});
+        let innerManifest = pkg["automaton"];
         const file = path.join(root,pkg['main']);
+
+        const localAutomatonConfigFilePath = path.join(root,"automaton.json");
+        if(await fsExtra.exists(localAutomatonConfigFilePath)){
+            /** find automaton.json and load it */
+            pkg = await fsExtra.readJSON(localAutomatonConfigFilePath);
+            innerManifest = pkg;
+        }
+
         if(innerManifest == undefined || innerManifest == null || Object.keys(innerManifest).length == 0){
             throw new ManifestError({message:`${name} is not a automaton. Please using automaton field in your package.json`});
         }

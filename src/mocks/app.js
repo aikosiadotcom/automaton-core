@@ -4,7 +4,7 @@ import {resolve} from 'import-meta-resolve';
 
 async function main({showLog = false}){
     process.argv.forEach((val, index, array)=>{
-        if(["-log","log"].includes(val)){
+        if(["--verbose"].includes(val)){
             showLog = true;
             return;
         }

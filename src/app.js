@@ -7,6 +7,8 @@ import EnvRequiredError from "#error/env_required_error";
 import * as dotenv from "dotenv";
 import envChecker from "node-envchecker";
 import { createClient } from "@supabase/supabase-js";
+import fsExtra from "fs-extra";
+import path from "path";
 
 /**
  * An abstract class that serves as a base for creating applications. It provides
@@ -79,7 +81,7 @@ class App{
     ];
 
     try {
-      dotenv.config({ path: this.explorer.path["env"] });
+      dotenv.config({ path: this._getEnvFile()});
       envChecker(requiredEnv);
     } catch (err) {
       throw new EnvRequiredError({ path: this.explorer.path["config"], requiredEnv });
@@ -135,6 +137,12 @@ class App{
 
     this.profiler = new Profiler(executionTimeReport=>this.logger.log("verbose", "execution time report", executionTimeReport));
   }
+
+  /* c8 ignore start */
+  _getEnvFile(){
+    return fsExtra.existsSync(path.join(process.cwd(),".env")) ? path.join(process.cwd(),".env") : this.explorer.path["env"];
+  }
+  /* c8 ignore end */
 }
 
 export default App;;

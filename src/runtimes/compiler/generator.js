@@ -58,7 +58,7 @@ export const BABEL_OPTIONS = {
  *      "template": "rest",
  *      "profile": "default",
  *      "runParameter": "page",
- *      "cronjob": "false"
+ *      "cronjob": false
  *  }
  * }]
  * const generator = new Generator();
@@ -75,7 +75,7 @@ export const BABEL_OPTIONS = {
  *      "template": "rest",
  *      "profile": "default",
  *      "runParameter": "page",
- *      "cronjob": "false"
+ *      "cronjob": false
  *  },
  *  main: path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/.automaton\/index.mjs`,
  *  module: [Module: null prototype] {...object}

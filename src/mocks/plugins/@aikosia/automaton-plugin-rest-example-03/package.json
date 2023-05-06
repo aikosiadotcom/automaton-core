@@ -5,13 +5,6 @@
   "type": "module",
   "author": "firman",
   "license": "MIT",
-  "automaton": {
-    "version": "1.0.0",
-    "template": "restx",
-    "profile": "default",
-    "runParameter": "page",
-    "cronjob": false
-  },
   "imports":{
     "#core":"../../../../index.js"
   }

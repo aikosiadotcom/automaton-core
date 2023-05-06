@@ -4,7 +4,10 @@ jest.unstable_mockModule('playwright-core',()=>({
     chromium:{
         connectOverCDP:()=>({
             contexts:()=>[{
-                on:()=>"mock"
+                on:()=>"mock",
+                newPage:()=>({
+                    close:()=>"mock"
+                })
             }]
         })
     }

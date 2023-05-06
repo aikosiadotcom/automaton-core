@@ -52,13 +52,13 @@ export const SCHEMA_JSON_VALIDATOR = deepFreeze({
       required: true,
       trim: true,
       asyncValidate: function(value, path, cb) {
-        if(value === "false" || value == false){
-            cb(null,null);
+        if(value == false || value == "false"){
+            return cb(null,null);
         }else{
             if(!cron.validate(value)){
-                cb({message:`wrong syntax of ${path} field. Please read: https://www.npmjs.com/package/node-cron`});
+                return cb({message:`wrong syntax of ${path} field. Please read: https://www.npmjs.com/package/node-cron`});
             }else{
-                cb(null,null);
+                return cb(null,null);
             }
         }
       }
