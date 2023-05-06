@@ -5,8 +5,7 @@ several features such as logging, profiling, event handling, and file exploratio
 initializes a Supabase client for database operations and checks for required environment variables.
 The constructor takes a configuration object that can be used to customize the behavior of the
 class.
- * @category Features
- * @subcategory API
+ * @category API
  * @example
  *
  * import App from "./app.js";
@@ -18,8 +17,6 @@ class.
  *      //you will have access to all of instance features class success logger,db,profiler,event,etc...
  *    }
  * }
- *
- * @abstract
  */
 declare class App {
     /**

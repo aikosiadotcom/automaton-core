@@ -8,7 +8,6 @@ import Manifest from "#runtime/manifest";
 /**
  * Fired when bot start running
  * @event Automaton#start
- * @memberof Automaton
  * @example
  * this.event.on('start',()=>{
  *      console.log('bot start running');
