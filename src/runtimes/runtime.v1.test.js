@@ -28,7 +28,6 @@ describe("given Runtime class",()=>{
             await mockLoader({case:1});
             const Runtime = (await import(resolve("#runtime/runtime.v1",import.meta.url))).default;
             const runtime = new Runtime({});
-
             const mockFn = getMockConsole();
 
             await runtime.run();

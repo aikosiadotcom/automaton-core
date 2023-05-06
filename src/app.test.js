@@ -2,7 +2,6 @@ import {describe,test,expect ,jest} from '@jest/globals';
 import {dotenv,envChecker,supabase} from "./mocks/app_deps.js";
 import {resolve} from 'import-meta-resolve';
 import path from "path";
-
 const getInstance = async(args)=>new (await import(resolve('#src/app',import.meta.url))).default(args);
 
 beforeEach(()=>{

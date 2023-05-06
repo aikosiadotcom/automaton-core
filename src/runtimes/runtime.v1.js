@@ -3,7 +3,6 @@ import App from "#src/app";
 import Compiler from '#compiler/index';
 import PluginLoader from '#plugin_loader/index';
 import parallel from "@trenskow/parallel";
-import deepFreeze from "deep-freeze-es6";
 import {PLUGIN_INCLUDE_REGEX, PLUGIN_EXCLUDE_REGEX} from "#src/constant";
 import NpmPackageManager from '#plugin_loader/npm_package_manager';
 import * as Manifest from "#runtime/manifest";

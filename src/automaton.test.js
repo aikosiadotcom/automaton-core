@@ -41,6 +41,7 @@ describe('given Automaton class', () => {
         test('then the end event handler should be called', async () => {
             const mockFn = jest.fn();
             const bot = new Bot({key:"Bot"}); 
+            
             bot.event.on("end",mockFn);
             await bot.event.emit('#run',{
                 manifest:{
