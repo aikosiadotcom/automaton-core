@@ -29,7 +29,7 @@ class.
  *      //you will have access to all of instance features class success logger,db,profiler,event,etc...
  *    }
  * }
- * 
+ *  
  * @abstract
  */
 class App{
