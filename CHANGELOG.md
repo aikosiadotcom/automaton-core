@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/aikosiadotcom/automaton-core/compare/v1.1.1...v1.1.2) (2023-05-06)
+
+
+### Bug Fixes
+
+* **stable:** this is stable version ([b89778a](https://github.com/aikosiadotcom/automaton-core/commit/b89778ad5bbcf9934880c1e4226d05650fcd22a4))
+
 ## [1.1.1](https://github.com/aikosiadotcom/automaton-core/compare/v1.1.0...v1.1.1) (2023-05-06)
 
 
