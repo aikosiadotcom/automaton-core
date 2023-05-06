@@ -3,19 +3,29 @@ export default Manifest;
  * ~Schema
  */
 export type Manifest = {
-    version: string;
-    template: string;
+    /**
+     * ~SchemaVersion} version
+     */
+    "": Manifest;
     profile: string;
-    runParameter: string;
     cronjob: boolean | string;
 };
 /**
 * @typedef {object} Manifest~Schema
-* @property {string} version
-* @property {string} template
+* @property {Manifest~SchemaVersion} version
+* @property {Manifest~SchemaTemplate} template
 * @property {string} profile
-* @property {string} runParameter
+* @property {Manifest~SchemaRunParameter} runParameter
 * @property {boolean | string} cronjob
+ */
+/**
+ * @typedef {"1.0.0"} Manifest~SchemaVersion
+ */
+/**
+ * @typedef {"rest" | "crawler"} Manifest~SchemaTemplate
+ */
+/**
+ * @typedef {'context' | 'page' | 'null'} Manifest~SchemaRunParameter
  */
 /**
  * File descriptor for bot created by automaton framework
@@ -25,19 +35,19 @@ export type Manifest = {
 declare class Manifest {
     /**
      * Returns available value for this property
-     * @type {Array<"1.0.0">}
+     * @type {Array<Manifest~SchemaVersion>}
      */
-    static get version(): "1.0.0"[];
+    static get version(): Manifest[];
     /**
      * Returns available value for this property
-     * @type {Array<"rest"|"crawler">}
+     * @type {Array<Manifest~SchemaTemplate>}
      */
-    static get template(): ("crawler" | "rest")[];
+    static get template(): Manifest[];
     /**
      * Returns available value for this property
-     * @type {Array<'context'|'page'|'null'>}
+     * @type {Array<Manifest~SchemaRunParameter>}
      */
-    static get runParameter(): ("page" | "context" | "null")[];
+    static get runParameter(): Manifest[];
     /**
      * @async
      * @param {Manifest} manifest
@@ -51,21 +61,21 @@ declare class Manifest {
      */
     constructor({ version, template, profile, runParameter, cronjob }: Manifest);
     /**
-     * @type {string}
+     * @type {Manifest~SchemaVersion}
      */
-    version: string;
+    version: Manifest;
     /**
-     * @type {string}
+     * @type {Manifest~SchemaTempalte}
      */
-    template: string;
+    template: Manifest;
     /**
      * @type {string}
      */
     profile: string;
     /**
-     * @type {string}
+     * @type {Manifest~SchemaRunParameter}
      */
-    runParameter: string;
+    runParameter: Manifest;
     /**
      * @type {boolean | string}
      */

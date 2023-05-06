@@ -66,7 +66,7 @@ declare class Automaton extends App {
      * @async
      * @param {Manifest.runParameter} arg
      */
-    run(arg: ("page" | "context" | "null")[]): Promise<void>;
+    run(arg: Manifest[]): Promise<void>;
     #private;
 }
 import App from "#src/app";

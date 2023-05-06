@@ -5,11 +5,23 @@ import ManifestError from '#error/manifest_error';
 
 /**
 * @typedef {object} Manifest~Schema 
-* @property {string} version
-* @property {string} template
+* @property {Manifest~SchemaVersion} version
+* @property {Manifest~SchemaTemplate} template
 * @property {string} profile
-* @property {string} runParameter
+* @property {Manifest~SchemaRunParameter} runParameter
 * @property {boolean | string} cronjob
+ */
+
+/**
+ * @typedef {"1.0.0"} Manifest~SchemaVersion
+ */
+
+/**
+ * @typedef {"rest" | "crawler"} Manifest~SchemaTemplate
+ */
+
+/**
+ * @typedef {'context' | 'page' | 'null'} Manifest~SchemaRunParameter
  */
 
 /**
@@ -20,7 +32,7 @@ import ManifestError from '#error/manifest_error';
 class Manifest{
     /**
      * Returns available value for this property
-     * @type {Array<"1.0.0">}
+     * @type {Array<Manifest~SchemaVersion>}
      */
     static get version(){
         return ["1.0.0"];
@@ -28,7 +40,7 @@ class Manifest{
 
     /**
      * Returns available value for this property
-     * @type {Array<"rest"|"crawler">}
+     * @type {Array<Manifest~SchemaTemplate>}
      */
     static get template(){
         return deepFreeze([
@@ -39,7 +51,7 @@ class Manifest{
 
     /**
      * Returns available value for this property
-     * @type {Array<'context'|'page'|'null'>}
+     * @type {Array<Manifest~SchemaRunParameter>}
      */
     static get runParameter(){
         return deepFreeze([
@@ -116,11 +128,11 @@ class Manifest{
      */
     constructor({version,template,profile,runParameter,cronjob}){
         /**
-         * @type {string}
+         * @type {Manifest~SchemaVersion}
          */
         this.version = version;
         /**
-         * @type {string}
+         * @type {Manifest~SchemaTempalte}
          */
         this.template = template;
         /**
@@ -128,7 +140,7 @@ class Manifest{
          */
         this.profile = profile;
         /**
-         * @type {string}
+         * @type {Manifest~SchemaRunParameter}
          */
         this.runParameter = runParameter;
         /**
