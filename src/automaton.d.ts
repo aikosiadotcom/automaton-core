@@ -58,7 +58,8 @@ declare class Automaton extends App {
     constructor(options: {
         key: string;
     });
-    manifest: any;
+    /**@type {Manifest} */
+    manifest: Manifest;
     endpoint: string;
     /**
      * Consumer must implement this method
@@ -69,3 +70,4 @@ declare class Automaton extends App {
     #private;
 }
 import App from "#src/app";
+import Manifest from "#runtime/manifest";

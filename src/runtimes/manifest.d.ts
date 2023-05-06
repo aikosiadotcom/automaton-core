@@ -1,5 +1,23 @@
 export default Manifest;
 /**
+ * ~Schema
+ */
+export type Manifest = {
+    version: string;
+    template: string;
+    profile: string;
+    runParameter: string;
+    cronjob: boolean | string;
+};
+/**
+* @typedef {object} Manifest~Schema
+* @property {string} version
+* @property {string} template
+* @property {string} profile
+* @property {string} runParameter
+* @property {boolean | string} cronjob
+ */
+/**
  * File descriptor for bot created by automaton framework
  * @category Runtimes
  * @subcategory Compiler
@@ -28,13 +46,10 @@ declare class Manifest {
      * @see https://www.npmjs.com/package/json-validator#usage--examples
      */
     static validate(manifest: Manifest): boolean;
-    constructor({ version, template, profile, runParameter, cronjob }: {
-        version: any;
-        template: any;
-        profile: any;
-        runParameter: any;
-        cronjob: any;
-    });
+    /**
+     * @param {Manifest~Schema}
+     */
+    constructor({ version, template, profile, runParameter, cronjob }: Manifest);
     /**
      * @type {string}
      */
@@ -55,4 +70,8 @@ declare class Manifest {
      * @type {boolean | string}
      */
     cronjob: boolean | string;
+    /**
+     * @returns {Manifest~Schema}
+     */
+    toObject(): Manifest;
 }

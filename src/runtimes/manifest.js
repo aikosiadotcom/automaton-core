@@ -4,6 +4,15 @@ import jsv from "json-validator";
 import ManifestError from '#error/manifest_error';
 
 /**
+* @typedef {object} Manifest~Schema 
+* @property {string} version
+* @property {string} template
+* @property {string} profile
+* @property {string} runParameter
+* @property {boolean | string} cronjob
+ */
+
+/**
  * File descriptor for bot created by automaton framework
  * @category Runtimes
  * @subcategory Compiler
@@ -49,11 +58,11 @@ class Manifest{
      */
     static async validate(manifest){
         await new Promise((resolve,reject)=>{
-            jsv.validate(JSON.parse(JSON.stringify(manifest)),{
+            jsv.validate(typeof Manifest === 'Manifest' ? manifest.toObject() : JSON.parse(JSON.stringify(manifest)),{
                 version: {
                   required: true,
                   trim:true,
-                  enum: ['1.0.0']
+                  enum: Manifest.version
                 },
                 template:{
                     required:true,
@@ -102,6 +111,9 @@ class Manifest{
         return true;
     }
 
+    /**
+     * @param {Manifest~Schema}
+     */
     constructor({version,template,profile,runParameter,cronjob}){
         /**
          * @type {string}
@@ -123,6 +135,19 @@ class Manifest{
          * @type {boolean | string}
          */
         this.cronjob = cronjob; 
+    }
+
+    /**
+     * @returns {Manifest~Schema}
+     */
+    toObject(){
+        return JSON.parse(JSON.stringify({
+            version:this.version,
+            template:this.template,
+            profile:this.profile,
+            runParameter:this.runParameter,
+            cronjob:this.cronjob
+        }));
     }
 }
 

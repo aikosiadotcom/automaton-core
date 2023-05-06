@@ -117,7 +117,7 @@ class Analyzer extends App{
             name:name,
             root:root,
             file:file,
-            manifest:innerManifest
+            manifest:new Manifest(innerManifest)
         };
     }
 }

@@ -62,6 +62,7 @@ import Manifest from "#runtime/manifest";
 class Automaton extends App{
     #browser;
     #context;
+    /**@type {Manifest} */
     manifest;
     endpoint;
 
