@@ -1,3 +1,15 @@
+## [1.1.4](https://github.com/aikosiadotcom/automaton-core/compare/v1.1.3...v1.1.4) (2023-05-06)
+
+
+### Bug Fixes
+
+* **app.js:** change it to non abstract ([4f4e192](https://github.com/aikosiadotcom/automaton-core/commit/4f4e19214b27b10a630ffcd8e34c575ac034cc82))
+
+
+### Reverts
+
+* **release.js:** cancel to git pull origin after finish run cause dont know when workflow finish ([4b707db](https://github.com/aikosiadotcom/automaton-core/commit/4b707db62b8d08f8521d00eb002a9dd7cf99f1d0))
+
 ## [1.1.3](https://github.com/aikosiadotcom/automaton-core/compare/v1.1.2...v1.1.3) (2023-05-06)
 
 
