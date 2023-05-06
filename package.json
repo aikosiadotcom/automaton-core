@@ -51,7 +51,7 @@
   "imports": {
     "#src/*": "./src/*.js",
     "#feature/*": "./src/features/*.js",
-    "#logger/*": "./src/logger/*.js",
+    "#logger/*": "./src/features/logger/*.js",
     "#runtime/*": "./src/runtimes/*.js",
     "#plugin_loader/*": "./src/runtimes/plugin_loader/*.js",
     "#compiler/*": "./src/runtimes/compiler/*.js",
@@ -72,6 +72,7 @@
     "delay": "^5.0.0",
     "dotenv": "^16.0.3",
     "env-paths": "^3.0.0",
+    "extend": "^3.0.2",
     "fs-extra": "^11.1.1",
     "import-meta-resolve": "^3.0.0",
     "json-validator": "^0.0.34",

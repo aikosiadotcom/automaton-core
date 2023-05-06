@@ -50,5 +50,5 @@ declare class Logger {
      * @param {string} [options.logger.tableName="winston_logs"]
      * @returns {external:winston.createLogger}
      */
-    constructor(options: object);
+    constructor(options?: object);
 }

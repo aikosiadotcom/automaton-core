@@ -2,7 +2,7 @@ import { deepFreeze } from "deep-freeze-es6";
 import App from "#src/app";
 import path from "path";
 import NpmPackageManager from '#plugin_loader/npm_package_manager'
-import InterfacePackageManager from "./interface_package_manager.js";
+import InterfacePackageManager from "#plugin_loader/interface_package_manager";
 
 
 

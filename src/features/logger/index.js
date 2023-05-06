@@ -1,6 +1,6 @@
 import winstonProxy from "winston";
-import WinstonSupabaseTransport from "./winston_supabase_transport.js";
-
+import WinstonSupabaseTransport from "#logger/winston_supabase_transport";
+import extend from "extend";
 
 /**
  * @external winston
@@ -57,11 +57,27 @@ class Logger{
      * @param {string} [options.logger.tableName="winston_logs"]
      * @returns {external:winston.createLogger}
      */
-    constructor(options){
-        const {supabase:supabaseClient,winston:winstonConfig,logger:loggerConfig} = options ?? {};
-        const {level,defaultMeta} = winstonConfig ?? {level:"debug",defaultMeta:{projectKey:"",moduleKey:"",childModuleKey:""}};
+    constructor(options = {}){
+        options = extend(true,{
+            supabase:null,
+            winston:{
+                level:"debug",
+                defaultMeta:{
+                    projectKey:"",
+                    moduleKey:"",
+                    childModuleKey:""
+                }
+            },
+            logger:{
+                console:true, 
+                tableName: "winston_logs"
+            }
+        },options);
+
+        const {supabase:supabaseClient,winston:winstonConfig,logger:loggerConfig} = options
+        const {level,defaultMeta} = winstonConfig;
         const {projectKey,moduleKey,childModuleKey} = defaultMeta;
-        const {console,tableName} = loggerConfig ?? {console:true, tableName: "winston_logs"};
+        const {console,tableName} = loggerConfig
 
         const transports = [];
 

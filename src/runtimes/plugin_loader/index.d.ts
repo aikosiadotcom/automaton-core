@@ -85,4 +85,4 @@ declare class PluginLoader extends App {
     #private;
 }
 import App from "#src/app";
-import InterfacePackageManager from "./interface_package_manager.js";
+import InterfacePackageManager from "#plugin_loader/interface_package_manager";
