@@ -76,6 +76,11 @@
     "winston": "^3.8.2"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^10.0.3",
+    "@semantic-release/release-notes-generator": "^11.0.1",
     "better-docs": "github:aikosiadotcom/better-docs#dev",
     "cross-env": "^7.0.3",
     "del-cli": "^5.0.0",
@@ -84,6 +89,7 @@
     "jsdoc": "^4.0.2",
     "jsdoc-plugin-intersection": "^1.0.4",
     "node-jest-badges": "^1.3.12",
+    "semantic-release": "^21.0.2",
     "taffydb": "^2.7.3",
     "typescript": "^5.0.4"
   }
