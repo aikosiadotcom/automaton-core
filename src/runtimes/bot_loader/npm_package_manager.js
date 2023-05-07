@@ -27,6 +27,13 @@ class NpmPackageManager extends InterfacePackageManager{
     ls(){
         return  JSON.parse(execSync(`npm ls -g --depth=0 --json=true`).toString())["dependencies"];
     }
+
+    /**
+     * @override
+     */
+    async search(name){
+        return JSON.parse(execSync(`npm search ${name} --json --no-description --prefer-online`).toString());
+    }
 }
 
 export default NpmPackageManager;

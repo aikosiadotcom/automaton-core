@@ -48,6 +48,18 @@ class InterfacePackageManager{
                "plugin_id_03":{}
           }
      }
+
+     /**
+      * will be used to search the plugins and perform existence check
+      * @async 
+      * @param {string} - name of your project
+      * @returns {Array<Object.<string, string>>}
+      */
+     async search(name){
+          return {
+               "name":""
+          }
+     }
 }
 
 export default InterfacePackageManager

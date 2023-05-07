@@ -54,6 +54,18 @@ class Runtime extends App{
     }
 
     /**
+     * Get Package Manager Provider
+     * 
+     * @param {string} key 
+     * @returns {InterfacePackageManager}
+     */
+    static getPackageManager(key = "npm"){
+        if(key == "npm"){
+            return new NpmPackageManager();
+        }
+    }
+
+    /**
      * @param {object} [options] options
      * @param {string[]} [options.includeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to include
      * @param {string[]} [options.excludeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to exclude

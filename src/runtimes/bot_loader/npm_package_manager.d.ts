@@ -12,5 +12,9 @@ declare class NpmPackageManager extends InterfacePackageManager {
      * @override
      */
     override ls(): any;
+    /**
+     * @override
+     */
+    override search(name: any): Promise<any>;
 }
 import InterfacePackageManager from "#bot_loader/interface_package_manager";

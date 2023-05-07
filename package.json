@@ -20,7 +20,7 @@
   "scripts": {
     "types": "del-cli src/**/*.ts -f && tsc",
     "docs": "cross-env NODE_ENV=production ./node_modules/.bin/jsdoc -c jsdoc.json",
-    "release": "npm run types && npm run docs && git pull origin && git add * && git-cz && git push origin",
+    "release": "npm run types && npm run docs && git add * && git-cz && git pull origin && git add * && git-cz && git push origin",
     "test": "cross-env NODE_ENV=development NODE_OPTIONS='--experimental-vm-modules' jest"
   },
   "keywords": [

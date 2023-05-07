@@ -31,4 +31,13 @@ declare class InterfacePackageManager {
     ls(): {
         [x: string]: object;
     };
+    /**
+     * will be used to search the plugins and perform existence check
+     * @async
+     * @param {string} - name of your project
+     * @returns {Array<Object.<string, string>>}
+     */
+    search(name: any): Array<{
+        [x: string]: string;
+    }>;
 }

@@ -35,6 +35,13 @@ declare class Runtime extends App {
      */
     static get tasks(): Map<any, any>;
     /**
+     * Get Package Manager Provider
+     *
+     * @param {string} key
+     * @returns {InterfacePackageManager}
+     */
+    static getPackageManager(key?: string): InterfacePackageManager;
+    /**
      * @param {object} [options] options
      * @param {string[]} [options.includeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to include
      * @param {string[]} [options.excludeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to exclude

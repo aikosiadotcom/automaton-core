@@ -7,7 +7,7 @@
 
 <div align="center">
     
-[![Branches](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-branches.svg?raw=true)
+![Branches](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-branches.svg?raw=true)
 ![Functions](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-functions.svg?raw=true)
 ![Lines](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-lines.svg?raw=true)
 ![Statements](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-statements.svg?raw=true)
