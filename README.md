@@ -9,7 +9,7 @@
     
 ![Release](https://github.com/aikosiadotcom/automaton-core/actions/workflows/release.yml/badge.svg)
 ![line-code](https://img.shields.io/tokei/lines/github/aikosiadotcom/automaton-core?logo=github)
-![Test](https://github.com/aikosiadotcom/automaton-core/actions/workflows/test.yml/test.svg)
+![Test](https://github.com/aikosiadotcom/automaton-core/actions/workflows/test.yml/badge.svg)
 ![Branches](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-branches.svg?raw=true)
 ![Functions](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-functions.svg?raw=true)
 ![Lines](https://raw.githubusercontent.com/aikosiadotcom/automaton-core/main/badges/coverage-lines.svg?raw=true)
