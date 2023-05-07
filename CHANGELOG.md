@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/aikosiadotcom/automaton-core/compare/v1.1.4...v1.1.5) (2023-05-06)
+
+
+### Bug Fixes
+
+* **file_explorer.js:** add new function changeToPro and changeToDev to this.env object ([db81b37](https://github.com/aikosiadotcom/automaton-core/commit/db81b378c31af335aa91a72e40f0c1be183bb1a8))
+
 ## [1.1.4](https://github.com/aikosiadotcom/automaton-core/compare/v1.1.3...v1.1.4) (2023-05-06)
 
 
