@@ -1,8 +1,8 @@
 import Automaton, { decorators } from "@aikosia/automaton-core";
 
-class AutomatonPluginRestExample02 extends Automaton{
+class AutomatonBotRestExample02 extends Automaton{
     constructor(){
-        super({key:"AutomatonPluginRestExample02"});
+        super({key:"AutomatonBotRestExample02"});
     }
 
     @decorators.firman
@@ -11,4 +11,4 @@ class AutomatonPluginRestExample02 extends Automaton{
     }
 }
 
-export default AutomatonPluginRestExample02;
+export default AutomatonBotRestExample02;

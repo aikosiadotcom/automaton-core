@@ -1,11 +1,11 @@
 import cron from 'node-cron';
 import App from "#src/app";
 import Compiler from '#compiler/index';
-import PluginLoader from '#plugin_loader/index';
+import PluginLoader from '#bot_loader/index';
 import parallel from "@trenskow/parallel";
-import {PLUGIN_INCLUDE_REGEX, PLUGIN_EXCLUDE_REGEX} from "#src/constant";
-import NpmPackageManager from '#plugin_loader/npm_package_manager';
-import InterfacePackageManager from '#plugin_loader/interface_package_manager';
+import {PROJECT_BOT_INCLUDE, PROJECT_BOT_EXCLUDE} from "#src/constant";
+import NpmPackageManager from '#bot_loader/npm_package_manager';
+import InterfacePackageManager from '#bot_loader/interface_package_manager';
 import Manifest from "#runtime/manifest";
 
 /**
@@ -24,7 +24,7 @@ import Manifest from "#runtime/manifest";
  * 
  * //assume new TestPackageManager when ls is called, it will return
  * {
- *  "@aikosia/automaton-plugin-rest-example-01": {},
+ *  "@aikosia/automaton-bot-rest-example-01": {},
  * }
  * 
  * await runtime.run();
@@ -59,7 +59,7 @@ class Runtime extends App{
      * @param {string[]} [options.excludeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to exclude
      * @param {InterfacePackageManager} [options.packageManager={@link NpmPackageManager}]
     */
-    constructor({includeRegex = PLUGIN_INCLUDE_REGEX, excludeRegex = PLUGIN_EXCLUDE_REGEX, packageManager = new NpmPackageManager()}){
+    constructor({includeRegex = PROJECT_BOT_INCLUDE, excludeRegex = PROJECT_BOT_EXCLUDE, packageManager = new NpmPackageManager()}){
         super({key:"Core",childKey:"Runtime"});
         this.#compiler = new Compiler();
         this.#loader = new PluginLoader({includeRegex, excludeRegex,packageManager});

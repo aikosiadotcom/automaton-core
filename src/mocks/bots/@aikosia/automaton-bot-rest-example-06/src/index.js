@@ -3,9 +3,9 @@ await import('../../../../playwright-core.js');
 
 const {default:Automaton,Decorators} = await import('#core');
 
-class AutomatonPluginRestExample06 extends Automaton{
+class AutomatonBotRestExample06 extends Automaton{
     constructor(){
-        super({key:"AutomatonPluginRestExample06"});
+        super({key:"AutomatonBotRestExample06"});
     }
 
     async run(page){
@@ -18,4 +18,4 @@ class AutomatonPluginRestExample06 extends Automaton{
     }
 }
 
-export default AutomatonPluginRestExample06
+export default AutomatonBotRestExample06

@@ -28,8 +28,8 @@ import fsExtra from 'fs-extra';
  * import Analyzer from "./analyzer.js";
  * 
  * const candidates = [{
- *      name: '@aikosia/automaton-plugin-rest-example-01',
- *      root: path.normalize(`${__dirname}\/plugins\/@aikosia\/automaton-plugin-rest-example-01`)
+ *      name: '@aikosia/automaton-bot-rest-example-01',
+ *      root: path.normalize(`${__dirname}\/bots\/@aikosia\/automaton-bot-rest-example-01`)
  * }]
  * const analyzer = new Analyzer();
  * const result = await analyzer.run({candidates});
@@ -37,9 +37,9 @@ import fsExtra from 'fs-extra';
  * 
  * Console Terminal Output:
  * {
- *  name:"@aikosia/automaton-plugin-rest-example-01",
- *  root:path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01`),
- *  file:path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`),
+ *  name:"@aikosia/automaton-bot-rest-example-01",
+ *  root:path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01`),
+ *  file:path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01\/src\/index.js`),
  *  manifest:{
  *      "version": "1.0.0",
  *      "template": "rest",

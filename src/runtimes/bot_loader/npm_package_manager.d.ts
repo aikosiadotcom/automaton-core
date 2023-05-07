@@ -13,4 +13,4 @@ declare class NpmPackageManager extends InterfacePackageManager {
      */
     override ls(): any;
 }
-import InterfacePackageManager from "#plugin_loader/interface_package_manager";
+import InterfacePackageManager from "#bot_loader/interface_package_manager";

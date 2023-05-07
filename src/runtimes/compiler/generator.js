@@ -50,9 +50,9 @@ export const BABEL_OPTIONS = {
  * import Generator from "./generator.js";
  * 
  * const candidates = [{
- *  name:"@aikosia/automaton-plugin-rest-example-01",
- *  root:path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01`),
- *  file:path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`),
+ *  name:"@aikosia/automaton-bot-rest-example-01",
+ *  root:path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01`),
+ *  file:path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01\/src\/index.js`),
  *  manifest:{
  *      "version": "1.0.0",
  *      "template": "rest",
@@ -67,9 +67,9 @@ export const BABEL_OPTIONS = {
  * 
  * Console Terminal Output:
  * {
- *  name:"@aikosia/automaton-plugin-rest-example-01",
- *  root:path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01`),
- *  file:path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`),
+ *  name:"@aikosia/automaton-bot-rest-example-01",
+ *  root:path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01`),
+ *  file:path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01\/src\/index.js`),
  *  manifest:{
  *      "version": "1.0.0",
  *      "template": "rest",
@@ -77,7 +77,7 @@ export const BABEL_OPTIONS = {
  *      "runParameter": "page",
  *      "cronjob": false
  *  },
- *  main: path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/.automaton\/index.mjs`,
+ *  main: path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01\/.automaton\/index.mjs`,
  *  module: [Module: null prototype] {...object}
  *  instance: ClassName {...object}
  * }

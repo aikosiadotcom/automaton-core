@@ -1,8 +1,8 @@
 import Automaton, { decorators } from "@aikosia/automaton-core";
 
-class AutomatonPluginRestExample03 extends Automaton{
+class AutomatonBotRestExample03 extends Automaton{
     constructor(){
-        super({key:"AutomatonPluginRestExample03"});
+        super({key:"AutomatonBotRestExample03"});
     }
 
     async print({name}){
@@ -10,4 +10,4 @@ class AutomatonPluginRestExample03 extends Automaton{
     }
 }
 
-export default AutomatonPluginRestExample03;
+export default AutomatonBotRestExample03;

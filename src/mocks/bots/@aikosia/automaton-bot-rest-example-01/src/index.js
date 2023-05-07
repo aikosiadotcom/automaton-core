@@ -3,9 +3,9 @@ await import('../../../../playwright-core.js');
 
 const {default:Automaton,Decorators} = await import('#core');
 
-class AutomatonPluginRestExample01 extends Automaton{
+class AutomatonBotRestExample01 extends Automaton{
     constructor(){
-        super({key:"AutomatonPluginRestExample01"});
+        super({key:"AutomatonBotRestExample01"});
     }
 
     async run(page){
@@ -19,4 +19,4 @@ class AutomatonPluginRestExample01 extends Automaton{
 
 export const TestImmutability = "I Am Immutable";
 
-export default AutomatonPluginRestExample01;
+export default AutomatonBotRestExample01;

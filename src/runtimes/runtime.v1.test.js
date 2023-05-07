@@ -1,6 +1,6 @@
 import {describe,test,expect ,jest} from '@jest/globals';
 import mockApp from "#mock/app"; 
-import mockLoader from "#mock/plugin_loader"; 
+import mockLoader from "#mock/bot_loader"; 
 import {resolve} from 'import-meta-resolve';
 
 const getMockConsole = (key = "log")=>{

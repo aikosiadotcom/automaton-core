@@ -27,7 +27,7 @@ describe("given App class", () => {
 
     describe("when the required options (key,childkey) provided and required .env file found on local path (project root directory)", ()=>{
         test('then should get the instance', async () => {
-            process.chdir(path.join("src","mocks","plugins","@aikosia","automaton-plugin-rest-example-05"));
+            process.chdir(path.join("src","mocks","bots","@aikosia","automaton-bot-rest-example-05"));
             await supabase();
             const instance = await getInstance({key:'key',childKey:'childKey'});
             expect(instance.constructor.name).toBe("App");
@@ -70,22 +70,4 @@ describe("given App class", () => {
         });
         
     });
-
-    
-    // describe("when _getEnvFile is called", ()=>{
-
-    //     test('then should function as it should be', async () => {
-    //         await dotenv();
-    //         await envChecker({throwError:false});
-    //         await supabase();
-    //         const instance = await getInstance({key:'key',childKey:'childKey'});
-    //         instance._getEnvFile();
-    //         expect(1).toBe(1);
-
-    //         process.chdir(path.join("src","mocks","plugins","@aikosia","automaton-plugin-rest-example-05"));
-    //         instance._getEnvFile();
-    //         expect(1).toBe(1);
-    //     });
-        
-    // });
 });

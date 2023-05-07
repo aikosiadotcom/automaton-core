@@ -72,8 +72,8 @@ additional directories specified in the `additionalPath` parameter of the constr
      * @type {object}
      * @property {function} isDev() - true if process.env.NODE_ENV === 'development' otherwise false
      * @property {function} isPro() - true if process.env.NODE_ENV === 'production' otherwise false
-     * @property {function} changeToPro() - set process.env.NODE_ENV = 'production'
-     * @property {function} changeToPro() - set process.env.NODE_ENV = 'development'
+     * @property {function} setToPro() - set process.env.NODE_ENV = 'production'
+     * @property {function} setToDev() - set process.env.NODE_ENV = 'development'
      */
     env: object;
     /**

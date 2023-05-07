@@ -53,7 +53,7 @@
     "#feature/*": "./src/features/*.js",
     "#logger/*": "./src/features/logger/*.js",
     "#runtime/*": "./src/runtimes/*.js",
-    "#plugin_loader/*": "./src/runtimes/plugin_loader/*.js",
+    "#bot_loader/*": "./src/runtimes/bot_loader/*.js",
     "#compiler/*": "./src/runtimes/compiler/*.js",
     "#error/*": "./src/errors/*.js",
     "#mock": "./src/mocks",

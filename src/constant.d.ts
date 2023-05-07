@@ -5,12 +5,12 @@
 /**
  * @const {object}
  */
-export const PLUGIN_NAMING_PREFIX: any;
+export const PROJECT_BOT_PREFIX: any;
 /**
  * @const {Array<object>}
  */
-export const PLUGIN_INCLUDE_REGEX: any;
+export const PROJECT_BOT_INCLUDE: any;
 /**
  * @const {Array<object>}
  */
-export const PLUGIN_EXCLUDE_REGEX: readonly any[];
+export const PROJECT_BOT_EXCLUDE: readonly any[];

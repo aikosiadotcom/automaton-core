@@ -18,9 +18,9 @@ describe("given Compiler class",()=>{
             const ret = await compiler.run({
                 automata: [
                     {
-                      name: '@aikosia/automaton-plugin-rest-example-01',
-                      root: path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01`),
-                      file: path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`),
+                      name: '@aikosia/automaton-bot-rest-example-01',
+                      root: path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01`),
+                      file: path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01\/src\/index.js`),
                       manifest: {
                         version: '1.0.0',
                         template: 'rest',
@@ -31,9 +31,9 @@ describe("given Compiler class",()=>{
                     }
                   ]
             });
-            expect(ret[0].name).toEqual("@aikosia/automaton-plugin-rest-example-01");
-            expect(ret[0].root).toEqual(path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01`));
-            expect(ret[0].file).toEqual(path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`));
+            expect(ret[0].name).toEqual("@aikosia/automaton-bot-rest-example-01");
+            expect(ret[0].root).toEqual(path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01`));
+            expect(ret[0].file).toEqual(path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01\/src\/index.js`));
             expect(ret[0].manifest).toEqual({
               "version": "1.0.0",
               "template": "rest",
@@ -41,7 +41,7 @@ describe("given Compiler class",()=>{
               "runParameter": "page",
               "cronjob": false
             });
-            expect(ret[0].main).toEqual(path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/.automaton\/index.mjs`));
+            expect(ret[0].main).toEqual(path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01\/.automaton\/index.mjs`));
             expect(ret[0]).toHaveProperty("module");
             expect(ret[0]).toHaveProperty("instance");
            

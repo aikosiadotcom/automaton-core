@@ -8,21 +8,21 @@ import { deepFreeze } from 'deep-freeze-es6';
 /**
  * @const {object}
  */
-export const PLUGIN_NAMING_PREFIX = deepFreeze({
-    'rest':'automaton-plugin-rest-',
-    'crawler':'automaton-plugin-crawler-'
+export const PROJECT_BOT_PREFIX = deepFreeze({
+    'rest':'automaton-bot-rest-',
+    'crawler':'automaton-bot-crawler-'
 })
 
 /**
  * @const {Array<object>}
  */
-export const PLUGIN_INCLUDE_REGEX = deepFreeze([
-    `@aikosia/${PLUGIN_NAMING_PREFIX['rest']}`,
-    `@aikosia/${PLUGIN_NAMING_PREFIX['crawler']}`
+export const PROJECT_BOT_INCLUDE = deepFreeze([
+    `@aikosia/${PROJECT_BOT_PREFIX['rest']}`,
+    `@aikosia/${PROJECT_BOT_PREFIX['crawler']}`
 ]);
 
 /**
  * @const {Array<object>}
  */
-export const PLUGIN_EXCLUDE_REGEX = Object.freeze([
+export const PROJECT_BOT_EXCLUDE = Object.freeze([
 ]);

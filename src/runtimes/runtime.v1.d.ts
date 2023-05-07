@@ -14,7 +14,7 @@ export default Runtime;
  *
  * //assume new TestPackageManager when ls is called, it will return
  * {
- *  "@aikosia/automaton-plugin-rest-example-01": {},
+ *  "@aikosia/automaton-bot-rest-example-01": {},
  * }
  *
  * await runtime.run();
@@ -59,4 +59,4 @@ declare class Runtime extends App {
 }
 import App from "#src/app";
 import Manifest from "#runtime/manifest";
-import InterfacePackageManager from '#plugin_loader/interface_package_manager';
+import InterfacePackageManager from '#bot_loader/interface_package_manager';

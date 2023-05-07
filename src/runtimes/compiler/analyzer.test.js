@@ -6,7 +6,7 @@ import {resolve} from 'import-meta-resolve';
 const mockPath = path.join(resolve("#mock",import.meta.url).replace(process.platform == "win32" ? "file:///" : "file://",""),"..");
 await mockApp({showLog:false});
 const Analyzer = (await import(resolve("#compiler/analyzer",import.meta.url))).default;
-// console.log(path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01`));
+// console.log(path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01`));
 beforeAll(()=>{
     jest.useFakeTimers();
 });
@@ -18,15 +18,15 @@ describe("given Analyzer class",()=>{
             const ret = await analyzer.run({
                 candidates: [
                     {
-                      name: '@aikosia/automaton-plugin-rest-example-01',
-                      root: path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01`)
+                      name: '@aikosia/automaton-bot-rest-example-01',
+                      root: path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01`)
                     }
                   ]  
             }); 
             expect(ret[0]).toEqual({
-                name:"@aikosia/automaton-plugin-rest-example-01",
-                root:path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01`),
-                file:path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`),
+                name:"@aikosia/automaton-bot-rest-example-01",
+                root:path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01`),
+                file:path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01\/src\/index.js`),
                 manifest:{
                     "version": "1.0.0",
                     "template": "rest",
@@ -49,8 +49,8 @@ describe("given Analyzer class",()=>{
             const ret = await analyzer.run({
                 candidates: [
                     {
-                      name: '@aikosia/automaton-plugin-rest-example-02',
-                      root: path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-02`)
+                      name: '@aikosia/automaton-bot-rest-example-02',
+                      root: path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-02`)
                     }
                   ]  
             }); 
@@ -64,12 +64,12 @@ describe("given Analyzer class",()=>{
             const ret = await analyzer.run({
                 candidates: [
                     {
-                      name: '@aikosia/automaton-plugin-rest-example-02',
-                      root: path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-02`)
+                      name: '@aikosia/automaton-bot-rest-example-02',
+                      root: path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-02`)
                     },
                     {
-                        name: '@aikosia/automaton-plugin-rest-example-03',
-                        root: path.normalize(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-03`)
+                        name: '@aikosia/automaton-bot-rest-example-03',
+                        root: path.normalize(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-03`)
                     }
                   ]  
             }); 

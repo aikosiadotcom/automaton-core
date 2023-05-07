@@ -15,14 +15,14 @@ beforeAll(()=>{
 describe("given Generator class",()=>{
     describe("when 'run' method is called",()=>{
         test("then the file will be compile and save to .automaton folder and the returned object should immutable",async()=>{
-            await fsExtra.remove(`${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/.automaton`);//TODO: i think this line should be remove. so it dont interfere with other running test
+            await fsExtra.remove(`${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01\/.automaton`);//TODO: i think this line should be remove. so it dont interfere with other running test
             const generator = new Generator();
             const ret = await generator.run({
                 candidates: [
                     {
-                      name: '@aikosia/automaton-plugin-rest-example-01',
-                      root: `${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01`,
-                      file: `${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-01\/src\/index.js`,
+                      name: '@aikosia/automaton-bot-rest-example-01',
+                      root: `${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01`,
+                      file: `${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-01\/src\/index.js`,
                       manifest: {
                         version: '1.0.0',
                         template: 'rest',
@@ -55,9 +55,9 @@ describe("given Generator class",()=>{
             const ret = await generator.run({
                 candidates: [
                     {
-                      name: '@aikosia/automaton-plugin-rest-example-02',
-                      rootx: `${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-02`,
-                      file: `${mockPath}\/mocks\/plugins\/@aikosia\/automaton-plugin-rest-example-02\/src\/index.js`,
+                      name: '@aikosia/automaton-bot-rest-example-02',
+                      rootx: `${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-02`,
+                      file: `${mockPath}\/mocks\/bots\/@aikosia\/automaton-bot-rest-example-02\/src\/index.js`,
                       manifest: {
                         version: '1.0.0',
                         template: 'rest',

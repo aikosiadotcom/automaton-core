@@ -28,7 +28,7 @@ export type PluginLoader = {
  *
  * @example
  *
- * import PluginLoader from './plugin_loader.js';
+ * import PluginLoader from './bot_loader.js';
  *
  * const loader = new PluginLoader({includeRegex:["@aikosia/automaton-"]});
  * const root = await loader.root();
@@ -39,18 +39,18 @@ export type PluginLoader = {
  * {
  *  installed: [
  *    {
- *      name: '@aikosiadotcom/automaton-plugin-rest-example-01',
- *      root: 'C:\\drive-d\\automaton\\automaton_modules\\automaton-core\\src\\mocks\\plugins\\aikosia\\automaton-plugin-rest-example-01'
+ *      name: '@aikosiadotcom/automaton-bot-rest-example-01',
+ *      root: 'C:\\drive-d\\automaton\\automaton_modules\\automaton-core\\src\\mocks\\plugins\\aikosia\\automaton-bot-rest-example-01'
  *    },
  *    {
- *      name: '@aikosia/automaton-plugin-rest-example-02',
- *      root: 'C:\\drive-d\\automaton\\automaton_modules\\automaton-core\\src\\mocks\\plugins\\aikosia\\automaton-plugin-rest-example-02'
+ *      name: '@aikosia/automaton-bot-rest-example-02',
+ *      root: 'C:\\drive-d\\automaton\\automaton_modules\\automaton-core\\src\\mocks\\plugins\\aikosia\\automaton-bot-rest-example-02'
  *    }
  *  ],
  *  candidates: [
  *    {
- *      name: '@aikosia/automaton-plugin-rest-example-02',
- *      root: 'C:\\drive-d\\automaton\\automaton_modules\\automaton-core\\src\\mocks\\plugins\\aikosia\\automaton-plugin-rest-example-02'
+ *      name: '@aikosia/automaton-bot-rest-example-02',
+ *      root: 'C:\\drive-d\\automaton\\automaton_modules\\automaton-core\\src\\mocks\\plugins\\aikosia\\automaton-bot-rest-example-02'
  *    }
  *  ],
  *  excluded: []
@@ -85,4 +85,4 @@ declare class PluginLoader extends App {
     #private;
 }
 import App from "#src/app";
-import InterfacePackageManager from "#plugin_loader/interface_package_manager";
+import InterfacePackageManager from "#bot_loader/interface_package_manager";
