@@ -1,4 +1,4 @@
-name: generate-badges
+name: test
 permissions: write-all
 on: 
   push:
