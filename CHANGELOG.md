@@ -1,3 +1,10 @@
+## [1.1.7](https://github.com/aikosiadotcom/automaton-core/compare/v1.1.6...v1.1.7) (2023-05-07)
+
+
+### Bug Fixes
+
+* **test:** test github release ([424fc49](https://github.com/aikosiadotcom/automaton-core/commit/424fc499f7078f6c0bdc1412ab49b4bb502de428))
+
 ## [1.1.6](https://github.com/aikosiadotcom/automaton-core/compare/v1.1.5...v1.1.6) (2023-05-07)
 
 
