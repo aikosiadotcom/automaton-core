@@ -1,3 +1,11 @@
+## [1.1.6](https://github.com/aikosiadotcom/automaton-core/compare/v1.1.5...v1.1.6) (2023-05-07)
+
+
+### Bug Fixes
+
+* fix release script ([6ff7c13](https://github.com/aikosiadotcom/automaton-core/commit/6ff7c133a14f65cb47b4a2e92fdd63bfbaf7b94a))
+* **remove script/release.js:** fix bug release script ([ca838af](https://github.com/aikosiadotcom/automaton-core/commit/ca838afa89b0195814f34922d9a261919203b339))
+
 ## [1.1.5](https://github.com/aikosiadotcom/automaton-core/compare/v1.1.4...v1.1.5) (2023-05-06)
 
 
