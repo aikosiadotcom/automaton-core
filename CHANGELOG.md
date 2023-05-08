@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.2.1](https://github.com/aikosiadotcom/automaton-core/compare/v1.2.0...v1.2.1) (2023-05-08)
+
+
+### Bug Fixes
+
+* previously not trigger a release ([1a857a6](https://github.com/aikosiadotcom/automaton-core/commit/1a857a63bd6af74c589c42d12548da00f7b90828))
+
 # [1.2.0](https://github.com/aikosiadotcom/automaton-core/compare/v1.1.9...v1.2.0) (2023-05-08)
 
 
