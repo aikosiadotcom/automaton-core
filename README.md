@@ -1,7 +1,7 @@
 <p align="center" style="margin-bottom: 0px !important;">
   <img width="200" src="https://github.com/aikosiadotcom/automaton/blob/main/statics/logo.svg?raw=true" alt="Automaton" align="center">
 </p>
-<h1 align="center" style="margin-top: 0px;">Automaton Core</h1>
+<h1 align="center" style="margin-top:0px;">Automaton Core</h1>
 
 <p align="center" >Core Libraries of Automaton Framework</p>
 
