@@ -1,3 +1,12 @@
+# Semantic Versioning Changelog
+
+# [1.2.0](https://github.com/aikosiadotcom/automaton-core/compare/v1.1.9...v1.2.0) (2023-05-08)
+
+
+### Features
+
+* **release.config.cjs:** fix github release ([d4113ec](https://github.com/aikosiadotcom/automaton-core/commit/d4113ec7211118da71ad0c15768fac4fdef2eb03))
+
 ## [1.1.7](https://github.com/aikosiadotcom/automaton-core/compare/v1.1.6...v1.1.7) (2023-05-07)
 
 
