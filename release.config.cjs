@@ -19,12 +19,15 @@ module.exports = {
         "@semantic-release/github",
         {
           "assets": [
-            "package.json", 
-            "CHANGELOG.md",
-            "src/**/*.js",
-            "src/**/*.d.ts",
-            "!src/**/*.test.js",
-            "!src/mocks/**/*"
+            {path:"package.json"}, 
+            {path:"CHANGELOG.md"},
+            {path:"README.md"},
+            [
+              "src/**/*.js",
+              "src/**/*.d.ts",
+              "!src/**/*.test.js",
+              "!src/mocks/**/*"
+            ]
           ],
           "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
         }
