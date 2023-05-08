@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.3.1](https://github.com/aikosiadotcom/automaton-core/compare/v1.3.0...v1.3.1) (2023-05-08)
+
+
+### Bug Fixes
+
+* **mocks/app:** since last release export a new object called Tests without jest in dependency ([41993a2](https://github.com/aikosiadotcom/automaton-core/commit/41993a289d16b6a83792543a5b905786cef92a15))
+
 # [1.3.0](https://github.com/aikosiadotcom/automaton-core/compare/v1.2.1...v1.3.0) (2023-05-08)
 
 
