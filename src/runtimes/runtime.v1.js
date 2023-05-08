@@ -46,6 +46,14 @@ class Runtime extends App{
     }
 
     /**
+     * Get the InterfacePackageManager class
+     * @type {InterfacePackageManager}
+     */
+    static get InterfacePackageManager(){
+        return InterfacePackageManager;
+    }
+
+    /**
      * Get the running tasks
      * @type {Map}
      */

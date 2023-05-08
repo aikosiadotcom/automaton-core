@@ -2,7 +2,8 @@ import {jest} from '@jest/globals';
 import EventEmitter from '#feature/event_emitter';
 import {resolve} from 'import-meta-resolve';
 
-async function main({showLog = false}){
+async function main(opts = {showLog:false}){
+    const {showLog} = opts;
     process.argv.forEach((val, index, array)=>{
         if(["--verbose"].includes(val)){
             showLog = true;

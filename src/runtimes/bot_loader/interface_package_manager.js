@@ -53,7 +53,8 @@ class InterfacePackageManager{
       * will be used to search the plugins and perform existence check
       * @async 
       * @param {string} - name of your project
-      * @returns {Array<Object.<string, string>>}
+      * @returns {Promise<Array<Object.<string, string>>>}
+      * @todo This method maybe optional, cause when runtimes running in local it doesn't need this method. but some dependent of this project need this method
       */
      async search(name){
           return {

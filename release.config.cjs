@@ -30,7 +30,8 @@ module.exports = {
             "src/**/*.js",
             "src/**/*.d.ts",
             "!src/**/*.test.js",
-            "!src/mocks/**/*"
+            "!src/mocks/**/*",
+            "src/mocks/app.js"
           ]
         ],
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"

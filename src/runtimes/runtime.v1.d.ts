@@ -30,6 +30,11 @@ declare class Runtime extends App {
      */
     static get Manifest(): Manifest;
     /**
+     * Get the InterfacePackageManager class
+     * @type {InterfacePackageManager}
+     */
+    static get InterfacePackageManager(): InterfacePackageManager;
+    /**
      * Get the running tasks
      * @type {Map}
      */
