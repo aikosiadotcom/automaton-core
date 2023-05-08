@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.3.0](https://github.com/aikosiadotcom/automaton-core/compare/v1.2.1...v1.3.0) (2023-05-08)
+
+
+### Features
+
+* **index.js:** export new object Tests ([1e881af](https://github.com/aikosiadotcom/automaton-core/commit/1e881af68d34e8c46ab34abdd176114934911753))
+
 ## [1.2.1](https://github.com/aikosiadotcom/automaton-core/compare/v1.2.0...v1.2.1) (2023-05-08)
 
 
