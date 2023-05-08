@@ -89,7 +89,7 @@ class Analyzer extends App{
     }
 
     /**
-     * It will load manifest file (automaton.json) in consumer project root directory. if not found, then it will search automaton field in package.json.
+     * It will load manifest file (automaton.config.json) in consumer project root directory. if not found, then it will search automaton field in package.json.
      * 
      * @param {PluginLoader~LoadedImmutablePlugin} options 
      * @returns {Analyzer~AnalyzedImmutablePlugin}
@@ -100,9 +100,9 @@ class Analyzer extends App{
         let innerManifest = pkg["automaton"];
         const file = path.join(root,pkg['main']);
 
-        const localAutomatonConfigFilePath = path.join(root,"automaton.json");
+        const localAutomatonConfigFilePath = path.join(root,"automaton.config.json");
         if(await fsExtra.exists(localAutomatonConfigFilePath)){
-            /** find automaton.json and load it */
+            /** find automaton.config.json and load it */
             pkg = await fsExtra.readJSON(localAutomatonConfigFilePath);
             innerManifest = pkg;
         }
