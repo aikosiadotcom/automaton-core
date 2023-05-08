@@ -19,10 +19,10 @@ module.exports = {
         "@semantic-release/github",
         {
           "assets": [
-            {path:"package.json"}, 
-            {path:"CHANGELOG.md"},
-            {path:"README.md"},
             [
+              "package.json",
+              "CHANGELOG.md",
+              "README.md",
               "src/**/*.js",
               "src/**/*.d.ts",
               "!src/**/*.test.js",
