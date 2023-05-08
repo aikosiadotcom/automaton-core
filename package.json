@@ -1,6 +1,6 @@
 {
   "name": "@aikosia/automaton-core",
-  "version": "1.1.7",
+  "version": "1.2.0",
   "description": "Core Libraries Of Automaton Framework",
   "main": "./src/index.js",
   "type": "module",
