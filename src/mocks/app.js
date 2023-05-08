@@ -1,9 +1,8 @@
-import {jest} from '@jest/globals';
 import EventEmitter from '#feature/event_emitter';
 import {resolve} from 'import-meta-resolve';
 
-async function main(opts = {showLog:false}){
-    const {showLog} = opts;
+async function main(jest){
+    let showLog = false;
     process.argv.forEach((val, index, array)=>{
         if(["--verbose"].includes(val)){
             showLog = true;
@@ -29,4 +28,4 @@ async function main(opts = {showLog:false}){
 }
 
 
-export default async(opts)=>main(opts);
+export default async(jest)=>main(jest);

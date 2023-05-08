@@ -5,7 +5,7 @@ import fsExtra from 'fs-extra';
 import {resolve} from 'import-meta-resolve';
 
 const mockPath = path.join(resolve("#mock",import.meta.url).replace(process.platform == "win32" ? "file:///" : "file://",""),"..");
-await mockApp({showLog:false});
+await mockApp(jest);
 const Generator = (await import(resolve("#compiler/generator",import.meta.url))).default;
 
 beforeAll(()=>{

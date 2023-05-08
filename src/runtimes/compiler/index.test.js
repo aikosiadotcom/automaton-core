@@ -4,7 +4,7 @@ import path from "path";
 import {resolve} from 'import-meta-resolve';
 
 const mockPath = path.join(resolve("#mock",import.meta.url).replace(process.platform == "win32" ? "file:///" : "file://",""),"..");
-await mockApp({showLog:false});
+await mockApp(jest);
 const Compiler = (await import(resolve("#compiler/index",import.meta.url))).default;
 
 beforeAll(()=>{

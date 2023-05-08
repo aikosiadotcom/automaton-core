@@ -5,7 +5,7 @@ import * as babel from "@babel/core";
 import fsExtra from 'fs-extra';
 import {resolve} from 'import-meta-resolve';
 
-await mockApp({showLog:false});
+await mockApp(jest);
 const {code} = await babel.transformFileAsync(resolve("#mock/decorators",import.meta.url).replace(process.platform == "win32" ? "file:///" : "file://",""), BABEL_OPTIONS);
 
 await fsExtra.ensureFile(resolve("#mock/decorators-compiled",import.meta.url).replace(process.platform == "win32" ? "file:///" : "file://",""));

@@ -1,6 +1,8 @@
+
+import {jest} from '@jest/globals';
 import mockApp from "#mock/app";
 
-await mockApp({showLog:false});
+await mockApp(jest);
 
 const Decorators = await import("../decorators.js");
 

@@ -5,7 +5,7 @@ import NpmPackageManager from "#bot_loader/npm_package_manager";
 import TestPackageManager from "#mock/test_package_manager";
 import {resolve} from 'import-meta-resolve';
 
-await mockApp({showLog:false});
+await mockApp(jest);
 const PluginLoader = (await import(resolve("#bot_loader/index",import.meta.url))).default;
 
 describe("given PluginLoader class",()=>{

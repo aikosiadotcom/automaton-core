@@ -11,9 +11,6 @@ const getMockConsole = (key = "log")=>{
 
 beforeAll(()=>{
     jest.useFakeTimers(); 
-    // jest.runAllTimersAsync();
-    // jest.runAllTicks();
-    // jest.runAllTimers();
 });
 
 afterEach(()=>{
@@ -24,7 +21,7 @@ afterEach(()=>{
 describe("given Runtime class",()=>{
     describe("when 'run' method is called",()=>{
         test("then example-01 on mockLoader will be running",async()=>{
-            await mockApp({showLog:false});
+            await mockApp(jest);
             await mockLoader({case:1});
             const Runtime = (await import(resolve("#runtime/runtime.v1",import.meta.url))).default;
             const runtime = new Runtime({});
@@ -42,7 +39,7 @@ describe("given Runtime class",()=>{
         test("then example-05 on mockLoader will be running",async()=>{
             //this environment variable will only be used for testing only
             process.env.AUTOMATON_RUNTIME_SCHEDULE_TASK_RUN_IMMEDIATELY = "yes";
-            await mockApp({showLog:false});
+            await mockApp(jest);
             await mockLoader({case:3});
             const Runtime = (await import(resolve("#runtime/runtime.v1",import.meta.url))).default;
             const runtime = new Runtime({});
@@ -60,7 +57,7 @@ describe("given Runtime class",()=>{
             //this environment variable will only be used for testing only
             process.env.AUTOMATON_RUNTIME_SCHEDULE_TASK_RUN_IMMEDIATELY = "yes";
 
-            await mockApp({showLog:false});
+            await mockApp(jest);
             await mockLoader({case:4});
             const Runtime = (await import(resolve("#runtime/runtime.v1",import.meta.url))).default;
             const runtime = new Runtime({});
@@ -77,7 +74,7 @@ describe("given Runtime class",()=>{
     
     describe("when 'run' method is called with ",()=>{
         test("then the tasks should be 0 cause the bot dont have export default",async()=>{
-            await mockApp({showLog:false});
+            await mockApp(jest);
             await mockLoader({case:2});
             const Runtime = (await import(resolve("#runtime/runtime.v1",import.meta.url))).default;
             const runtime = new Runtime({});

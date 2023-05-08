@@ -30,7 +30,7 @@
     "<rootDir>/src/index.js",
     "<rootDir>/src/runtimes/index.js",
     "<rootDir>/src/runtimes/manifest.js",
-    "<rootDir>/src/runtimes/plugin_loader/interface_package_manager.js"
+    "<rootDir>/src/runtimes/bot_loader/interface_package_manager.js"
   ],
   "coveragePathIgnorePatterns": [
     "<rootDir>/src/mocks",
@@ -39,7 +39,7 @@
     "<rootDir>/src/index.js",
     "<rootDir>/src/runtimes/index.js",
     "<rootDir>/src/runtimes/manifest.js",
-    "<rootDir>/src/runtimes/plugin_loader/interface_package_manager.js"
+    "<rootDir>/src/runtimes/bot_loader/interface_package_manager.js"
   ],
   "coverageProvider": "v8"
 }

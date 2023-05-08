@@ -2,7 +2,7 @@ import {describe,test,expect ,jest} from '@jest/globals';
 import mockApp from "#mock/app";
 import {resolve} from 'import-meta-resolve';
 
-await mockApp({showLog:false});
+await mockApp(jest);
 await import(resolve('#mock/axios',import.meta.url)); 
 await import(resolve('#mock/playwright-core',import.meta.url)); 
 const Automaton = (await import(resolve("#src/automaton",import.meta.url))).default;
