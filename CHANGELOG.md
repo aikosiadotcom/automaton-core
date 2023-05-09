@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+# [1.4.0](https://github.com/aikosiadotcom/automaton-core/compare/v1.3.1...v1.4.0) (2023-05-09)
+
+
+### Features
+
+* process can be exit by consumer and NODE_ENV default to production ([3e1c0d2](https://github.com/aikosiadotcom/automaton-core/commit/3e1c0d2e5fcce0b2ba46a45fcd71b97d4a78526e))
+
 ## [1.3.1](https://github.com/aikosiadotcom/automaton-core/compare/v1.3.0...v1.3.1) (2023-05-08)
 
 
