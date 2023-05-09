@@ -51,8 +51,9 @@ declare class Runtime extends App {
      * @param {string[]} [options.includeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to include
      * @param {string[]} [options.excludeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to exclude
      * @param {InterfacePackageManager} [options.packageManager={@link NpmPackageManager}]
+     * @param {boolean} exitOnFinish - will close the process by calling process.exit(0) as soon as the bot has finished executed
     */
-    constructor({ includeRegex, excludeRegex, packageManager }?: {
+    constructor({ includeRegex, excludeRegex, packageManager, exitOnFinish }?: {
         includeRegex?: string[];
         excludeRegex?: string[];
         packageManager?: InterfacePackageManager;

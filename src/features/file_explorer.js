@@ -41,6 +41,11 @@ class FileExplorer{
      * @param {boolean} [options.dryRun=false]
      */
     constructor({name, additionalPath = [], dryRun = false}){
+
+        if(process.env.NODE_ENV == undefined){
+            this.env.setToPro();
+        }
+
         /**
          * `dryRun` is a boolean option in the `FileExplorer` class constructor that, when set to
         `true`, creates the necessary directories for the app's data storage without actually
@@ -112,7 +117,7 @@ additional directories specified in the `additionalPath` parameter of the constr
 
         }
 
-        deepFreeze(this);
+        return Object.freeze(this);
     }
 
     /**

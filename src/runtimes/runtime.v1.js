@@ -36,6 +36,7 @@ import Manifest from "#runtime/manifest";
 class Runtime extends App{
     #compiler;
     #loader;
+    #exitOnFinish;
     
     /**
      * Get the Manifest class
@@ -78,11 +79,13 @@ class Runtime extends App{
      * @param {string[]} [options.includeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to include
      * @param {string[]} [options.excludeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to exclude
      * @param {InterfacePackageManager} [options.packageManager={@link NpmPackageManager}]
+     * @param {boolean} exitOnFinish - will close the process by calling process.exit(0) as soon as the bot has finished executed
     */
-    constructor({includeRegex = PROJECT_BOT_INCLUDE, excludeRegex = PROJECT_BOT_EXCLUDE, packageManager = new NpmPackageManager()}){
+    constructor({includeRegex = PROJECT_BOT_INCLUDE, excludeRegex = PROJECT_BOT_EXCLUDE, packageManager = new NpmPackageManager(), exitOnFinish = false}){
         super({key:"Core",childKey:"Runtime"});
         this.#compiler = new Compiler();
         this.#loader = new PluginLoader({includeRegex, excludeRegex,packageManager});
+        this.#exitOnFinish = exitOnFinish;
     }
 
     /**
@@ -92,7 +95,6 @@ class Runtime extends App{
         this.profiler.start('Runtime.run');
         const {candidates:automata} = await this.#loader.ls();  
         const candidates = await this.#compiler.run({automata});
-
         await parallel(candidates.map(async(plugin)=>{
             return await this.#build({plugin});
         }));
@@ -121,6 +123,11 @@ class Runtime extends App{
         return new Promise((resolve,reject)=>{
             cron.schedule(manifest.cronjob === false ? "0 0 31 2 0" : manifest.cronjob, async () =>  {
                 try{
+                    await instance.event.on("end",()=>{
+                        if(this.#exitOnFinish){
+                            process.exit(0);
+                        }
+                    });
                     await instance.event.emit("#run",{manifest});
                     return resolve();
                 }catch(err){

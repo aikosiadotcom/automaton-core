@@ -32,6 +32,11 @@ declare class InterfacePackageManager {
         [x: string]: object;
     };
     /**
+     * @param {string} name - project name
+     * @returns {string} absolute path of the root project
+     */
+    resolve(name: string): string;
+    /**
      * will be used to search the plugins and perform existence check
      * @async
      * @param {string} - name of your project

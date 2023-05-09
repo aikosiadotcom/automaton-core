@@ -72,7 +72,7 @@ declare class PluginLoader extends App {
         excludeRegex?: string[];
         packageManager?: InterfacePackageManager;
     });
-    root: any;
+    root: string;
     packages: {
         [x: string]: any;
     };

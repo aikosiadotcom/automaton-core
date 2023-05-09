@@ -1,5 +1,6 @@
 // @ts-nocheck
 import Transport from 'winston-transport';
+import stringify from 'safe-stable-stringify'
 
 /**
  * @external Transport
@@ -73,7 +74,7 @@ class WinstonSupabaseTransport extends Transport {
     async log(args, callback) {
         const { logsTable } = this;
         const { project_key, module_key, child_module_key, level, message, ...metax } = args;
-        const meta = metax.stack ?? metax[Symbol.for('splat')];
+        const meta = stringify(metax.stack) ?? stringify(metax[Symbol.for('splat')]);
 
         setImmediate(() => {
             this.emit('logged', args);

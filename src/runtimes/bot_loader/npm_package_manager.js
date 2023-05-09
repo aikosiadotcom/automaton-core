@@ -31,6 +31,13 @@ class NpmPackageManager extends InterfacePackageManager{
     /**
      * @override
      */
+    resolve(name){
+        return path.join(this.root(),name);
+    }
+
+    /**
+     * @override
+     */
     async search(name){
         return JSON.parse(execSync(`npm search ${name} --json --no-description --prefer-online`).toString());
     }

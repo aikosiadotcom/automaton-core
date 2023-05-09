@@ -78,12 +78,13 @@
     "import-meta-resolve": "^3.0.0",
     "json-validator": "^0.0.34",
     "node-cron": "^3.0.2",
-    "node-envchecker": "^1.0.8",
+    "node-envchecker": "github:aikosiadotcom/node-envchecker#dev",
     "p-retry": "^5.1.2",
     "playwright-core": "^1.32.3",
     "pretty-hrtime": "^1.0.3",
     "random": "^4.1.0",
     "read-pkg": "^8.0.0",
+    "safe-stable-stringify": "^2.4.3",
     "winston": "^3.8.2"
   },
   "devDependencies": {

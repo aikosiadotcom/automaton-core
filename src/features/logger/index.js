@@ -77,19 +77,22 @@ class Logger{
         const {supabase:supabaseClient,winston:winstonConfig,logger:loggerConfig} = options
         const {level,defaultMeta} = winstonConfig;
         const {projectKey,moduleKey,childModuleKey} = defaultMeta;
-        const {console,tableName} = loggerConfig
+        const {console: consolex,tableName} = loggerConfig
 
         const transports = [];
 
-        if(console){
+        if(consolex){
             transports.push(new winstonProxy.transports.Console());
         }
         
         if(supabaseClient){
-            transports.push(new WinstonSupabaseTransport({
-                supabaseClient:supabaseClient,
-                tableName:tableName
-              }))
+            if(process.env.AUTOMATON_DISABLE_REMOTE_LOG == "true"){
+            }else{
+                transports.push(new WinstonSupabaseTransport({
+                    supabaseClient:supabaseClient,
+                    tableName:tableName
+                  }))
+            }
         }
 
         return winstonProxy.createLogger({

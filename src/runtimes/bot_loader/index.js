@@ -59,6 +59,7 @@ import InterfacePackageManager from "#bot_loader/interface_package_manager";
 class PluginLoader extends App{
   #includeRegex;
   #excludeRegex;
+  #packageManager;
   root;
   packages;
 
@@ -77,13 +78,13 @@ class PluginLoader extends App{
 
     this.#includeRegex = includeRegex;
     this.#excludeRegex = excludeRegex;
+    this.#packageManager = packageManager;
     /**
      * The root location of all plugins are stored
      * 
      * @type {string} 
      */
-    this.root = deepFreeze(packageManager.root());
-
+    this.root = packageManager.root();
     /**
      * List of all plugins 
      * 
@@ -98,7 +99,7 @@ class PluginLoader extends App{
      */
     this.packages = packageManager.ls();
     
-    deepFreeze(this); 
+    return Object.freeze(this);
   }
 
   /**
@@ -129,11 +130,10 @@ class PluginLoader extends App{
       );
 
       const ret = { 
-        installed: installed.map(({name})=>({name:name,root:path.join(this.root,name)})), 
-        candidates: candidates.map(({name})=>({name:name,root:path.join(this.root,name)})), 
-        excluded: excluded.map(({name})=>({name:name,root:path.join(this.root,name)}))}
+        installed: installed.map(({name})=>({name:name,root:this.#packageManager.resolve(name)})), 
+        candidates: candidates.map(({name})=>({name:name,root:this.#packageManager.resolve(name)})), 
+        excluded: excluded.map(({name})=>({name:name,root:this.#packageManager.resolve(name)}))}
 
-    
       this.logger.log("verbose","output",ret);
 
       return deepFreeze(ret);

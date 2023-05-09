@@ -1,5 +1,5 @@
 import AbstractClassError from "#error/abstract_class_error";
-
+import path from 'path';
 
 /**
  * Acts as a Interface in case wanna build a custom loader for future use case
@@ -47,6 +47,15 @@ class InterfacePackageManager{
                "plugin_id_02":{},
                "plugin_id_03":{}
           }
+     }
+
+     /**
+      * @param {string} name - project name
+      * @returns {string} absolute path of the root project
+      */
+     resolve(name){
+          //implementation
+          return path.join(this.root(),name);
      }
 
      /**

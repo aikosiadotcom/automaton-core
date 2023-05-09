@@ -9,6 +9,7 @@ import envChecker from "node-envchecker";
 import { createClient } from "@supabase/supabase-js";
 import fsExtra from "fs-extra";
 import path from "path";
+import extend from "extend";
 
 /**
  * An abstract class that serves as a base for creating applications. It provides
@@ -63,7 +64,6 @@ class App{
  * @todo Provide additional argument for modify behaviour of features class
  */
   constructor(options) {
-
     if (!options.key || !options.childKey) {
       throw new ConstructorParamsRequiredError(["key", "childKey"]);
     }
@@ -117,12 +117,9 @@ class App{
       };
     }
 
-    let loggerConfig = {};
-    if (Object.keys(loggerConfig).length == 0) {
-      loggerConfig = {
-        console: this.explorer.env.isPro(),
-      };
-    }
+    let loggerConfig = extend(true,{
+      console: this.explorer.env.isDev()
+    },options.logger == undefined ? {} : options.logger);
 
     this.event = new EventEmitter();
 
