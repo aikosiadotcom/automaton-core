@@ -21,7 +21,7 @@ function _checkInRHS(value) { if (Object(value) !== value) throw TypeError("righ
 import { jest } from '@jest/globals';
 import mockApp from "#mock/app";
 await mockApp(jest);
-var Decorators = await import("../decorators.js");
+var Decorators = await import("#src/decorators");
 _dec = Decorators.dowhile;
 _dec2 = Decorators.delay;
 _dec3 = Decorators.delay({

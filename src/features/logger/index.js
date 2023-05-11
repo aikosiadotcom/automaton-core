@@ -82,7 +82,13 @@ class Logger{
         const transports = [];
 
         if(consolex){
-            transports.push(new winstonProxy.transports.Console());
+            if(process.env.AUTOMATON_DISABLE_CONSOLE_LOG == "true"){
+                transports.push(new winstonProxy.transports.Console({
+                    level:'error'
+                }));
+            }else{
+                transports.push(new winstonProxy.transports.Console());
+            }
         }
         
         if(supabaseClient){

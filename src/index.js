@@ -3,10 +3,10 @@ import * as Decorators from '#src/decorators';
 import * as Constants from "#src/constant";
 import App from "#src/app";
 import Runtime from '#src/runtimes/runtime.v1';
-import mockApp from "#mock/app";
+import {createMockApp} from "#mock/app";
 
 const Tests = {
-    createMockApp:mockApp
+    createMockApp:createMockApp
 }
 
 export { Decorators, Runtime , Constants, App, Tests};

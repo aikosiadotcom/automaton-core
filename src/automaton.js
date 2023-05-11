@@ -93,7 +93,7 @@ class Automaton extends App{
          * will be used to fetch url of CDP (Chrome Devtools Protocol)
          * @type {string} 
          */
-        this.endpoint = `${host}:${port}/browser`;
+        this.endpoint = `${host}:${port}`;
 
         /**
          * Since we dont wanna force consumer of this class to always provided options manifest when they inherited this class. So, it must implemented this way
@@ -111,10 +111,22 @@ class Automaton extends App{
      */
     async #run({manifest, endpoint}){
         try{ 
-            if(this.manifest == undefined || JSON.stringify(this.manifest) !== manifest || this.endpoint != endpoint){
+            if(endpoint!=""){
+                this.endpoint = endpoint;
+            }
+            
+            /**
+             * @fires Automaton#start
+             */
+            /* c8 ignore end */
+            await this.event.emit("start");
+            this.profiler.start("run");
+
+            if(this.manifest == undefined || JSON.stringify(this.manifest) !== manifest){
                 //since this event listener using 'on' not 'once'
                 this.manifest = manifest;
-                this.#browser = await chromium.connectOverCDP(endpoint ? endpoint : (await axios.get(`${this.endpoint}/${this.manifest["profile"]}`)).data);
+                const url = (await axios.get(`${this.endpoint}/browser/${this.manifest["profile"]}`)).data;
+                this.#browser = await chromium.connectOverCDP(url);
                 this.#context = this.#browser.contexts()[0];
         
                 //TODO: Consider to change it to plugin maybe like puppeteer-extra-plugin. 
@@ -130,16 +142,7 @@ class Automaton extends App{
         
                     return page;
                 });
-
-                this.endpoint = endpoint;
             }
-            
-            /**
-             * @fires Automaton#start
-             */
-            /* c8 ignore end */
-            await this.event.emit("start");
-            this.profiler.start("run");
             
             /**template processor */
             if(this.manifest.template == 'crawler' || this.manifest.template == 'rest'){
@@ -157,12 +160,12 @@ class Automaton extends App{
                 throw new ManifestError({message:`template processor "${this.manifest.template}" not found`});
             }
         }catch(err){
+            this.logger.log("error","RuntimeException",err);
             /**
              * @fires Automaton#error
              */
             await this.event.emit('error',err);
-            // this.logger.log("error","RuntimeException",err);
-            throw err;
+            // throw err;
         }finally{
             /**
              * @fires Automaton#start

@@ -1,9 +1,8 @@
 import { deepFreeze } from "deep-freeze-es6";
 import App from "#src/app";
-import path from "path";
 import NpmPackageManager from '#bot_loader/npm_package_manager'
 import InterfacePackageManager from "#bot_loader/interface_package_manager";
-
+import extend from 'extend';
 
 
 /**
@@ -69,9 +68,15 @@ class PluginLoader extends App{
    * @param {string[]} [options.excludeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to exclude
    * @param {InterfacePackageManager} [options.packageManager={@link NpmPackageManager}]
    */
-  constructor({ includeRegex = [], excludeRegex = [], packageManager = new NpmPackageManager() }) {
+  constructor(options) {
+    options = extend(true,{
+        includeRegex:[],
+        excludeRegex:[],
+        packageManager:new NpmPackageManager()
+    },options);
     super({key:'Core',childKey:'PluginLoader'});
 
+    const {includeRegex,excludeRegex,packageManager} = options;
     if(includeRegex.length == 0){
       throw new Error("includeRegex required")
     }

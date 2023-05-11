@@ -67,7 +67,7 @@ declare class PluginLoader extends App {
      * @param {string[]} [options.excludeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to exclude
      * @param {InterfacePackageManager} [options.packageManager={@link NpmPackageManager}]
      */
-    constructor({ includeRegex, excludeRegex, packageManager }: {
+    constructor(options: {
         includeRegex: string[];
         excludeRegex?: string[];
         packageManager?: InterfacePackageManager;

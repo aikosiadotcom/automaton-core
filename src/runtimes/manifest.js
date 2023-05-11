@@ -2,7 +2,10 @@ import deepFreeze from "deep-freeze-es6";
 import cron from 'node-cron';
 import jsv from "json-validator";
 import ManifestError from '#error/manifest_error';
-
+import { readPackage } from "read-pkg";
+import fsExtra from 'fs-extra';
+import extend from 'extend';
+import path from 'path';
 
 /**
  * File descriptor for bot created by automaton framework
@@ -101,6 +104,25 @@ class Manifest{
         });
 
         return true;
+    }
+    
+    /**
+     * 
+     * @param {undefined | object} [options] 
+     * @param {string} [options.cwd=process.cwd()]
+     */
+    static async get(options){
+        options = extend(true,{
+            cwd:process.cwd()
+        },options);
+
+        const localAutomatonConfigFilePath = path.join(options.cwd,"automaton.config.json");
+        if(await fsExtra.pathExists(localAutomatonConfigFilePath)){
+            return await fsExtra.readJSON(localAutomatonConfigFilePath);
+        }
+        
+        const pkg = await readPackage({cwd:options.cwd});
+        return pkg["automaton"];
     }
 
     /**

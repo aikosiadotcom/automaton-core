@@ -1,5 +1,6 @@
 import InterfacePackageManager from "#bot_loader/interface_package_manager";
 import { execSync } from "child_process";
+import path from 'path';
 
 /**
  * The idea is instead of build custom package manager, why dont just build plugins on top of the [NPM]{@link https://www.npmjs.com/} Infrastructures and get all the benefit from it? don't reinvent the wheel, right?

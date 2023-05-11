@@ -10,10 +10,13 @@ import random from 'random';
  * @category API
  */
 
-const logger = (new App({key:"Core",childKey:"Decorators"})).logger;
+function getLogger(){
+    return (new App({key:"Core",childKey:"Decorators"})).logger;
+}
 
 /* c8 ignore start */
 async function _delay(opts = {}){
+    const logger = getLogger();
     const _min = opts.min ?? 30;
     const _max = opts.max ?? 60;
     const _meta = opts.meta ?? {};
@@ -21,8 +24,11 @@ async function _delay(opts = {}){
     const _name = opts.name ?? "";
 
     const t = random.int(_min*1000,_max*1000);
-    console.log(_name,_meta,`delay ${Math.ceil(t/1000)} seconds between ${_min} - ${_max}`);
-    await delay(t);
+    logger.log("verbose","delay",{
+        message:`delay ${Math.ceil(t/1000)} seconds between ${_min} - ${_max}`,
+        meta:_meta
+    });
+    await wait(t);
 }
 /* c8 ignore end */
 
@@ -146,6 +152,7 @@ export function delay(value,opts){
  * }
  */
 export function retry(value,opts){
+    const logger = getLogger();
     if(opts != undefined && opts.kind == "method"){
         return async function (...args) {
             return await pRetry(async()=>await value.call(this,...args),{

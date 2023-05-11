@@ -7,7 +7,7 @@ import {PROJECT_BOT_INCLUDE, PROJECT_BOT_EXCLUDE} from "#src/constant";
 import NpmPackageManager from '#bot_loader/npm_package_manager';
 import InterfacePackageManager from '#bot_loader/interface_package_manager';
 import Manifest from "#runtime/manifest";
-
+import extend from "extend";
 /**
  * The Map object is a simple key/value map. Any value (both objects and primitive values) may be used as either a key or a value.
  * @external Map
@@ -36,7 +36,6 @@ import Manifest from "#runtime/manifest";
 class Runtime extends App{
     #compiler;
     #loader;
-    #exitOnFinish;
     
     /**
      * Get the Manifest class
@@ -79,31 +78,46 @@ class Runtime extends App{
      * @param {string[]} [options.includeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to include
      * @param {string[]} [options.excludeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to exclude
      * @param {InterfacePackageManager} [options.packageManager={@link NpmPackageManager}]
-     * @param {boolean} exitOnFinish - will close the process by calling process.exit(0) as soon as the bot has finished executed
+     * @param {string} [options.endpoint=""]
     */
-    constructor({includeRegex = PROJECT_BOT_INCLUDE, excludeRegex = PROJECT_BOT_EXCLUDE, packageManager = new NpmPackageManager(), exitOnFinish = false}){
+    constructor(options){
+        options = extend(true,{
+            includeRegex:PROJECT_BOT_INCLUDE,
+            excludeRegex:PROJECT_BOT_EXCLUDE,
+            packageManager:new NpmPackageManager(),
+            endpoint:""
+        },options);
         super({key:"Core",childKey:"Runtime"});
+        this.options = options;
         this.#compiler = new Compiler();
-        this.#loader = new PluginLoader({includeRegex, excludeRegex,packageManager});
-        this.#exitOnFinish = exitOnFinish;
+        this.#loader = new PluginLoader(options);
     }
 
     /**
      * Run the runtime
      */
     async run(){ 
-        this.profiler.start('Runtime.run');
+        await this.stop();
+        this.profiler.start('run');
         const {candidates:automata} = await this.#loader.ls();  
         const candidates = await this.#compiler.run({automata});
+        this.automata = candidates;
         await parallel(candidates.map(async(plugin)=>{
             return await this.#build({plugin});
         }));
+        this.profiler.stop('run');
+    }
+
+    async stop(){
+        for (let [key, value] of Runtime.tasks) {
+            value.stop();
+        }
     }
 
     /**
      * 
      * @param {object} options 
-     * @param {Generator~GeneratedImmutablePlugin} plugin
+     * @param {Generator~GeneratedImmutablePlugin} options.plugin
      */
     async #build({plugin}){
         try{
@@ -116,19 +130,23 @@ class Runtime extends App{
     /**
      * 
      * @param {object} options 
-     * @param {Generator~GeneratedImmutablePlugin} plugin
+     * @param {Generator~GeneratedImmutablePlugin} options.plugin
      */
     #cronjob({plugin}){
         const {main, name,root,file,manifest, instance, module} = plugin
         return new Promise((resolve,reject)=>{
             cron.schedule(manifest.cronjob === false ? "0 0 31 2 0" : manifest.cronjob, async () =>  {
                 try{
-                    await instance.event.on("end",()=>{
-                        if(this.#exitOnFinish){
-                            process.exit(0);
-                        }
+                    await instance.event.on("start",async ()=>{
+                        await this.event.emit(`start#${name}`,plugin);
                     });
-                    await instance.event.emit("#run",{manifest});
+                    await instance.event.on("error",async (err)=>{
+                        await this.event.emit(`error#${name}`,plugin,err);
+                    });
+                    await instance.event.on("end",async ()=>{
+                        await this.event.emit(`end#${name}`,plugin);
+                    });
+                    await instance.event.emit("#run",{manifest,endpoint:this.options.endpoint});
                     return resolve();
                 }catch(err){
                     return reject(err);

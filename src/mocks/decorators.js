@@ -4,7 +4,7 @@ import mockApp from "#mock/app";
 
 await mockApp(jest);
 
-const Decorators = await import("../decorators.js");
+const Decorators = await import("#src/decorators");
 
 class DecoratorTest{
     counter = 0;

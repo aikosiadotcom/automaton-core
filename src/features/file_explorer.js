@@ -1,8 +1,8 @@
 import envPaths from "env-paths";
 import path from "path";
 import fsExtra from 'fs-extra';
-import deepFreeze from "deep-freeze-es6";
 import {isValidPath} from "@igor.dvlpr/valid-path";
+import env from "#feature/env";
 
 
 /**  
@@ -42,9 +42,10 @@ class FileExplorer{
      */
     constructor({name, additionalPath = [], dryRun = false}){
 
-        if(process.env.NODE_ENV == undefined){
-            this.env.setToPro();
-        }
+        /**
+         * @type {env}
+        */
+        this.env = env;
 
         /**
          * `dryRun` is a boolean option in the `FileExplorer` class constructor that, when set to
@@ -102,38 +103,25 @@ additional directories specified in the `additionalPath` parameter of the constr
 
         fsExtra.ensureFileSync(this.path.env);
 
-        /**
-         * @type {object}
-         * @property {function} isDev() - true if process.env.NODE_ENV === 'development' otherwise false
-         * @property {function} isPro() - true if process.env.NODE_ENV === 'production' otherwise false
-         * @property {function} setToPro() - set process.env.NODE_ENV = 'production'
-         * @property {function} setToDev() - set process.env.NODE_ENV = 'development'
-         */
-        this.env = {
-            isDev:()=>process.env.NODE_ENV === 'development',
-            isPro:()=>process.env.NODE_ENV === 'production',
-            setToPro(){process.env.NODE_ENV = 'production'},
-            setToDev(){process.env.NODE_ENV = 'development'},
-
-        }
-
         return Object.freeze(this);
     }
 
     /**
      * Get normalize current environment string based on process.env.NODE_ENV
      * 
-     * @throws {Error} if process.env.NODE_ENV value not between 'development' or 'production'
-     * @returns {'Development' | 'Production'}
+     * @throws {Error} if process.env.NODE_ENV value not between 'development' | 'production' | 'testing'
+     * @returns {'Development' | 'Production' | 'Testing'}
      */
     getCurrentEnv(){
         if(process.env.NODE_ENV == 'development'){
             return 'Development';
         }else if(process.env.NODE_ENV == 'production'){
             return 'Production';
+        }else if(process.env.NODE_ENV == 'testing'){
+            return 'Testing';
         }
     
-        throw new Error(`Unknown ${process.env.NODE_ENV} Environment. Please choose between 'production' or 'development' `);
+        throw new Error(`Unknown ${process.env.NODE_ENV} Environment. Please choose 'production' or 'development' `);
     }
 }
 

@@ -29,6 +29,12 @@ declare class Manifest {
      */
     static validate(manifest: any): Promise<boolean>;
     /**
+     *
+     * @param {undefined | object} [options]
+     * @param {string} [options.cwd=process.cwd()]
+     */
+    static get(options?: undefined | object): Promise<any>;
+    /**
     * @typedef {object} Manifest~Schema
     * @property {"1.0.0"} version
     * @property {"rest" | "crawler"} template

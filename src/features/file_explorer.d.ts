@@ -43,6 +43,15 @@ declare class FileExplorer {
         name: string;
     });
     /**
+     * @type {env}
+    */
+    env: {
+        isTest(): boolean;
+        isDev(): boolean;
+        isPro(): boolean;
+        getCapitalize(): "Development" | "Production" | "Testing";
+    };
+    /**
      * `dryRun` is a boolean option in the `FileExplorer` class constructor that, when set to
     `true`, creates the necessary directories for the app's data storage without actually
     writing any files to disk. This is useful for testing and debugging purposes, as it
@@ -69,18 +78,10 @@ additional directories specified in the `additionalPath` parameter of the constr
      */
     path: object;
     /**
-     * @type {object}
-     * @property {function} isDev() - true if process.env.NODE_ENV === 'development' otherwise false
-     * @property {function} isPro() - true if process.env.NODE_ENV === 'production' otherwise false
-     * @property {function} setToPro() - set process.env.NODE_ENV = 'production'
-     * @property {function} setToDev() - set process.env.NODE_ENV = 'development'
-     */
-    env: object;
-    /**
      * Get normalize current environment string based on process.env.NODE_ENV
      *
-     * @throws {Error} if process.env.NODE_ENV value not between 'development' or 'production'
-     * @returns {'Development' | 'Production'}
+     * @throws {Error} if process.env.NODE_ENV value not between 'development' | 'production' | 'testing'
+     * @returns {'Development' | 'Production' | 'Testing'}
      */
-    getCurrentEnv(): 'Development' | 'Production';
+    getCurrentEnv(): 'Development' | 'Production' | 'Testing';
 }
