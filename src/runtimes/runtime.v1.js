@@ -91,6 +91,7 @@ class Runtime extends App{
         this.options = options;
         this.#compiler = new Compiler();
         this.#loader = new PluginLoader(options);
+        this.automata = [];
     }
 
     /**
@@ -106,6 +107,10 @@ class Runtime extends App{
             return await this.#build({plugin});
         }));
         this.profiler.stop('run');
+    }
+
+    async reload(){
+        return await this.run();
     }
 
     async stop(){
@@ -124,6 +129,7 @@ class Runtime extends App{
             await this.#cronjob({plugin});
         }catch(err){
             this.logger.log("error",`Runtime Exception of \'${plugin.name}\'`,err);
+            await this.event.emit("error",err,plugin);
         }
     }
 
@@ -137,14 +143,8 @@ class Runtime extends App{
         return new Promise((resolve,reject)=>{
             cron.schedule(manifest.cronjob === false ? "0 0 31 2 0" : manifest.cronjob, async () =>  {
                 try{
-                    await instance.event.on("start",async ()=>{
-                        await this.event.emit(`start#${name}`,plugin);
-                    });
                     await instance.event.on("error",async (err)=>{
-                        await this.event.emit(`error#${name}`,plugin,err);
-                    });
-                    await instance.event.on("end",async ()=>{
-                        await this.event.emit(`end#${name}`,plugin);
+                        await this.event.emit(`error`,err,plugin);
                     });
                     await instance.event.emit("#run",{manifest,endpoint:this.options.endpoint});
                     return resolve();

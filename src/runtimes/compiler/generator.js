@@ -152,7 +152,7 @@ class Generator extends App{
         await fsExtra.ensureFile(compileFilePath);
         await fsExtra.writeFile(compileFilePath,code);
 
-        const module = await import(`file://${compileFilePath}`);
+        const module = await import(`file://${compileFilePath}?version='${new Date()}'`);
 
         if(module.default == undefined || module.default == null){
             throw new Error("Class must \'export default\'");

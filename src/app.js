@@ -56,6 +56,7 @@ class App{
    * @type {FileExplorer}
   */
   explorer;
+  
 
 /**
  * @param {object} options - An object containing optional configuration options for the constructor.

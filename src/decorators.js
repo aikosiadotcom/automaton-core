@@ -106,8 +106,9 @@ export function dowhile(value,{kind,name}){
 export function delay(value,opts){
     if(opts != undefined && opts.kind == "method"){
         return async function (...args){
-            await value.call(this,...args);
+            const output = await value.call(this,...args);
             await _delay({name:opts.name});
+            return output;
         }
     }
 
@@ -115,8 +116,9 @@ export function delay(value,opts){
     return (_value,{kind,name})=>{
         if(kind == 'method'){
             return async function (...args){
-                await _value.call(this,...args);
+                const output = await _value.call(this,...args);
                 await _delay({meta,min,max,name});
+                return output;
             }
         }
     }
