@@ -59,10 +59,10 @@ export function dowhile(value: any, { kind, name }: {
  *      }
  * }
  */
-export function delay(value: any, opts: any): ((...args: any[]) => Promise<void>) | ((_value: any, { kind, name }: {
+export function delay(value: any, opts: any): ((...args: any[]) => Promise<any>) | ((_value: any, { kind, name }: {
     kind: any;
     name: any;
-}) => (...args: any[]) => Promise<void>);
+}) => (...args: any[]) => Promise<any>);
 /**
  * When there's an error happened, it will wait between 30-120 seconds to retry the first time. For the next (second,third,...) retry, it will wait between [options.min,options.max] value
  *

@@ -51,20 +51,25 @@ declare class Runtime extends App {
      * @param {string[]} [options.includeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to include
      * @param {string[]} [options.excludeRegex] - using [String.prototype.match]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match} to perform which plugin to exclude
      * @param {InterfacePackageManager} [options.packageManager={@link NpmPackageManager}]
+     * @param {string} [options.endpoint=""]
     */
     constructor(options?: {
         includeRegex?: string[];
         excludeRegex?: string[];
         packageManager?: InterfacePackageManager;
     });
+    options: {
+        includeRegex?: string[];
+        excludeRegex?: string[];
+        packageManager?: InterfacePackageManager;
+    };
+    automata: any[];
     /**
      * Run the runtime
-     *
-     * @param {object} [options = {}]
-     * @param {string} [endpoint=""]
      */
-    run(options?: object): Promise<void>;
-    automata: import("./compiler/generator.js").default[];
+    run(): Promise<void>;
+    reload(): Promise<void>;
+    stop(): Promise<void>;
     /**
      *
      * @param {boolean} value
@@ -74,5 +79,5 @@ declare class Runtime extends App {
     #private;
 }
 import App from "#src/app";
-import Manifest from "#runtime/manifest";
 import InterfacePackageManager from '#bot_loader/interface_package_manager';
+import Manifest from "#runtime/manifest";
