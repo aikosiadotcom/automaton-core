@@ -1,5 +1,12 @@
 # Semantic Versioning Changelog
 
+## [1.4.1](https://github.com/aikosiadotcom/automaton-core/compare/v1.4.0...v1.4.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* backup before refactor ([294fae5](https://github.com/aikosiadotcom/automaton-core/commit/294fae58ee6fefc6401de84790036d9b3a7a202c))
+
 # [1.4.0](https://github.com/aikosiadotcom/automaton-core/compare/v1.3.1...v1.4.0) (2023-05-09)
 
 
