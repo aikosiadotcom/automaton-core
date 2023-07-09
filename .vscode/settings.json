@@ -4,12 +4,11 @@
     "docwriter.progress.trackTypes": true,
     "typescript.tsdk": "node_modules\\typescript\\lib",
     "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
         "**/.DS_Store": true,
-        "**/Thumbs.db": true,
-        "**/tsconfig.json":true
+        "**/.git": true,
+        "**/.hg": true,
+        "**/.svn": true,
+        "**/CVS": true,
+        "**/Thumbs.db": true
     }
 }

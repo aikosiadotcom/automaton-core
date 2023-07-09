@@ -120,17 +120,17 @@ class PluginLoader extends App{
       const candidates = installed.filter(
         (automaton) =>
           this.#includeRegex.filter((pattern) =>
-            automaton.name.match(new RegExp(pattern))
+            automaton.name.match(new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
           ).length &&
           !this.#excludeRegex.filter((pattern) =>
-            automaton.name.match(new RegExp(pattern))
+            automaton.name.match(new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
           ).length
       );
 
       const excluded = installed.filter(
         (automaton) =>
           this.#excludeRegex.filter((pattern) =>
-            automaton.name.match(new RegExp(pattern))
+            automaton.name.match(new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
           ).length
       );
 

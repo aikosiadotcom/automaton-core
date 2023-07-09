@@ -10,7 +10,7 @@ import { createClient } from "@supabase/supabase-js";
 import fsExtra from "fs-extra";
 import path from "path";
 import extend from "extend";
-
+import "@aikosia/escape-regex-factory";
 /**
  * An abstract class that serves as a base for creating applications. It provides
 several features such as logging, profiling, event handling, and file exploration. It also
@@ -139,5 +139,4 @@ class App{
   }
   /* c8 ignore end */
 }
-
 export default App;;

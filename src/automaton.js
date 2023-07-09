@@ -64,6 +64,8 @@ class Automaton extends App{
     /**@type {Manifest} */
     manifest;
     endpoint;
+    #package;
+    #idTask;
 
     /**
      * @param {object} options
@@ -98,8 +100,30 @@ class Automaton extends App{
         /**
          * Since we dont wanna force consumer of this class to always provided options manifest when they inherited this class. So, it must implemented this way
          */
-        this.event.on('#run',async({manifest, endpoint = ""})=>{
-            await this.#run({manifest, endpoint});
+        this.event.on('#run',async({plugin, endpoint = ""})=>{
+            this.#package = plugin;
+            await this.#run({manifest:plugin.name, endpoint});
+        });
+
+        this.event.on("start",async()=>{
+            if(this.db){
+                const {data} = await this.db.from('running_tasks').insert({name:this.#package.name});
+                this.#idTask = data[0].id;
+            }
+        });
+        this.event.on("finish",async()=>{
+            this.db ? await this.db.from('running_tasks').update({success:true,end:((new Date()).toISOString()).toLocaleString('id-ID')}) : null;
+        });
+        this.event.on("error",async(err)=>{
+            this.db ? await this.db.from('running_tasks').update({success:false,end:((new Date()).toISOString()).toLocaleString('id-ID'),message:[err]}) : null;
+        });
+
+        this.event.on('save',async(input,output)=>{
+            this.db ? await this.db.from("tasks_output").insert({
+                name:this.#package.name,
+                input:input,
+                output:output
+            }) : null;
         });
     }
 
@@ -133,8 +157,8 @@ class Automaton extends App{
                 /* c8 ignore start */
                 this.#context.on("page",(page)=>{
                     page.automaton = {};
-                    page.automaton.waitForResponse = async({goto,waitUrl,responseType="json"})=>{
-                        const responsePromise  = page.waitForResponse((resp)=>resp.url().includes(waitUrl));
+                    page.automaton.waitForResponse = async({goto,pattern,responseType="json"})=>{
+                        const responsePromise  = page.waitForResponse((resp)=>resp.url().match(new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))));
                         await page.goto(goto);
                         const response = await responsePromise;
                         return await response[responseType]();
@@ -159,6 +183,8 @@ class Automaton extends App{
             }else{
                 throw new ManifestError({message:`template processor "${this.manifest.template}" not found`});
             }
+
+            await this.event.emit("finish");
         }catch(err){
             this.logger.log("error","RuntimeException",err);
             /**
@@ -181,6 +207,14 @@ class Automaton extends App{
      */
     async run(arg){
         throw new MustOverrideError(`please override run method on ${this.manifest.name}. example: async run(arg)=>{}`);
+    }
+
+    getOptions(){
+        let opts = JSON.stringify(this.manifest.options);
+        for(let [key,value] in this.manifest.input){
+            opts = opts.replaceAll(`:${key}`,value);
+        }
+        return opts;
     }
 }
 

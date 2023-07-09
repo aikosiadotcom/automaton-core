@@ -8,6 +8,7 @@ import NpmPackageManager from '#bot_loader/npm_package_manager';
 import InterfacePackageManager from '#bot_loader/interface_package_manager';
 import Manifest from "#runtime/manifest";
 import extend from "extend";
+import * as Providers from '#src/provider/supabase/index';
 /**
  * The Map object is a simple key/value map. Any value (both objects and primitive values) may be used as either a key or a value.
  * @external Map
@@ -146,7 +147,7 @@ class Runtime extends App{
                     await instance.event.on("error",async (err)=>{
                         await this.event.emit(`error`,err,plugin);
                     });
-                    await instance.event.emit("#run",{manifest,endpoint:this.options.endpoint});
+                    await instance.event.emit("#run",{plugin,endpoint:this.options.endpoint});
                     return resolve();
                 }catch(err){
                     return reject(err);

@@ -21,7 +21,7 @@
     "types": "del-cli src/**/*.ts -f && tsc",
     "docs": "cross-env NODE_ENV=production ./node_modules/.bin/jsdoc -c jsdoc.json -p",
     "release": "npm run types && npm run docs && git add * && git-cz && git pull origin && git push origin",
-    "test": "cross-env NODE_ENV=development NODE_OPTIONS='--experimental-vm-modules' jest"
+    "test": "cross-env NODE_ENV=testing NODE_OPTIONS='--experimental-vm-modules' jest"
   },
   "keywords": [
     "aikosia",
@@ -62,6 +62,7 @@
   },
   "exports": "./src/index.js",
   "dependencies": {
+    "@aikosia/escape-regex-factory": "^1.0.1",
     "@babel/core": "^7.21.4",
     "@babel/plugin-proposal-decorators": "^7.21.0",
     "@babel/preset-env": "^7.21.4",
@@ -94,6 +95,7 @@
     "@semantic-release/github": "^8.0.7",
     "@semantic-release/npm": "^10.0.3",
     "@semantic-release/release-notes-generator": "^11.0.1",
+    "@types/fs-extra": "^11.0.1",
     "better-docs": "github:aikosiadotcom/better-docs#dev",
     "commitizen": "^4.3.0",
     "cross-env": "^7.0.3",
